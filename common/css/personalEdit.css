@@ -1,0 +1,133 @@
+.buttonBar {
+	display: flex;
+	display: -webkit-flex;
+}
+.buttonBar .button {
+	text-align: center;
+	height: 30px;
+	width: 180px;
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 30px;
+	border-radius: 3px 3px 0px 0px;
+	background-color: rgba(85, 85, 85, 1.0);
+	cursor: pointer;
+	margin: 15px 20px 0px 0px;
+}
+
+.moduleTop {
+	width: 100%;
+	height: 6px;
+	min-height: 6px;
+	background-color: #555555;
+}
+
+.edit {
+	width: 100%;
+	background-color: rgba(245, 245, 245, 0.8);
+	padding-top: 20px;
+}
+.edit .blankBottom {
+	width: 100%;
+	min-height: 20px;
+}
+
+.edit .inputLine {
+	display: flex;
+	display: -webkit-flex;
+	margin: 0px 30px;
+	height: 60px;
+	line-height: 60px;
+}
+.edit .inputLine .text {
+	font-size: 16px;
+	color: #717171;
+	width: 120px;
+	height: 60px;
+}
+.edit .inputLine .longText {
+	width: 200px;
+}
+.edit .inputLine .infoInput{
+	outline: none;
+	border: 0;
+	padding: 0px 10px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	height: 30px;
+	font-size: 14px;
+	box-shadow: 0px 1px 1px #c1c1c1 inset;
+	margin: 15px 0px;
+	width: 250px;
+}
+.edit .inputLine .longInput {
+	width: 300px;
+}
+.edit .inputLine .shortInput {
+	width: 60px;
+	padding: 0px 0px 0px 10px;
+}
+
+.edit .saveButton {
+	margin: 20px 30px 20px auto;
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 30px;
+	background-color: #465d4c;
+	height: 30px;
+	width: 75px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.edit .info {
+	
+}
+.edit .info textarea {
+	height: 140px;
+	font-size: 14px;
+	background-color: #ffffff;
+	width: calc(100% - 60px);
+	box-shadow: 0px 1px 1px #c1c1c1 inset;
+	outline: none;
+	border: 0;
+	padding: 10px;
+	border-radius: 3px;
+	margin: 0px 30px;
+}
+
+.edit .head {
+	display: none;
+	margin-top: 50px;
+}
+.edit .head .headLine {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	margin: 0px 18%;
+}
+.edit .head .headLine .headImg {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+.edit .head .headSaveButton {
+	margin: 50px calc(18% + 63px) 50px calc(82% - 138px);
+}
+.edit .head .hint {
+	text-align: center;
+	color: #555555;
+	font-size: 14px;
+	margin: 30px 0px 60px;
+}
+
+.edit .pwd {
+	display: none;
+}
+.edit .pwd .pwdSaveButton {
+	margin: 15px 30px;
+}
+
+

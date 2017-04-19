@@ -1,0 +1,160 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="css/global.css" ／>
+	<link rel="stylesheet" href="css/personalEdit.css" ／>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+	<script>
+		$(document).ready(function() {
+			$("#login").show();
+			$("#personalModuleList").show();
+		});
+		function showEdit(index) {
+			for(var i = 0; i < 3; i++) {
+				if(i == index) {
+					$("#editBlock"+i).show();
+					$("#button"+i).css("background-color", "rgba(70, 93, 76, 1.0)");
+				}
+				else {
+					$("#editBlock"+i).hide();
+					$("#button"+i).css("background-color", "rgba(85, 85, 85, 1.0)");
+				}
+			}
+		}
+	</script>
+	<div class="sideBar">
+		<div class="logo"><img src="img/logo.png" /></div>
+		<div class="personalInfo">
+			<div class="isLogin" id="login">
+				<div class="pPhoto" style="cursor: pointer;" onclick="window.location.href='personalData.html'"><img src="img/man.png" /></div>
+				<div class="name">name</div>
+				<div class="pInfo" id="grade">grade: 2</div>
+				<div class="pInfo" id="article">article: 8</div>
+			</div>
+			<div class="notLogin" id="notLogin">
+				<div class="pPhoto"><img src="img/profile.png" /></div>
+				<input type="text" class="loginInput" placeholder="Username" />
+				<input type="text" class="loginInput" placeholder="Password" />
+				<div class="forgetPwd">Forgot password?</div>
+				<div class="buttonLine">
+					<div class="loginButton">Login</div>
+					<div class="loginButton registerButton">Register</div>
+				</div>
+				<div class="buttonLine">
+					<img src="img/qq2.png" class="thirdPlatformButton" />
+					<img src="img/wechat2.png" class="thirdPlatformButton" />
+					<img src="img/weibo2.png" class="thirdPlatformButton" />
+				</div>
+			</div>
+		</div>
+		<div class="personalModuleList" id="personalModuleList">
+			<div class="personalModule" id="pModule0" onclick="window.location.href='main.html?login=login'">
+				<img src="img/arrow.png" class="arrow" /><img src="img/homepage.png" class="title" />
+			</div>
+			<div class="personalModule" id="pModule1" onclick="window.location.href='favourite.html?show=all&page=1'">
+				<img src="img/arrow.png" class="arrow" /><img src="img/favorites.png" class="title" />
+			</div>
+			<div class="personalModule" id="pModule2">
+				<img src="img/arrow.png" class="arrow" /><img src="img/mail2.png" class="title" />
+			</div>
+			<div class="personalModule choose" id="pModule3" onclick="">
+				<img src="img/arrow.png" class="arrow arrowChoose" /><img src="img/settings.png" class="title" />
+			</div>
+			<div class="personalModule" id="pModule4" onclick="window.location.href='friend.html?page=1'">
+				<img src="img/arrow.png" class="arrow" /><img src="img/friends.png" class="title" />
+			</div>
+		</div>
+	</div>
+	<div class="mainPage">
+		<div class="searchBar">
+			<div class="blank"></div>
+			<div class="context">
+				<div class="search">
+					<img src="img/search.png" class="logo" />
+					<input type="text" name="search" placeholder="search" />
+				</div>
+			</div>
+			<div class="blank"></div>
+		</div>
+		<div class="main" style="background-image: url(img/background3.png)">
+			<div class="blank"></div>
+			<div class="mainContent">
+				<div class="path"><a href="main.html">Homepage</a> >> <a href="personalData.html">Personal Data</a> >> <a href="personalEdit.html">Settings</a></div>
+				<div class="buttonBar">
+					<div class="button" id="button0" style="background-color: rgba(70, 93, 76, 1.0);" onclick="showEdit(0)">Basic Information</div>
+					<div class="button" id="button1" onclick="showEdit(1)">Head Portrait</div>
+					<div class="button" id="button2" onclick="showEdit(2)">Password</div>
+				</div>
+				<div class="moduleTop"></div>
+				<div class="edit">
+					<div class="info" id="editBlock0">
+						<div class="inputLine">
+							<div class="text">Name:</div>
+							<input type="text" class="infoInput" placeholder="" />
+						</div>
+						<div class="inputLine">
+							<div class="text">Gender:</div>
+							<label><input name="Gender" type="radio" value="0" checked=""/>&nbsp&nbsp Male &nbsp&nbsp</label>
+							<label><input name="Gender" type="radio" value="1" />&nbsp&nbsp Female &nbsp&nbsp</label>
+						</div>
+						<div class="inputLine">
+							<div class="text">Birthday:</div>
+							<input type="text" class="infoInput shortInput" placeholder="year" />
+							<div>&nbsp yy &nbsp</div>
+							<input type="text" class="infoInput shortInput" placeholder="month" />
+							<div>&nbsp mm &nbsp</div>
+							<input type="text" class="infoInput shortInput" placeholder="day" />
+							<div>&nbsp dd &nbsp</div>
+						</div>
+						<div class="inputLine">
+							<div class="text">Email:</div>
+							<input type="text" class="infoInput" placeholder="" />
+						</div>
+						<div class="inputLine">
+							<div class="text">City:</div>
+							<input type="text" class="infoInput" placeholder="" />
+						</div>
+						<div class="inputLine">
+							<div class="text">About Me</div>
+						</div>
+						<textarea placeholder="Write something about you here"></textarea>
+						<div class="saveButton">Save</div>
+					</div>
+					<div class="head" id="editBlock1">
+						<div class="headLine">
+							<img src="img/man.png" class="headImg" />
+							<img src="img/upload.png" class="headImg" style="cursor: pointer;" onclick="" />
+						</div>
+						<div class="saveButton headSaveButton">Save</div>
+						<div class="hint">Hint: 当前仅支持 jpg, png, tiff 格式且文件大小小于 2MB 的图片</div>
+					</div>
+					<div class="pwd" id="editBlock2">
+						<div class="inputLine" id="oldPwd">
+							<div class="text longText">Current Password</div>
+							<input type="text" class="infoInput longInput" placeholder="old password" />
+						</div>
+						<div class="inputLine" id="newPwd">
+							<div class="text longText">New Password</div>
+							<input type="text" class="infoInput longInput" placeholder="new password" />
+						</div>
+						<div class="inputLine" id="confirmNewPwd">
+							<div class="text longText">Confirm Password</div>
+							<input type="text" class="infoInput longInput" placeholder="confirm new password" />
+						</div>
+						<div class="saveButton pwdSaveButton">Save</div>
+					</div>
+					<div class="blankBottom"></div>
+				</div>
+				<div class="bottomInfo">
+					<p>广告业务|合作交流|联系我们|技术支持</p>
+					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+					<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+				</div>
+			</div>
+			<div class="blank"></div>
+		</div>
+	</div>
+</body>
+</html>

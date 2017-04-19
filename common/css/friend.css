@@ -1,0 +1,253 @@
+.searchFriendLine {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	width: 100%;
+	margin-top: 50px;
+}
+.searchFriendLine .buttonLine {
+	display: flex;
+	display: -webkit-flex;
+	font-size: 16px;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 4px;
+}
+.searchFriendLine .buttonLine .button {
+	width: 75px;
+	border-radius: 3px;
+	height: 30px;
+	color: #000000;
+	background-color: unset;
+	cursor: pointer;
+	text-align: center;
+}
+.searchFriendLine .buttonLine .choose {
+	background-color: #555555;
+	color: #ffffff;
+}
+.searchFriendLine .inlineSearch {
+	height: 34px;
+	border-radius: 17px;
+	display: flex;
+	display: -webkit-flex;
+	width: 300px;
+	background-color: #ffffff;
+}
+.searchFriendLine .inlineSearch .logo {
+	margin: 6px 15px;
+	width: 22px;
+	background-color: #ffffff;	
+}
+.searchFriendLine .inlineSearch input {
+	font-size: 20px;
+	line-height: 34px;	
+	border: 0;
+	width: 230px;
+	outline: none;
+}
+
+.friendsLine {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	width: 100%;
+	margin-top: 20px;
+}
+.friendsLine .friend {
+	width: 30%;
+	background-color: #ffffff;
+	min-height: 130px;
+	display: flex;
+	display: -webkit-flex;
+}
+.friendsLine .friend .logo {
+	margin: 15px;
+	width: 100px;
+	height: 100px;
+	cursor: pointer;
+	background-color: unset;
+}
+.friendsLine .friend .info {
+	width: calc(100% - 160px);
+}
+.friendsLine .friend .info .name {
+	margin: 30px 0px 10px;
+	font-size: 20px;
+	color: #000000;
+}
+.friendsLine .friend .info .other {
+	font-size: 16px;
+	color: #717171;
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 1;
+	}
+	from {
+		top: 20px;
+	}
+	to {
+		top: 5px;
+	}
+}
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 1;
+	}
+	from {
+		top: 20px;
+	}
+	to {
+		top: 5px;
+	}
+}
+@-moz-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 1;
+	}
+	from {
+		top: 20px;
+	}
+	to {
+		top: 5px;
+	}
+}
+@-o-keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 1;
+	}
+	from {
+		top: 20px;
+	}
+	to {
+		top: 5px;
+	}
+}
+.friendsLine .friend .option {
+	margin: 10px 10px 0px 0px;
+	width: 20px;
+	height: 20px;
+}
+.friendsLine .friend .option .optionImg {
+	cursor: pointer;
+	width: 20px;
+	height: 20px;
+}
+.friendsLine .friend .option .optionList {
+	display: none;
+	position: relative;
+	left: -75px;
+	top: 5px;
+	width: 95px;
+}
+.friendsLine .friend .option .optionList .item {
+	display: flex;
+	display: -webkit-flex;
+	background-color: rgba(245, 245, 245, 0.92);
+	height: 25px;
+	line-height: 25px;
+	color: #000000;
+	font-size: 14px;
+}
+.friendsLine .friend .option .optionList .item img {
+	margin: 5px;
+	width: 15px;
+	height: 15px;
+}
+.friendsLine .friend .option .optionList .grey {
+	background-color: rgba(233, 233, 233, 0.92);
+}
+.friendsLine .friend .option .optionList .item:hover {
+	background-color: rgba(201, 201, 201, 0.92);
+	cursor: pointer;
+}
+.friendsLine .friend .option:focus {
+	border: 0;
+	outline: none;
+}
+.friendsLine .friend .option:focus .optionList {
+	display: block;
+	-webkit-animation: fadeIn 0.3s ease;
+	-moz-animation: fadeIn 0.3s ease;
+	-o-animation: fadeIn 0.3s ease;
+	animation: fadeIn 0.3s ease;
+}
+
+
+
+@media (max-width: 1279px) {
+
+.friendsLine .friend {
+	width: 30%;
+	background-color: #ffffff;
+	min-height: 110px;
+	display: flex;
+	display: -webkit-flex;
+}
+.friendsLine .friend .logo {
+	margin: 13px;
+	width: 84px;
+	height: 84px;
+	cursor: pointer;
+	background-color: unset;
+}
+.friendsLine .friend .info {
+	width: calc(100% - 134px);
+}
+.friendsLine .friend .info .name {
+	margin: 24px 0px 8px;
+	font-size: 18px;
+	color: #000000;
+}
+.friendsLine .friend .info .other {
+	font-size: 14px;
+	color: #717171;
+}
+.friendsLine .friend .option {
+	margin: 8px 8px 0px 0px;
+	width: 16px;
+	height: 16px;
+}
+.friendsLine .friend .option .optionImg {
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+}
+.friendsLine .friend .option .optionList {
+	display: none;
+	position: relative;
+	left: -75px;
+	top: 5px;
+	width: 91px;
+}
+
+}
+

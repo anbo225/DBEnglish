@@ -1,0 +1,487 @@
+*{ padding:0; margin:0;}
+
+body {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	display: flex;
+	display: -webkit-flex;
+	height: 100%
+}
+
+.sideBar {
+	width: 200px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background-color: #555555;
+}
+
+.logo {
+	width: 100%;
+	background-color: #e9e9e9;
+}
+.logo img {
+	width: 72%;
+	margin: 3px 14%;
+}
+
+.personalInfo {
+	width: 100%;
+	text-align: center;	
+}
+.personalInfo .pPhoto {
+	margin: 30px 18% 20px;
+}
+.personalInfo .pPhoto img {
+	width: 100%;
+	border-radius: 50%;
+}
+.personalInfo .name {
+	font-size: 24px;
+	margin: 0px auto 7px;
+	color: #ffffff;
+}
+.personalInfo .pInfo {
+	font-size: 16px;
+	color: #c1c1c1;
+	margin-bottom: 3px;
+}
+
+
+.personalInfo .loginInput {
+	width: 76%;
+	margin: 0px 12% 15px;
+	height: 30px;
+	outline: none;
+	border: 0;
+	padding: 0px 15px;
+	font-size: 16px;
+	border-radius: 15px;
+}
+.personalInfo .forgetPwd {
+	width: 76%;
+	margin: 0px 12% 15px;
+	text-align: right;
+	font-size: 12px;
+	color: #ffffff;
+	cursor: pointer;
+}
+.personalInfo .buttonLine {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	margin: 0px 12% 20px;
+}
+.personalInfo .buttonLine .loginButton {
+	color: #ffffff;
+	font-size: 14px;
+	line-height: 25px;
+	background-color: #62592d;
+	height: 25px;
+	width: 70px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.personalInfo .buttonLine .registerButton {
+	background-color: #465d4c;
+}
+.personalInfo .buttonLine .thirdPlatformButton {
+	width: 35px;
+	height: 35px;
+}
+
+.personalModuleList {
+	display: none;
+	margin-top: 15px;
+}
+
+.personalModule {
+	width: 100%;
+	text-align: center;
+	cursor: pointer;
+}
+.personalModule .title {
+	height: 20px;
+	margin: 15px calc(50% - 50px) 15px calc(50% - 100px);
+}
+.personalModule .arrow {
+	visibility: hidden;
+	height: 50px;
+}
+.personalModule:hover .arrow {
+	visibility: visible;
+}
+.personalModule .arrowChoose {
+	visibility: visible;
+}
+.personalModuleList .choose {
+	background-color: #434343;
+}
+
+.mainPage {
+	width: calc(100% - 200px);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.searchBar {
+	position: fixed;
+	left: 200px;
+	top: 0;
+	height: 50px;
+	min-height: 50px;
+	width: 100%;
+	background-color: #dbdbdb;
+	z-index: 5;
+	display: flex;
+	display: -webkit-flex;
+	flex-wrap: nowrap;
+	-webkit-flex-wrap: nowrap;
+}
+.searchBar .blank {
+	width: calc(50% - 580px);
+	min-width: 60px;
+}
+.searchBar .context {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	width: 960px;
+}
+.searchBar .context .search {
+	margin: 8px 0;
+	border-radius: 17px;
+	display: flex;
+	display: -webkit-flex;
+	width: 400px;
+	background-color: #ffffff;
+}
+.searchBar .context .search .logo {
+	margin: 6px 15px;
+	width: 22px;
+	background-color: #ffffff;	
+}
+.searchBar .context .search input {
+	font-size: 20px;
+	line-height: 34px;	
+	border: 0;
+	width: 330px;
+	outline: none;
+}
+
+.main {
+	display: flex;
+	display: -webkit-flex;
+	flex-wrap: nowrap;
+	-webkit-flex-wrap: nowrap;
+	min-width: 1080px;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+	padding: 50px 0 0;
+	min-height: 100%;
+}
+
+.main .blank {
+	width: calc(50% - 480px);
+	min-width: 60px;
+}
+
+.main .mainContent {
+	width: 960px;
+}
+
+.main .mainContent .path {
+	margin: 30px 0 12px;
+	line-height: 18px;
+	font-size: 18px;
+	color: #717171;
+}
+
+.main .mainContent .path a {
+	text-decoration: none;
+	color: #717171;
+}
+.main .mainContent .path a:hover { 
+	text-decoration: underline;
+}
+
+.pageModule {
+	margin: 25px 0px;
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row-reverse;
+	-webkit-flex-direction: row-reverse;
+	text-align: center;
+	color: #000000;
+	font-size: 13px;
+	line-height: 25px;
+	height: 25px;
+}
+.pageModule .jumpButton {
+	color: #ffffff;
+	background-color: #465d4c;
+	font-size: 14px;
+	width: 50px;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.pageModule .totalPage {
+	margin: 0px 7px;
+}
+.pageModule .searchPage {
+	width: 50px;
+	border: 0;
+	outline: none;
+	padding: 0px 7px;
+	border-radius: 3px;
+}
+.pageModule .pageLine {
+	display: flex;
+	display: -webkit-flex;
+	margin-right: 25px;
+}
+.pageModule .pageLine .page {
+	min-width: 11px;
+	padding: 0px 7px;
+	border-radius: 3px;
+	margin-left: 3px;
+	background-color: #ffffff;
+}
+.pageModule .pageLine .page:hover {
+	background-color: rgba(201, 201, 201, 1.0);
+	cursor: pointer;
+}
+.pageModule .pageLine .choose {
+	background-color: #555555 !important;
+	color: #ffffff;
+}
+
+.postModule {
+	background-color: rgba(245, 245, 245, 0.8);
+	width: calc(100% - 70px);
+	padding: 15px 35px;
+	min-height: 280px;
+}
+.postModule .titleLine{
+	display: flex;
+	display: -webkit-flex;
+	height: 30px;
+	font-size: 16px;
+	line-height: 30px;
+	width: 100%;
+}
+.postModule .titleLine .titleText{
+	margin-right: 10px;
+}
+.postModule .titleLine .titleInput{
+	outline: none;
+	border: 0;
+	padding: 0px 10px;
+	border-radius: 3px;
+	background-color: #ffffff;
+	height: 30px;
+	width: 35%;
+	font-size: 14px;
+	box-shadow: 0px 1px 1px #c1c1c1 inset;
+}
+.postModule .titleLine .attachmentText {
+	margin-left: 20px;
+}
+.postModule .titleLine .attachment{
+	width: 28px;
+	height: 28px;
+	margin: 2px 0px 0px 10px;
+	cursor: pointer;
+}
+.postModule textarea {
+	height: 250px;
+	font-size: 14px;
+	background-color: #ffffff;
+	width: 100%;
+	box-shadow: 0px 1px 1px #c1c1c1 inset;
+	outline: none;
+	border: 0;
+	padding: 10px;
+	border-radius: 3px;
+	margin-top: 15px;
+}
+.postModule .postButton{
+	margin-left: calc(100% - 75px);
+	margin-top: 15px;
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 30px;
+	background-color: #465d4c;
+	height: 30px;
+	width: 75px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.blankLine {
+	min-height: 30px;
+	width: 100%;
+}
+
+.bottomInfo {
+	text-align: center;
+	font-size: 14px;
+	line-height: 180%;
+	margin: 60px 0px;
+	color: #535353;
+}
+
+.mask {
+	background-color: rgba(0, 0, 0, 0.8);
+	position: fixed;
+	display: none;
+	left: 0px;
+	top: 0px;
+	z-index: 10;
+}
+
+@media (max-width: 1279px) {
+
+.sideBar {
+	width: 160px;
+	height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	background-color: #555555;
+}
+
+.logo img {
+	width: 90%;
+	margin: 3px 5%;
+}
+
+.personalInfo .loginInput {
+	width: 84%;
+	margin: 0px 8% 15px;
+	height: 30px;
+	outline: none;
+	border: 0;
+	padding: 0px 15px;
+	font-size: 16px;
+	border-radius: 15px;
+}
+.personalInfo .forgetPwd {
+	width: 84%;
+	margin: 0px 8% 15px;
+	text-align: right;
+	font-size: 12px;
+	color: #ffffff;
+	cursor: pointer;
+}
+.personalInfo .buttonLine {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	margin: 0px 8% 20px;
+}
+.personalInfo .buttonLine .loginButton {
+	color: #ffffff;
+	font-size: 14px;
+	line-height: 25px;
+	background-color: #62592d;
+	height: 25px;
+	width: 50px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.personalInfo .buttonLine .registerButton {
+	width: 70px;
+	background-color: #465d4c;
+}
+
+.mainPage {
+	width: calc(100% - 160px);
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+
+.searchBar {
+	position: fixed;
+	left: 160px;
+	top: 0;
+	height: 50px;
+	min-height: 50px;
+	width: 100%;
+	background-color: #dbdbdb;
+	z-index: 5;
+	display: flex;
+	display: -webkit-flex;
+	flex-wrap: nowrap;
+	-webkit-flex-wrap: nowrap;
+}
+.searchBar .blank {
+	width: calc(50% - 464px);
+	min-width: 48px;
+}
+.searchBar .context {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	width: 768px;
+}
+.searchBar .context .search {
+	margin: 8px 0;
+	border-radius: 17px;
+	display: flex;
+	display: -webkit-flex;
+	width: 330px;
+	background-color: #ffffff;
+}
+.searchBar .context .search .logo {
+	margin: 6px 15px;
+	width: 22px;
+	background-color: #ffffff;	
+}
+.searchBar .context .search input {
+	font-size: 20px;
+	line-height: 34px;	
+	border: 0;
+	width: 260px;
+	outline: none;
+}
+
+.main {
+	display: flex;
+	display: -webkit-flex;
+	flex-wrap: nowrap;
+	-webkit-flex-wrap: nowrap;
+	min-width: 864px;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+	padding: 50px 0 0;
+}
+
+.main .blank {
+	width: calc(50% - 384px);
+	min-width: 48px;
+}
+
+.main .mainContent {
+	width: 768px;
+}
+
+.postModule {
+	background-color: rgba(245, 245, 245, 0.8);
+	width: calc(100% - 50px);
+	padding: 10px 25px;
+	min-height: 280px;
+}
+
+}
+
+
+
+
+

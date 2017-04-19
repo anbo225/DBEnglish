@@ -1,0 +1,177 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="css/global.css" ／>
+	<link rel="stylesheet" href="css/personalData.css" ／>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+</head>
+<body>
+	<script>
+		$(document).ready(function() {
+			$("#login").show();
+			$("#personalModuleList").show();
+		});
+	</script>
+	<div class="sideBar">
+		<div class="logo"><img src="img/logo.png" /></div>
+		<div class="personalInfo">
+			<div class="isLogin" id="login">
+				<div class="pPhoto"><img src="img/man.png" /></div>
+				<div class="name">name</div>
+				<div class="pInfo" id="grade">grade: 2</div>
+				<div class="pInfo" id="article">article: 8</div>
+			</div>
+			<div class="notLogin" id="notLogin">
+				<div class="pPhoto"><img src="img/profile.png" /></div>
+				<input type="text" class="loginInput" placeholder="Username" />
+				<input type="text" class="loginInput" placeholder="Password" />
+				<div class="forgetPwd">Forgot password?</div>
+				<div class="buttonLine">
+					<div class="loginButton">Login</div>
+					<div class="loginButton registerButton">Register</div>
+				</div>
+				<div class="buttonLine">
+					<img src="img/qq2.png" class="thirdPlatformButton" />
+					<img src="img/wechat2.png" class="thirdPlatformButton" />
+					<img src="img/weibo2.png" class="thirdPlatformButton" />
+				</div>
+			</div>
+		</div>
+		<div class="personalModuleList" id="personalModuleList">
+			<div class="personalModule" id="pModule0" onclick="window.location.href='main.html?login=login'">
+				<img src="img/arrow.png" class="arrow" /><img src="img/homepage.png" class="title" />
+			</div>
+			<div class="personalModule" id="pModule1" onclick="window.location.href='favourite.html?show=all&page=1'">
+				<img src="img/arrow.png" class="arrow" /><img src="img/favorites.png" class="title" />
+			</div>
+			<div class="personalModule" id="pModule2">
+				<img src="img/arrow.png" class="arrow" /><img src="img/mail2.png" class="title" />
+			</div>
+			<div class="personalModule choose" id="pModule3" onclick="">
+				<img src="img/arrow.png" class="arrow arrowChoose" /><img src="img/settings.png" class="title" />
+			</div>
+			<div class="personalModule" id="pModule4" onclick="window.location.href='friend.html?page=1'">
+				<img src="img/arrow.png" class="arrow" /><img src="img/friends.png" class="title" />
+			</div>
+		</div>
+	</div>
+	<div class="mainPage">
+		<div class="searchBar">
+			<div class="blank"></div>
+			<div class="context">
+				<div class="search">
+					<img src="img/search.png" class="logo" />
+					<input type="text" name="search" placeholder="search" />
+				</div>
+			</div>
+			<div class="blank"></div>
+		</div>
+		<div class="main" style="background-image: url(img/background3.png)">
+			<div class="blank"></div>
+			<div class="mainContent">
+				<div class="path"><a href="main.html?login=login">Homepage</a> >> <a href="">Personal Data</a></div>
+				<div class="personalData">
+					<div class="personalDataTop"></div>
+					<div class="websiteData">
+						<img src="img/man.png" class="pPhoto" />
+						<div class="data">
+							<div class="nameBar">
+								<div class="name">Franky</div>
+								<div class="status">[online]</div>
+							</div>
+							<div class="otherInfo">Grade: 2</div>
+							<div class="otherInfo">Post: 8</div>
+						</div>
+						<div class="buttonBar">
+							<div class="button" onclick="window.location.href='personalEdit.html'">Edit</div>
+							<div class="button logout" onclick="window.location.href='main.html?login=notLogin'">Log out</div>
+						</div>
+					</div>
+					<hr />
+					<div class="information">
+						<div class="title">Basic Information</div>
+						<div class="infoLine">
+							<div class="item">
+								<div class="iname">Name:</div>
+								<div class="ivalue">Lily</div>
+							</div>
+							<div class="item">
+								<div class="iname">Gender:</div>
+								<div class="ivalue">Male</div>
+							</div>
+							<div class="item">
+								<div class="iname">Birthday:</div>
+								<div class="ivalue">1994-01-10</div>
+							</div>
+						</div>
+						<div class="infoLine">
+							<div class="item">
+								<div class="iname">Mail:</div>
+								<div class="ivalue">123456789@pku.edu.cn</div>
+							</div>
+							<div class="item">
+								<div class="iname">City:</div>
+								<div class="ivalue">Beijing</div>
+							</div>
+							<div class="item"></div>
+						</div>
+						<div class="blankBottom"></div>
+					</div>
+					<hr />
+					<div class="information">
+						<div class="title">Liveness</div>
+						<div class="infoLine">
+							<div class="item">
+								<div class="iname">Login:</div>
+								<div class="ivalue">204</div>
+							</div>
+							<div class="item">
+								<div class="iname">Post:</div>
+								<div class="ivalue">8</div>
+							</div>
+							<div class="item">
+								<div class="iname">Credit:</div>
+								<div class="ivalue">102</div>
+							</div>
+						</div>
+						<div class="infoLine">
+							<div class="item long">
+								<div class="iname">Last Login:</div>
+								<div class="ivalue">2017-03-10 20:18:18</div>
+							</div>
+							<div class="item long">
+								<div class="iname">Last Login IP:</div>
+								<div class="ivalue">255.255.255.255</div>
+							</div>
+						</div>
+						<div class="infoLine">
+							<div class="item long">
+								<div class="iname">Total Online Time:</div>
+								<div class="ivalue">203h34m</div>
+							</div>
+							<div class="item long">
+								<div class="iname">Register Time:</div>
+								<div class="ivalue">2015-11-10 10:18:18</div>
+							</div>
+							
+						</div>
+						<div class="blankBottom"></div>
+					</div>
+					<hr />
+					<div class="information">
+						<div class="title">About Me</div>
+						<div class="aboutMe">bababababababababa</div>
+						<div class="blankBottom"></div>
+					</div>
+				</div>
+				<div class="bottomInfo">
+					<p>广告业务|合作交流|联系我们|技术支持</p>
+					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+					<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+				</div>
+			</div>
+			<div class="blank"></div>
+		</div>
+	</div>
+</body>
+</html>

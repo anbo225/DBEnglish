@@ -1,0 +1,128 @@
+.personalData {
+	width: 100%;
+	background-color: rgba(245, 245, 245, 0.8);
+}
+
+.personalData .personalDataTop {
+	width: 100%;
+	height: 6px;
+	min-height: 6px;
+	background-color: #555555
+}
+
+.personalData .websiteData {
+	height: 188px;
+	display: flex;
+	display: -webkit-flex;
+}
+.personalData .websiteData .pPhoto {
+	margin: 30px;
+	width: 128px;
+	height: 128px;
+	border-radius: 50%;
+}
+.personalData .websiteData .data {
+	margin-left: 10px;
+	width: calc(100% - 303px);
+}
+.personalData .websiteData .data .nameBar {
+	display: flex;
+	display: -webkit-flex;
+}
+.personalData .websiteData .data .nameBar .name {
+	margin: 50px 0px 10px;
+	font-size: 24px;
+	font-weight: 600;
+	color: #000000;
+}
+.personalData .websiteData .data .nameBar .status {
+	margin: 56px 15px 10px;
+	color: #c80001;
+	font-size: 16px;
+}
+.personalData .websiteData .data .otherInfo {
+	color: #555555;
+	font-size: 18px;
+}
+.personalData .websiteData .buttonBar {
+	margin-right: 30px;
+	width: 75px;
+}
+.personalData .websiteData .buttonBar .button {
+	width: 75px;
+	margin-top: 55px;
+	border-radius: 3px;
+	height: 30px;
+	color: #ffffff;
+	background-color: #465d4c;
+	cursor: pointer;
+	text-align: center;
+	line-height: 30px;
+	font-size: 16px;
+}
+.personalData .websiteData .buttonBar .logout {
+	margin-top: 18px;
+	background-color: #62592d;
+}
+.personalData .websiteData .buttonBar .follow {
+	background-color: #c80001;
+}
+.personalData .websiteData .buttonBar .mail {
+	margin: 18px 22px;
+	width: 30px;
+	height: 30px;
+	background-color: unset;
+}
+
+
+.personalData hr {
+	border: 0.5px solid rgba(219, 219, 219, 0.8);
+	margin: 0 15px;
+	border-radius: 0.5px;
+}
+
+.personalData .information {
+	margin: 0px 35px;
+	color: #000000;
+}
+.personalData .information .title {
+	font-size: 20px;
+	font-weight: 600;
+	height: 60px;
+	line-height: 60px;
+}
+.personalData .information .infoLine {
+	margin: 5px 0px 5px 15px;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+}
+.personalData .information .aboutMe {
+	margin: 15px;
+	font-size: 16px;
+	line-height: 120%;
+	color: #555555;
+}
+.personalData .information .infoLine .item {
+	width: 27%;
+	display: flex;
+	display: -webkit-flex;
+}
+.personalData .information .infoLine .long {
+	width: 50%;
+}
+.personalData .information .infoLine .item .iname {
+	color: #717171;
+}
+.personalData .information .infoLine .item .ivalue {
+	margin-left: 5px;
+}
+.personalData .information .blankBottom {
+	min-height: 10px;
+	width: 100%;
+}
+

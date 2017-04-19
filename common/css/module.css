@@ -1,0 +1,270 @@
+.module {
+	width: 100%;
+}
+
+.module .topBar {
+	background-color: rgba(245, 245, 245, 0.8);
+}
+.module .topBar .moduleTop {
+	width: 100%;
+	height: 6px;
+	min-height: 6px;
+	background-color: #555555
+}
+.module .topBar .moduleTitle {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	margin: 12px 35px;
+}
+.module .topBar .moduleTitle .title {
+	margin: 10px 0;
+	height: 26px;
+}
+.module .topBar .moduleTitle .title img {
+	height: 100%;
+}
+.module .topBar .moduleTitle .inlineSearch {
+	margin: 6px 0;
+	height: 34px;
+	border-radius: 17px;
+	display: flex;
+	display: -webkit-flex;
+	width: 300px;
+	background-color: #ffffff;
+}
+.module .topBar .moduleTitle .inlineSearch .logo {
+	margin: 6px 15px;
+	width: 22px;
+	background-color: #ffffff;	
+}
+.module .topBar .moduleTitle .inlineSearch input {
+	font-size: 20px;
+	line-height: 34px;	
+	border: 0;
+	width: 230px;
+	outline: none;
+}
+.module .topBar .otherInfo {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	height: 30px;
+	margin: 0px 35px;
+}
+.module .topBar .otherInfo .info{
+	display: flex;
+	display: -webkit-flex;
+	font-size: 14px;
+	color: #717171;
+	line-height: 30px;
+}
+.module .topBar .otherInfo .info .red{
+	color: #c8000b;
+}
+.module .topBar .otherInfo .postButton{
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 30px;
+	background-color: #465d4c;
+	height: 30px;
+	width: 75px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.module .topBar .blankBottom {
+	min-height: 20px;
+	width: 100%;
+}
+
+.module .buttonBar {
+	display: flex;
+	display: -webkit-flex;
+	margin-top: 15px;
+}
+.module .buttonBar .button {
+	text-align: center;
+	height: 30px;
+	width: 90px;
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 30px;
+	border-radius: 3px 3px 0px 0px;
+	background-color: rgba(85, 85, 85, 1.0);
+	cursor: pointer;
+	margin-right: 10px;
+}
+
+.module .mainContent {
+	background-color: rgba(245, 245, 245, 0.8);
+}
+.module .mainContent .moduleTop {
+	width: 100%;
+	height: 6px;
+	min-height: 6px;
+	background-color: #555555;
+}
+.module .mainContent .articleList {
+	margin: 0px 35px;
+}
+.module .mainContent .articleList .titleLine {
+	height: 51px;
+	line-height: 51px;
+	display: flex;
+	display: -webkit-flex;
+	width: 100%;
+	color: #717171;
+	font-size: 14px;
+}
+.module .mainContent .articleList .titleLine .title {
+	margin-left: 160px;
+	width: calc(100% - 475px);
+}
+.module .mainContent .articleList .titleLine .other {
+	width: 105px;
+	text-align: center;
+}
+.module .mainContent .articleList .grey {
+	background-color: #e9e9e9;
+}
+.module .mainContent .articleList .article {
+	height: 51px;
+	line-height: 51px;
+	display: flex;
+	display: -webkit-flex;
+	width: 100%;
+	color: #000000;
+}
+.module .mainContent .articleList .article:hover {
+	background-color: #c9c9c9;
+	cursor: pointer;
+}
+.module .mainContent .articleList .article .point {
+	width: 45px;
+}
+.module .mainContent .articleList .article .point .dot {
+	height: 9px;
+	width: 9px;
+	margin: 21px 18px;
+	background-color: #c8000b;
+	border-radius: 50%;
+}
+.module .mainContent .articleList .article .title {
+	width: calc(100% - 360px);
+	display: flex;
+	display: -webkit-flex;
+	font-size: 16px;
+}
+.module .mainContent .articleList .article .title .topContent {
+	max-width: calc(100% - 82px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.module .mainContent .articleList .article .title .content {
+	max-width: calc(100% - 30px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.module .mainContent .articleList .article .title .top {
+	margin: 15px 0px 15px 10px;
+	width: 42px;
+	height: 21px;
+	border-radius: 3px;
+	color: #ffffff;
+	background-color: #c8000b;
+	font-size: 14px;
+	line-height: 21px;
+	text-align: center;
+}
+.module .mainContent .articleList .article .title .attachment {
+	margin: 15px 0px 15px 9px;
+	width: 21px;
+	height: 21px;
+}
+.module .mainContent .articleList .article .other {
+	width: 105px;
+	text-align: center;
+	font-size: 14px;
+}
+.module .mainContent .articleList .article .other .author {
+	margin-top: 5px;
+	line-height: 20px;
+	height: 20px;
+	font-size: 14px;
+}
+.module .mainContent .articleList .article .other .date {
+	color: #717171;
+	line-height: 20px;
+	height: 20px;
+	font-size: 14px;
+	margin-top: 1px;
+}
+.module .mainContent .articleList .blankBottom {
+	min-height: 12px;
+	width: 100%;
+}
+
+
+
+@media (max-width: 1279px) {
+
+.module .topBar .moduleTitle {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	margin: 12px 25px;
+}
+.module .topBar .otherInfo {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	height: 30px;
+	margin: 0px 25px;
+}
+
+.module .mainContent .articleList {
+	margin: 0px 25px;
+}
+.module .mainContent .articleList .titleLine .title {
+	margin-left: 128px;
+	width: calc(100% - 416px);
+}
+.module .mainContent .articleList .titleLine .other {
+	width: 96px;
+	text-align: center;
+}
+.module .mainContent .articleList .article .point {
+	width: 35px;
+}
+.module .mainContent .articleList .article .point .dot {
+	height: 9px;
+	width: 9px;
+	margin: 21px 13px;
+	background-color: #c8000b;
+	border-radius: 50%;
+}
+.module .mainContent .articleList .article .title {
+	width: calc(100% - 323px);
+	display: flex;
+	display: -webkit-flex;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-size: 16px;
+}
+.module .mainContent .articleList .article .other {
+	width: 96px;
+	text-align: center;
+	font-size: 14px;
+}
+
+}
+

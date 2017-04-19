@@ -1,0 +1,99 @@
+.registerBody {
+	height: 100%;
+	width: 100%;
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+}
+
+.registerBody .logo {
+	margin: 30px calc(50% - 185px);
+	width: 370px;
+	background-color: unset;
+}
+.registerBody .register {
+	background-color: #ffffff;
+	padding: 1px 0px 20px calc(50% - 175px); 
+	width: calc(50% + 175px);
+	color: #000000;
+	font-size: 18px;
+}
+.registerBody .register .text {
+	margin: 15px 0px 3px;
+}
+.registerBody .register .regInput {
+	width: 350px;
+	height: 40px;
+	font-size: 20px;
+	padding: 0px 15px;
+	border-radius: 3px;
+	outline: none;
+	border: 1px solid #717171;
+}
+.registerBody .register .regInput:focus {
+	border-color: #144b9e;
+	box-shadow: 0px 0px 1px #144b9e inset;
+}
+.registerBody .register .shortInput {
+	width: 120px;
+}
+.registerBody .register .verifyLine {
+	display: flex;
+	display: -webkit-flex;
+	height: 40px;
+}
+.registerBody .register .verifyLine .verifyBlock {
+	text-align: center;
+	margin: 2px 20px;
+	height: 36px;
+	width: 100px;
+	line-height: 36px;
+	background-color: #d2d2d2;
+}
+.registerBody .register .blue {
+	color: #144b9e;
+	line-height: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+.registerBody .register .submitLine {
+	display: flex;
+	display: -webkit-flex;
+	height: 40px;
+	margin-top: 20px;
+	line-height: 40px;
+}
+.registerBody .register .submitLine .submitButton {
+	color: #ffffff;
+	background-color: #d2d2d2;
+	height: 40px;
+	width: 85px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.registerBody .register .submitLine .agreeLine {
+	margin: 0px 20px;
+	display: flex;
+	display: -webkit-flex;
+	cursor: pointer;
+}
+.registerBody .register .submitLine .agreeLine .agreeBox {
+	margin: 11px 0px;
+	width: 18px;
+	height: 18px;
+	border: 1px solid #465d4c;
+	border-radius: 1px;
+}
+.registerBody .register .submitLine .agreeLine .agreeBox .agree {
+	margin: 3px;
+	width: 12px;
+	height: 12px;
+	background-color: #ffffff;
+}
+.registerBody .register .submitLine .agreeLine .agreeText {
+	margin-left: 10px;
+}
+
+
+
+
