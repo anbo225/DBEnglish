@@ -1,6 +1,28 @@
 
 <!--{template common/header}-->
 
+<link rel="stylesheet" href="./template/EnglishDB/common/css/module.css">
+<script>
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+	function changeColor(id){
+		
+	}
+	window.onload=function(){
+		var type = GetQueryString("type");
+
+		jq("#" + type).css("background-color", "rgb(70, 93, 76)");
+		if (type != null && type != "all")
+			jq("#all").css("background-color", "rgba(85, 85, 85, 1.0)");
+		if (type != null && type != "thread")
+			jq("#thread").css("background-color", "rgba(85, 85, 85, 1.0)");
+		if (type != null && type != "forum")
+			jq("#forum").css("background-color", "rgba(85, 85, 85, 1.0)");
+	}
+</script>
 <div class="mainPage">
 		<div class="searchBar">
 			<div class="blank"></div>
@@ -12,62 +34,65 @@
 			</div>
 			<div class="blank"></div>
 		</div>
-		<div class="main" style="background-image: url(./template/EnglishDB/common/img/background2.png)">
+		<div class="main" style="background-image: url(./template/EnglishDB/common/img/background.png)">
 			<div class="blank"></div>
 			<div class="mainContent">
 
-			<div class="path"><a href="./">Homepage</a> >>  <a href="home.php?mod=space&do=favorite""> Favorite</a>  </div>
+			<div class="path"><a href="./">Homepage</a> >>  <a href="home.php?mod=space&do=favorite"> Favorite</a>  </div>
 
 			<div class="module">
-					
+
 					<div class="buttonBar">
-						<div class="button" id="all"><a href="home.php?mod=space&do=favorite&type=all">{lang favorite_all}</div>
-						<div class="button" id="hot"><a href="home.php?mod=space&do=favorite&type=thread">{lang favorite_thread}</a></div>
-						<div class="button" id="elite"><a href="home.php?mod=space&do=favorite&type=forum">{lang favorite_forum}</a></div>
+						<div class="button" id="all" style="background-color: rgb(70, 93, 76);" onclick = "window.location.href='home.php?mod=space&do=favorite&type=all'">{lang favorite_all}</div>
+						<div class="button" id="thread" onclick="window.location.href='home.php?mod=space&do=favorite&type=thread'">{lang favorite_thread}</div>
+						<div class="button" id="forum" onclick="window.location.href='home.php?mod=space&do=favorite&type=forum'">{lang favorite_forum}</div>
 					</div>
 
 					<div class="mainContent">
 						<div class="moduleTop"></div>
 						
-
-						<h1 class="mt bbs">
-							<img alt="favorite" src="{STATICURL}image/feed/favorite.gif" class="vm" />
-							<!--{if $_GET[type] == "thread"}-->{lang favorite_thread}
-							<!--{elseif $_GET[type] == "forum"}-->{lang favorite_forum}
-							<!--{elseif $_GET[type] == "group"}-->{lang favorite_group}
-							<!--{elseif $_GET[type] == "blog"}-->{lang favorite_blog}
-							<!--{elseif $_GET[type] == "album"}-->{lang favorite_album}
-							<!--{elseif $_GET[type] == "article"}-->{lang favorite_article}
-							<!--{else}-->{lang favorite_all}</a><!--{/if}-->
-						</h1>
-
+						
+					<div class="articleList">
+						<div class="titleLine">
+								<div class="mytitle">Title</div>
+								<div class="other">Type</div>
+								<div class="other">Time</div>
+								<div class="other">Operation</div>
+						</div>
 						<!--{if $list}-->
 						<form method="post" autocomplete="off" name="delform" id="delform" action="home.php?mod=spacecp&ac=favorite&op=delete&type=$_GET[type]&checkall=1" onsubmit="showDialog('{lang del_select_favorite_confirm}', 'confirm', '', '$(\'delform\').submit();'); return false;">
 							<input type="hidden" name="formhash" value="{FORMHASH}" />
 							<input type="hidden" name="delfavorite" value="true" />
-							<ul id="favorite_ul" class="">
+							<ul id="favorite_ul">
+								{eval $ix=0;}
 								<!--{loop $list $k $value}-->
-								<li id="fav_$k" class="bbda ptm pbm">
-									<a class="y" id="a_delete_$k" href="home.php?mod=spacecp&ac=favorite&op=delete&favid=$k" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a>
-									<input type="checkbox" name="favorite[]" class="pc" value="$k" vid="$value[id]" />
-									<!--{if $_GET['type'] == 'all'}--><span>$value[icon]</span><!--{/if}-->
-									<a href="$value[url]" target="_blank">$value[title]</a> <span class="xg1"><!--{date($value[dateline], 'u')}--></span>
-									<!--{if $value[description]}-->
-									<div class="quote">
-										<blockquote id="quote_preview">$value[description]</blockquote>
-									</div>
-									<!--{/if}-->
+								<script></script>
+								<!--{if $ix % 2}-->
+								<li id="fav_$k" class="article">
+									<div class="point"><div class="dot"></div></div>
+									
+									<div class="mytitle" onclick = "window.location.href='$value[url]'" target="_blank">$value[title] </div>
+									<div class="other" style="color:#717171">type</div>
+									<div class="other"  style="color:#717171"><!--{date($value[dateline], 'u')}--></div>
+									<div class = "other" ><a  style="color:#717171" id="a_delete_$k" href="home.php?mod=spacecp&ac=favorite&op=delete&favid=$k" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a></div>
 								</li>
+								<!--{else}-->
+								<li id="fav_$k" class="article grey">
+									<div class="point"><div class="dot"></div></div>
+									
+									<div class="mytitle" onclick="window.location.href='$value[url]'" target="_blank">$value[title] </div>
+									<div class="other"  style="color:#717171">type</div>
+									<div class="other"  style="color:#717171"><!--{date($value[dateline], 'u')}--></div>
+									<div class = "other" ><a  style="color:#717171" id="a_delete_$k" href="home.php?mod=spacecp&ac=favorite&op=delete&favid=$k" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a></div>
+								</li>
+								<!--{/if}-->
+								{eval $ix++;}
 								<!--{/loop}-->
 							</ul>
-							<p class="mtm pns">
-								<label for="chkall" onclick="checkall(this.form, 'favorite')"><input type="checkbox" name="chkall" id="chkall" class="pc vm" />{lang select_all}</label>
-								<button type="submit" name="delsubmit" value="true" class="pn vm"><em>{lang del_favorite}</em></button>
-								<!--{if $_GET[type] == "thread"}-->
-									<button type="button" name="collectionsubmit" value="true" class="pnc vm" onclick="collection_favorite()"><em>{lang collection_favorite}</em></button>
-								<!--{/if}-->
-							</p>
+							
 						</form>
+						<div class="blankBottom"></div>
+					</div>
 						<!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
 						<!--{else}-->
 						<p class="emp">{lang no_favorite_yet}</p>
@@ -76,7 +101,15 @@
 
 					</div>
 				</div>
-	
+				<div class="blankLine"></div>
+				<div class="bottomInfo">
+					<p>广告业务|合作交流|联系我们|技术支持</p>
+					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+					<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+				</div>
+			</div>
+			<div class="blank"></div>
+	</div>
 </div>
 
 

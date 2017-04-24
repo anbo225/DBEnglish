@@ -18,11 +18,11 @@
 	-webkit-justify-content: space-between;
 	margin: 12px 35px;
 }
-.module .topBar .moduleTitle .title {
+.module .topBar .moduleTitle .mytitle {
 	margin: 10px 0;
 	height: 26px;
 }
-.module .topBar .moduleTitle .title img {
+.module .topBar .moduleTitle .mytitle img {
 	height: 100%;
 }
 .module .topBar .moduleTitle .inlineSearch {
@@ -119,7 +119,7 @@
 	color: #717171;
 	font-size: 14px;
 }
-.module .mainContent .articleList .titleLine .title {
+.module .mainContent .articleList .titleLine .mytitle {
 	margin-left: 160px;
 	width: calc(100% - 475px);
 }
@@ -152,26 +152,26 @@
 	background-color: #c8000b;
 	border-radius: 50%;
 }
-.module .mainContent .articleList .article .title {
+.module .mainContent .articleList .article .mytitle {
 	width: calc(100% - 360px);
 	display: flex;
 	display: -webkit-flex;
 	font-size: 16px;
 }
-.module .mainContent .articleList .article .title .topContent {
+.module .mainContent .articleList .article .mytitle .topContent {
 	max-width: calc(100% - 82px);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-.module .mainContent .articleList .article .title .content {
+.module .mainContent .articleList .article .mytitle .content {
 	max-width: calc(100% - 30px);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
-.module .mainContent .articleList .article .title .top {
+.module .mainContent .articleList .article .mytitle .top {
 	margin: 15px 0px 15px 10px;
 	width: 42px;
 	height: 21px;
@@ -182,7 +182,7 @@
 	line-height: 21px;
 	text-align: center;
 }
-.module .mainContent .articleList .article .title .attachment {
+.module .mainContent .articleList .article .mytitle .attachment {
 	margin: 15px 0px 15px 9px;
 	width: 21px;
 	height: 21px;
@@ -233,7 +233,7 @@
 .module .mainContent .articleList {
 	margin: 0px 25px;
 }
-.module .mainContent .articleList .titleLine .title {
+.module .mainContent .articleList .titleLine .mytitle {
 	margin-left: 128px;
 	width: calc(100% - 416px);
 }
@@ -251,7 +251,7 @@
 	background-color: #c8000b;
 	border-radius: 50%;
 }
-.module .mainContent .articleList .article .title {
+.module .mainContent .articleList .article .mytitle {
 	width: calc(100% - 323px);
 	display: flex;
 	display: -webkit-flex;
