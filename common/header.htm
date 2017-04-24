@@ -28,11 +28,51 @@
 	<!--{/if}-->
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="./template/EnglishDB/common/css/global.css" ／>
-	<link rel="stylesheet" href="./template/EnglishDB/common/css/main.css" ／>	
+	<link rel="stylesheet" href="./template/EnglishDB/common/css/main.css" ／>
+	<script type="text/javascript" src="./template/EnglishDB/common/js/jquery.min.js"></script>
+	<script>
+		jq = jQuery.noConflict();
+	</script>
 </head>
 <body id="nv_{$_G[basescript]}" class="pg_{CURMODULE}{if $_G['basescript'] === 'portal' && CURMODULE === 'list' && !empty($cat)} {$cat['bodycss']}{/if}" onkeydown="if(event.keyCode==27) return false;">
 
-	
+	<script>
+		function GetQueryString(name) {
+		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if(r!=null)return  unescape(r[2]); return null;
+		}
+		jq(document).ready(function() {
+			var targetPml;
+			if(window.location.pathname.indexOf("home.php")!=-1) {
+				var pmlmod = GetQueryString("mod");
+				var pmldo = GetQueryString("do");
+
+				if(pmlmod == "space" && pmldo == "favorite") {
+					targetPml = jq("#pModule1");
+				}
+				else if(pmlmod == "space" && pmldo == "pm") {
+					targetPml = jq("#pModule2");
+				}
+				else if(pmlmod == "spacecp") {
+					targetPml = jq("#pModule3");
+				}
+				else if(pmlmod == "space" && pmldo == "friend") {
+					targetPml = jq("#pModule4");
+				}
+				else targetPml = jq("#pModule0");
+			}
+			else {
+				targetPml = jq("#pModule0");
+			}
+			if(targetPml.length > 0) {
+				targetPml.addClass("choose");
+				targetPml.find(".arrow").eq(0).addClass("arrowChoose");
+				targetPml.attr("onclick","");
+			}
+		});
+	</script>
+
 	<div id="append_parent"></div>
 	<div id="ajaxwaitid"></div>
 
@@ -52,8 +92,8 @@
 		</div>
 
 		<div class="personalModuleList" id="personalModuleList">
-			<div class="personalModule choose" id="pModule0">
-				<img src="./template/EnglishDB/common/img/arrow.png" class="arrow arrowChoose" /><img src="./template/EnglishDB/common/img/homepage.png" class="personalModuleTitle" />
+			<div class="personalModule" id="pModule0" onclick="window.location.href='forum.php'">
+				<img src="./template/EnglishDB/common/img/arrow.png" class="arrow" /><img src="./template/EnglishDB/common/img/homepage.png" class="personalModuleTitle" />
 			</div>
 			<div class="personalModule" id="pModule1" onclick="window.location.href='home.php?mod=space&do=favorite&view=me'">
 				<img src="./template/EnglishDB/common/img/arrow.png" class="arrow" /><img src="./template/EnglishDB/common/img/favorites.png" class="personalModuleTitle" />
