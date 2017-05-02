@@ -131,6 +131,200 @@ body {
 	background-color: #434343;
 }
 
+.chatModule {
+	position: fixed;
+	z-index: 5;
+	right: 5px;
+	bottom: 5px;
+	color: #000000;
+	font-size: 18px;
+}
+.chatModule .chatEntry{
+	color: #000000;
+	background-color: #ffffff;
+	font-size: 18px;
+	text-align: center;
+	width: 200px;
+	height: 50px;
+	line-height: 50px;
+	border-radius: 3px;
+	cursor: pointer;
+	border: 1px solid #dcdcdc;
+	box-shadow: 0px 0px 2px 3px rgba(13,5,9,.03);
+}
+.chatModule .red {
+	color: #c80001;
+}
+.chatModule .chatB {
+	display: none;
+}
+.chatModule .chatBox {
+	display: flex;
+	display: -webkit-flex;
+	width: 500px;
+	height: 350px;
+	min-height: 350px;
+	border-radius: 5px;
+	border: 1px solid #dcdcdc;
+	box-shadow: 0px 0px 2px 3px rgba(13,5,9,.03);
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.chatModule .chatBox .friend {
+	width: 150px;
+	background-color: #f5f5f5;
+	font-size: 12px;
+}
+.chatModule .chatBox .friend .findFriend {
+	height: 40px;
+	min-height: 40px;
+	padding: 0px 15px;
+	border: 0;
+	outline: none;
+	font-size: 14px;
+}
+.chatModule .chatBox .friend .findFriend:focus {
+	background-color: #ffffff;
+}
+.chatModule .chatBox .friend .friendList {
+	height: 309px;
+	min-height: 309px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.chatModule .chatBox .friend .friendList .item {
+	display: flex;
+	display: -webkit-flex;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+}
+.chatModule .chatBox .friend .friendList .item:hover {
+	background-color: #e5e5e5;
+}
+.chatModule .chatBox .friend .friendList .item .friendPic {
+	height: 22px;
+	width: 22px;
+	margin: 9px 7px 9px 9px;
+}
+.chatModule .chatBox .friend .friendList .item .friendPic img {
+	width: 100%;
+	border-radius: 50%;
+}
+.chatModule .chatBox .friend .friendList .item .friendName {
+	width: calc(100% - 80px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.chatModule .chatBox .friend .friendList .item .isNew {
+	width: 42px;
+	display: flex;
+	display: -webkit-flex;
+}
+.chatModule .chatBox .friend .friendList .item .isNew .text {
+	width: 26px;
+	color: #c9c9c9;
+}
+.chatModule .chatBox .friend .friendList .item .isNew .dot {
+	margin: 17px 6px 17px 4px;
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	background-color: #c80001;
+}
+.chatModule .chatBox .chatList {
+	width: 349px;
+	background-color: #ffffff;
+}
+.chatModule .chatBox .chatList .chatTop {
+	height: 40px;
+	min-height: 40px;
+	line-height: 40px;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	padding-left: 15px;
+}
+.chatModule .chatBox .chatList .chatTop .close {
+	margin: 12px;
+	height: 16px;
+	width: 16px;
+	cursor: pointer;
+}
+.chatModule .chatBox .chatList .chatContent {
+	height: 278px;
+	min-height: 278px;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.chatModule .chatBox .chatList .chatContent .chatMessage {
+	display: flex;
+	display: -webkit-flex;
+	margin-top: 10px;
+	font-size: 12px;
+}
+.chatModule .chatBox .chatList .chatContent .myMes {
+	flex-direction: row-reverse;
+	-webkit-flex-direction: row-reverse;
+}
+.chatModule .chatBox .chatList .chatContent .chatMessage .friendPic {
+	height: 22px;
+	width: 22px;
+	margin: 0px 9px;
+}
+.chatModule .chatBox .chatList .chatContent .chatMessage .friendPic img {
+	width: 100%;
+	border-radius: 50%;
+}
+.chatModule .chatBox .chatList .chatContent .chatMessage .leftTri {
+	border-top: 8px solid #D3EDF5;
+    border-left: 8px solid #ffffff;
+    margin: 8px 0px 0px -2px;
+}
+.chatModule .chatBox .chatList .chatContent .chatMessage .rightTri {
+	border-top: 8px solid #e5e5e5;
+    border-right: 8px solid #ffffff;
+    margin: 8px -2px 0px 0px;
+}
+.chatModule .chatBox .chatList .chatContent .chatMessage .mesContent {
+	max-width: 240px;
+	padding: 6px 10px;
+	background-color: #D3EDF5;
+	border-radius: 5px;
+}
+.chatModule .chatBox .chatList .chatContent .chatMessage .grey {
+	background-color: #e5e5e5;
+}
+.chatModule .chatBox .chatList .chatInputLine {
+	display: flex;
+	display: -webkit-flex;
+	height: 30px;
+}
+.chatModule .chatBox .chatList .chatInputLine .chatInput {
+	height: 30px;
+	width: 318px;
+	min-height: 30px;
+	padding: 0px 10px;
+	border: 0;
+	outline: none;
+	font-size: 14px;
+}
+.chatModule .chatBox .chatList .chatInputLine .emoji {
+	height: 30px;
+	width: 30px;
+}
+.chatModule .chatBox .verticleHr {
+	width: 1px;
+	background-color: #e9e9e9;
+}
+.chatModule .chatBox .horizenHr {
+	min-height: 1px;
+	width: 100%;
+	background-color: #e9e9e9;
+}
+
 .mainPage {
 	width: calc(100% - 200px);
 	overflow-x: hidden;
