@@ -22,6 +22,7 @@
 	background-color: unset;
 	cursor: pointer;
 	text-align: center;
+	cursor: pointer;
 }
 .searchFriendLine .buttonLine .choose {
 	background-color: #555555;
@@ -63,12 +64,19 @@
 	display: flex;
 	display: -webkit-flex;
 }
+.friendsLine .blankfriend {
+	visibility: hidden;
+}
 .friendsLine .friend .logo {
 	margin: 15px;
 	width: 100px;
 	height: 100px;
 	cursor: pointer;
 	background-color: unset;
+}
+.friendsLine .friend .logo img {
+	width: 100%;
+	border-radius: 50%;
 }
 .friendsLine .friend .info {
 	width: calc(100% - 160px);
@@ -81,6 +89,46 @@
 .friendsLine .friend .info .other {
 	font-size: 16px;
 	color: #717171;
+}
+.friendsLine .friend .requestInfo {
+	width: calc(100% - 145px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.friendsLine .friend .requestInfo .name {
+	margin: 15px 0px 5px;
+	font-size: 18px;
+	color: #000000;
+}
+.friendsLine .friend .requestInfo .other {
+	font-size: 12px;
+	color: #717171;
+}
+.friendsLine .friend .requestInfo .buttonLine {
+	width: 100%;
+	margin-top: 10px;
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row-reverse;
+	-webkit-flex-direction: row-reverse;
+}
+.friendsLine .friend .requestInfo .buttonLine .postButton {
+	margin-left: 15px; 
+	font-size: 14px;
+	color: #ffffff;
+	line-height: 25px;
+	height: 25px;
+	width: 60px;
+	text-align: center;
+	background-color: #465d4c;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 0px;
+}
+.friendsLine .friend .requestInfo .buttonLine .grey {
+	background-color: #e5e5e5;
+	color: #717171
 }
 
 @keyframes fadeIn {
@@ -202,6 +250,84 @@
 }
 
 
+.showWindowModule {
+	background-color: rgba(245, 245, 245, 0.8);
+	width: 470px;
+}
+.showWindowModuleShort {
+	width: 275px;
+}
+.showWindowModule .showWindowTitleLine {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	padding: 15px;
+	font-size: 1em;
+}
+.showWindowModule .showWindowTitleLine .showWindowTitle {
+
+}
+.showWindowModule .showWindowTitleLine .close {
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+	background: url("../img/false.png");
+	background-size: 100% 100%;
+}
+.showWindowModule .showWindowContentLine {
+	display: flex;
+	display: -webkit-flex;
+	padding: 0px 15px 0px 25px;
+}
+.showWindowModule .showWindowContentLine .logo {
+	height: 50px;
+	width: 50px;
+}
+.showWindowModule .showWindowContentLine .logo img {
+	width: 100%;
+	border-radius: 50%;
+}
+.showWindowModule .showWindowContentLine .otherContent {
+	margin-left: 15px;
+	width: 365px;
+	font-size: 14px;
+	color: #000000;
+}
+.showWindowModule .showWindowContentLine .otherContent .grey {
+	color: #717171;
+}
+.showWindowModule .showWindowContentLine .otherContent input {
+	margin: 10px 0px;
+	height: 25px;
+	font-size: 14px;
+	background-color: #ffffff;
+	width: 240px;
+	box-shadow: 0px 1px 1px #c1c1c1 inset;
+	outline: none;
+	border: 0;
+	padding: 0px 10px;
+	border-radius: 3px;
+}
+.showWindowModule .postButton{
+	margin: 15px 15px 15px calc(100% - 90px);
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 30px;
+	background-color: #465d4c;
+	height: 30px;
+	width: 75px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+	border: 0px;
+}
+.showWindowModule .showWindowContent {
+	padding: 0px 15px;
+	font-size: 14px;
+	color: #000000;
+}
+
 
 @media (max-width: 1279px) {
 
@@ -219,6 +345,10 @@
 	cursor: pointer;
 	background-color: unset;
 }
+.friendsLine .friend .logo img {
+	width: 100%;
+	border-radius: 50%;
+}
 .friendsLine .friend .info {
 	width: calc(100% - 134px);
 }
@@ -230,6 +360,47 @@
 .friendsLine .friend .info .other {
 	font-size: 14px;
 	color: #717171;
+}
+.friendsLine .friend .requestInfo {
+	width: calc(100% - 123px);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.friendsLine .friend .requestInfo .name {
+	margin: 13px 0px 4px;
+	font-size: 16px;
+	color: #000000;
+}
+.friendsLine .friend .requestInfo .other {
+	font-size: 12px;
+	line-height: 120%;
+	color: #717171;
+}
+.friendsLine .friend .requestInfo .buttonLine {
+	width: 100%;
+	margin-top: 9px;
+	display: flex;
+	display: -webkit-flex;
+	flex-direction: row-reverse;
+	-webkit-flex-direction: row-reverse;
+}
+.friendsLine .friend .requestInfo .buttonLine .postButton {
+	font-size: 12px;
+	color: #ffffff;
+	line-height: 22px;
+	height: 22px;
+	width: 52px;
+	text-align: center;
+	background-color: #465d4c;
+	cursor: pointer;
+	border-radius: 3px;
+	border: 0px;
+}
+.friendsLine .friend .requestInfo .buttonLine .grey {
+	margin-left: 11px; 
+	background-color: #e5e5e5;
+	color: #717171
 }
 .friendsLine .friend .option {
 	margin: 8px 8px 0px 0px;

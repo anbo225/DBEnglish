@@ -199,6 +199,9 @@ body {
 	line-height: 40px;
 	cursor: pointer;
 }
+.chatModule .chatBox .friend .friendList .choose {
+	background-color: #e5e5e5;
+}
 .chatModule .chatBox .friend .friendList .item:hover {
 	background-color: #e5e5e5;
 }
