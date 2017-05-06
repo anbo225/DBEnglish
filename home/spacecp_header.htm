@@ -1,3 +1,34 @@
+<script>
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+
+	window.onload=function(){
+		//jq("#realname").removeClass("px");
+		//jq("#realname").addClass("classInfo");
+		var ac = GetQueryString("ac");
+		var op = GetQueryString("op");
+		if (ac == "profile" || ac == null){
+			if (op == "password"){
+				jq("#button0").css("background-color", "rgba(85, 85, 85, 1.0)");
+				jq("#button1").css("background-color", "rgba(85, 85, 85, 1.0)");
+				jq("#button2").css("background-color", "rgb(70, 93, 76)");
+			}
+			else{
+				jq("#button2").css("background-color", "rgba(85, 85, 85, 1.0)");
+				jq("#button1").css("background-color", "rgba(85, 85, 85, 1.0)");
+				jq("#button0").css("background-color", "rgb(70, 93, 76)");
+			}
+		}
+		else{
+			jq("#button0").css("background-color", "rgba(85, 85, 85, 1.0)");
+			jq("#button2").css("background-color", "rgba(85, 85, 85, 1.0)");
+			jq("#button1").css("background-color", "rgb(70, 93, 76)");
+		}
+	}
+</script>
 <div class="mainPage">
 		<div class="searchBar">
 			<div class="blank"></div>
@@ -13,12 +44,12 @@
 			<div class="blank"></div>
 			<div class="mainContent">
 
-				<div class="path"><a href="./">Homepage</a> >>  <a href="home.php?mod=spacecp"">Settings</a> >> <!--{subtemplate home/spacecp_header_name}--></div>
+				<div class="path"><a href="./">Homepage</a> >>  <a href="home.php?mod=spacecp">Settings</a> >> <!--{subtemplate home/spacecp_header_name}--></div>
 
 			<div class="buttonBar">
-					<div class="button" id="button0" "><a href="home.php?mod=spacecp&ac=profile">Basic Information </a></div>
-					<div class="button" id="button1" "><a href="home.php?mod=spacecp&ac=avatar"> Head Portrait </a></div>
-					<div class="button" id="button2" "><a href="home.php?mod=spacecp&ac=profile&op=password">Password </a></div>
+					<div class="button" id="button0" onclick="window.location.href='home.php?mod=spacecp&ac=profile'" style="background-color:rgb(70, 93, 76);">Basic Information </div>
+					<div class="button" id="button1" onclick="window.location.href='home.php?mod=spacecp&ac=avatar'"> Head Portrait </div>
+					<div class="button" id="button2" onclick="window.location.href='home.php?mod=spacecp&ac=profile&op=password'">Password </a></div>
 			</div>
 
 			<div class="moduleTop"></div>
