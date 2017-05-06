@@ -44,7 +44,60 @@
 		    var r = window.location.search.substr(1).match(reg);
 		    if(r!=null)return  unescape(r[2]); return null;
 		}
+
+		function myAjax(){ 
+			var ajaxData = { 
+				type:arguments[0].type || "GET", 
+				url:arguments[0].url || "", 
+				async:arguments[0].async || "true", 
+				data:arguments[0].data || null, 
+				dataType:arguments[0].dataType || "text", 
+				contentType:arguments[0].contentType || "application/x-www-form-urlencoded", 
+				beforeSend:arguments[0].beforeSend || function(){}, 
+				success:arguments[0].success || function(){}, 
+				error:arguments[0].error || function(){}
+			} 
+			ajaxData.beforeSend() 
+			var xhr = createxmlHttpRequest();  
+			xhr.responseType=ajaxData.dataType; 
+			xhr.open(ajaxData.type,ajaxData.url,ajaxData.async);  
+			xhr.setRequestHeader("Content-Type",ajaxData.contentType);  
+			xhr.send(convertData(ajaxData.data));  
+			xhr.onreadystatechange = function() {  
+				if (xhr.readyState == 4) {  
+					if(xhr.status == 200) { 
+						ajaxData.success(xhr.response) 
+					}
+					else { 
+						ajaxData.error() 
+					}
+				}
+			}  
+		} 
+		function createxmlHttpRequest() {  
+			if (window.ActiveXObject) {  
+				return new ActiveXObject("Microsoft.XMLHTTP");  
+			} else if (window.XMLHttpRequest) {  
+				return new XMLHttpRequest();  
+			}  
+		}
+		function convertData(data){ 
+			if( typeof data === 'object' ) { 
+				var convertResult = "" ;  
+				for(var c in data) {  
+					convertResult+= c + "=" + data[c] + "&";  
+				}  
+				convertResult=convertResult.substring(0,convertResult.length-1) 
+				return convertResult; 
+			}
+			else { 
+				return data; 
+			} 
+		}
+
 		jq(document).ready(function() {
+
+			//choose personalModule
 			var targetPml;
 			if(window.location.pathname.indexOf("home.php")!=-1) {
 				var pmlmod = GetQueryString("mod");
@@ -73,7 +126,124 @@
 				targetPml.attr("onclick","");
 			}
 		});
+
 	</script>
+	<!--{if $_G['uid']}-->
+	<script>
+		curTalkId = "";
+		firstFlag = 0;
+		curFriendId = "";
+
+		function getChatDetail(uname, fuid, isNew, plid) {
+			var obj = jq("#friend"+fuid);
+			if(!plid) {
+				plid = "";
+			}
+			curTalkId = plid;
+			curFriendId = fuid;
+			//alert(fuid+" "+plid);
+			if(isNew != null && isNew == 1) {
+				obj.attr("onclick","getChatDetail('"+uname+"', '"+fuid+"', 0, '"+plid+"')");
+				obj.find(".isNew").eq(0).remove();
+				myAjax({
+					url:'./updateIsNewMes.php',
+					type:'post',
+					data:'fuid='+fuid+'&plid='+plid
+				});
+			}
+
+			jq("#chatName").html(uname);
+
+			myAjax({
+				url:'./fetchChatDetail.php',
+				type:'post',
+				data:'fuid='+fuid+'&plid='+plid,
+				error: function () {
+					alert("error");
+				},
+				success: function (data) {
+					//alert(data);
+					var jsonObj = JSON.parse(data);
+					var cc = jq("#chatContent");
+					cc.empty();
+					for(var i = 0; i < jsonObj.length; i++) {
+						var tri = "rightTri";
+						var mymes = " myMes";
+						var grey = " grey";
+						if(jsonObj[i].authorid == fuid) {
+							tri = "leftTri";
+							mymes = "";
+							grey = "";
+						}
+						cc.append('<div class="chatMessage'+mymes+'"><div class="friendPic">'+
+							'<img src="uc_server/avatar.php?uid='+jsonObj[i].authorid+
+							'&size=small" /></div><div class="'+tri+'"></div><div class="'+
+							'mesContent'+grey+'">'+jsonObj[i].message+'</div></div>');
+					}
+					cc.scrollTop(cc[0].scrollHeight);
+				}
+			});
+		}
+
+		function showChatBox() {
+			if(firstFlag == 0) {
+				firstFlag = 1;
+				var fl = jq("#friendList").find(".item");
+				if(fl.length > 0) {
+					fl.eq(0).trigger("click");
+				}
+			}
+			jq("#chatEntry").hide();
+			jq("#chatBox").show();
+		}
+		function hideChatBox() {
+			jq("#chatBox").hide();
+			jq("#chatEntry").show();
+		}
+
+		jq(document).ready(function() {
+			//load chat module
+			myAjax({
+				url:'./fetchChatFriendsList.php',     
+				type:'get',
+				error: function() {     
+					alert('error');     
+				},
+				success: function(data) {
+					//alert(data);
+					var jsonObj = JSON.parse(data);
+					var fl = jq("#friendList");
+					var newCnt = 0;
+					for(var i = 0; i < jsonObj.length; i++) {
+						if(jsonObj[i].name == null || jsonObj[i].name == "") continue;
+						var isNewContent = "";
+						if(jsonObj[i].isnew != null && jsonObj[i].isnew == "1") {
+							isNewContent = '<div class="isNew"><div class="text">New</div><div class="dot"></div></div>';
+							newCnt++;			
+						}
+						fl.append('<div class="item" id="friend'+jsonObj[i].fuid+'" onclick="getChatDetail(\''+jsonObj[i].name+'\',\''+jsonObj[i].fuid+'\','+jsonObj[i].isnew+',\''+jsonObj[i].plid+'\')">'+
+							'<div class="friendPic"><img src="'+
+							'uc_server/avatar.php?uid='+jsonObj[i].fuid+'&size=small" /></div>'+
+							'<div class="friendName">'+jsonObj[i].name+'</div>'+
+							isNewContent + '</div>');
+					}
+					if(newCnt > 0) {
+						jq("#chatEntry").html('message('+newCnt+' new)');
+					}
+				}
+			});
+			jq(document).click(function(){
+    			hideChatBox();
+			});
+			jq("#chatBox").click(function(event){
+    			event.stopPropagation();
+			});
+			jq("#chatEntry").click(function(event){
+    			event.stopPropagation();
+			});
+		});
+	</script>
+	<!--{/if}-->
 
 	<div id="append_parent"></div>
 	<div id="ajaxwaitid"></div>
@@ -120,4 +290,48 @@
 
 	</div>
 
+	<!--{if $_G['uid']}-->
+	<div class="chatModule">
+		<div class="chatEntry" id="chatEntry" onclick="showChatBox()">message</div>
+		<div class="chatB" id="chatBox">
+			<div class="chatBox">
+				<div class="friend">
+					<input type="text" placeholder="search friend" class="findFriend" />
+					<div class="horizenHr"></div>
+					<div class="friendList" id="friendList">
+						<!--
+						<div class="item">
+							<div class="friendPic"><img src="" /></div>
+							<div class="friendName">zoudm</div>
+						</div>
+						-->
+					</div>
+				</div>
+				<div class="verticleHr"></div>
+				<div class="chatList">
+					<div class="chatTop">
+						<div id="chatName"></div>
+						<img src="./template/EnglishDB/common/img/false.png" class="close" onclick="hideChatBox()" />
+					</div>
+					<div class="horizenHr"></div>
+					<div class="chatContent" id="chatContent">
+						<!--
+						<div class="chatMessage myMes">
+							<div class="friendPic"><img src="" /></div>
+							<div class="rightTri"></div>
+							<div class="mesContent grey">hello</div>
+						</div>
+						-->
+					</div>
+					<div class="horizenHr"></div>
+					<div class="chatInputLine">
+						<input type="text" class="chatInput" />
+						<div class="verticleHr"></div>
+						<div class="emoji"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--{/if}-->
 	
