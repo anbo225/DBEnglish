@@ -173,9 +173,10 @@
 					url:'./template/EnglishDB/postChatMessage.php',
 					type:'post',
 					data:{'fuid':curFriendId,'plid':curTalkId,'mymes':msg},
+					async:false,
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					error: function () {
-						alert("error");
+						alert("message send error");
 					},
 					success: function (data) {
 						if(data.indexOf("success") > -1) {
@@ -185,7 +186,9 @@
 							var plid = realData[1];
 							if(curTalkId == null || curTalkId == "") {
 								curTalkId = plid;
-
+								var tempName = jq("#chatName").text();
+								jq("#friend"+curFriendId).attr("onclick","getChatDetail('"+tempName+"','"+curFriendId+"','0','"+curTalkId+"')");
+								getCurChatMes();
 							}
 							cc.append('<div class="chatMessage myMes"><div class="friendPic">'+
 							'<img src="uc_server/avatar.php?uid='+authorid+
