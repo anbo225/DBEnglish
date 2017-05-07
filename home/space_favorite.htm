@@ -31,7 +31,9 @@
 
 	jq(document).ready(function() {
 			page = Number(GetQueryString("page"));
+
 			//page choose
+			//totalPage = Math.ceil($count / 20);
 			totalPage = 10;
 			jq("#totalPage").text("/ "+totalPage);
 			if(page == NaN || page > totalPage || page < 1) page = 1;
@@ -62,7 +64,7 @@
 				}
 				else {
 					jq("#page1").text("1...");
-					jq("#page1").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+					jq("#page1").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page=1'");
 					if(page < totalPage - 3) {
 						for(var i = 2; i < 6; i++) {
 							jq("#page"+i).text(i + page - 3);
@@ -140,7 +142,6 @@
 
 					<div class="mainContent">
 						<div class="moduleTop"></div>
-					<script>alert("$count")</script>
 						
 					<div class="articleList">
 						<div class="titleLine">
@@ -192,7 +193,7 @@
 					</div>
 						<!--{if $multi}--><div class="pgs cl mtm">$multi</div><!--{/if}-->
 						<!--{else}-->
-						<p class="emp">{lang no_favorite_yet}</p>
+						<p class="emp">You have not added any collection yet.</p>
 						<!--{/if}-->
 
 					</div>
@@ -202,7 +203,7 @@
 					<input type="text" class="searchPage" id="searchPage" placeholder="page">
 					<div class="pageLine">
 						<div class="page" style="margin-right: 12px;" onclick="pagePrev()">Previous</div>
-						<div class="page choose" id="page1" onclick="window.location.href='favourite.html?show=all&amp;page=1'">1</div>
+						<div class="page" id="page1" onclick="window.location.href='favourite.html?show=all&amp;page=1'">1</div>
 						<div class="page" id="page2" ></div>
 						<div class="page" id="page3" ></div>
 						<div class="page" id="page4" ></div>

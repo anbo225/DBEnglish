@@ -1,49 +1,145 @@
-<!--{if $_G[setting][homepagestyle]}-->
-	<!--{subtemplate home/space_header}-->
-	<div id="ct" class="ct2 wp cl">
-		<div class="mn">
-			<div class="bm">
-				<div class="bm_h">
-					<h1 class="mt">{lang memcp_profile}</h1>
-				</div>
-			<div class="bm_c">
-<!--{else}-->
-	<!--{template common/header}-->
-	<div id="pt" class="bm cl">
-		<div class="z">
-			<a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a> <em>&rsaquo;</em>
-			<a href="home.php?mod=space&uid=$space[uid]">{$space[username]}</a> <em>&rsaquo;</em>
-			{lang memcp_profile}
-		</div>
-	</div>
-	<style id="diy_style" type="text/css"></style>
-	<div class="wp">
-		<!--[diy=diy1]--><div id="diy1" class="area"></div><!--[/diy]-->
-	</div>
-	<!--{template home/space_menu}-->
-	<div id="ct" class="ct1 wp cl">
-		<div class="mn">
-			<!--[diy=diycontenttop]--><div id="diycontenttop" class="area"></div><!--[/diy]-->
-			<div class="bm bw0">
-				<div class="bm_c">
-<!--{/if}-->
-
-				<!--{subtemplate home/space_profile_body}-->
-		
-				<!--{if !$_G[setting][homepagestyle]}--><!--[diy=diycontentbottom]--><div id="diycontentbottom" class="area"></div><!--[/diy]--><!--{/if}-->
+<!--{template common/header}-->
+<link rel="stylesheet" href="./template/EnglishDB/common/css/personalData.css">
+	<div class="mainPage">
+		<div class="searchBar">
+			<div class="blank"></div>
+			<div class="context">
+				<div class="search">
+					<img src="./template/EnglishDB/common/img/search.png" class="logo" />
+					<input type="text" name="search" placeholder="search" />
 				</div>
 			</div>
-			<!--{if $_G[setting][homepagestyle]}-->
+			<div class="blank"></div>
 		</div>
-		<div class="sd">
-			<!--{subtemplate home/space_userabout}-->
-		<!--{/if}-->
-	</div>
-</div>
+		<div class="main" style="background-image: url(./template/EnglishDB/common/img/background3.png)">
+			<div class="blank"></div>
+			<div class="mainContent">
+				<div class="path"><a href="main.html?login=login">Homepage</a> >> <a href="">Personal Data</a></div>
+	<div class="personalData">
+					<div class="personalDataTop"></div>
+					<div class="websiteData">
+						<img src="http://localhost/upload/uc_server/avatar.php?uid=1&size=big" class="pPhoto" />
+						<div class="data">
+							<div class="nameBar">
+								<div class="name">{$space[username]}</div>
+								<div class="status">
+									<!--{if $_G['ols'][$space[uid]]}-->
+										[Online]
+									<!--{else}-->
+										[Offline]
+									<!--{/if}-->
+								</div>
+							</div>
+							<div class="otherInfo">Grade: $space[credits]</div>
+							<div class="otherInfo">Post: $space[posts]</div>
+						</div>
+						<div class="buttonBar">
+							<div class="button" onclick="window.location.href='./home.php?mod=spacecp'">Edit</div>
+							<div class="button logout" onclick="window.location.href='main.html?login=notLogin'">Log out</div>
+						</div>
+					</div>
+					<hr />
+					<div class="information">
+						<div class="title">Basic Information</div>
+						<div class="infoLine">
+							<div class="item">
+								<div class="iname">Name:</div>
+								<div class="ivalue">$profiles[realname][value]</div>
+							</div>
+							<div class="item">
+								<div class="iname">Gender:</div>
+								<div class="ivalue" id = "gender"></div>
+								<script>
+									if ("$profiles[gender][value]" == '男')
+										jq("#gender").append("Male");
+									else if ("$profiles[gender][value]" == '女')
+										jq("#gender").append("Femail");
+									else
+										jq("#gender").append("Secret");
+								</script>
+							</div>
+							<div class="item">
+								<div class="iname">Birthday:</div>
+								<div class="ivalue" id="birthday"></div>
+								<script>
+									var temp = "$profiles[birthday][value]".split("年");
+									var year = temp[0];
+									temp = temp[1].split("月");
+									var month = temp[0];
+									temp = temp[1].split("日");
+									var date = temp[0];
+									jq("#birthday").append(year+"-"+month+"-"+date);
+								</script>
+							</div>
+						</div>
+						<div class="infoLine">
+							<div class="item">
+								<div class="iname">Mail:</div>
+								<div class="ivalue">$space[email]</div>
+							</div>
+							<div class="item">
+								<div class="iname">City:</div>
+								<div class="ivalue">$space[affectivestatus]</div>
+							</div>
+							<div class="item"></div>
+						</div>
+						<div class="blankBottom"></div>
+					</div>
+					<hr />
+					<div class="information">
+						<div class="title">Liveness</div>
+						<div class="infoLine">
+							<div class="item">
+								<div class="iname">Online Time:</div>
+								<div class="ivalue">$space[oltime] hours</div>
+							</div>
+							<div class="item">
+								<div class="iname">Post:</div>
+								<div class="ivalue">$space[posts]</div>
+							</div>
+							<div class="item">
+								<div class="iname">Credit:</div>
+								<div class="ivalue">$space[credits]</div>
+							</div>
+						</div>
+						<div class="infoLine">
+							<div class="item long">
+								<div class="iname">Last Login:</div>
+								<div class="ivalue">$space[lastvisit]</div>
+							</div>
+							<div class="item long">
+								<div class="iname">Last Login IP:</div>
+								<div class="ivalue">$space[lastip]:$space[port] - $space[lastip_loc]</div>
+							</div>
+						</div>
+						<div class="infoLine">
+							<div class="item long">
+								<div class="iname">Last Post:</div>
+								<div class="ivalue">$space[lastpost]</div>
+							</div>
+							<div class="item long">
+								<div class="iname">Register Time:</div>
+								<div class="ivalue">$space[regdate]</div>
+							</div>
+							
+						</div>
+						<div class="blankBottom"></div>
+					</div>
+					<hr />
+					<div class="information">
+						<div class="title">About Me</div>
+						<div class="aboutMe">$space[lookingfor]</div>
+						<div class="blankBottom"></div>
+					</div>
 
-<!--{if !$_G[setting][homepagestyle]}-->
-	<div class="wp mtn">
-		<!--[diy=diy3]--><div id="diy3" class="area"></div><!--[/diy]-->
+				</div>
+				<div class="bottomInfo">
+					<p>广告业务|合作交流|联系我们|技术支持</p>
+					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+					<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+				</div>
+			</div>
+			<div class="blank"></div>
+		</div>
 	</div>
-<!--{/if}-->
 <!--{template common/footer}-->
