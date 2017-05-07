@@ -8,10 +8,10 @@ $discuz->init();
 function dividedFind($id, $arr) {
 	$left = 0;
 	$right = count($arr);
-	while($left < $right + 1) {
+	while($left <= $right) {
 		$pivot = ($left + $right) / 2;
-		if($arr[$pivot]['fuid'] > $id) $right = $pivot;
-		else if($arr[$pivot]['fuid'] < $id) $left = $pivot;
+		if($arr[$pivot]['fuid'] > $id) $right = $pivot - 1;
+		else if($arr[$pivot]['fuid'] < $id) $left = $pivot + 1;
 		else {
 			return $arr[$pivot]['fusername'];
 		}
