@@ -26,6 +26,7 @@ function dividedFind($id, $arr) {
 }
 
 $res = DB::fetch_all('SELECT plid FROM pre_ucenter_pm_members WHERE uid='.$_G['uid'].' ORDER BY lastdateline DESC');
+if(count($res) == 0) exit();
 $plidArr = array_column($res, 'plid');
 
 $chatList = DB::fetch_all('SELECT isnew,uid,plid FROM pre_ucenter_pm_members WHERE plid IN (%n) ORDER BY lastdateline DESC', array($plidArr));
