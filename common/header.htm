@@ -391,6 +391,7 @@
 				},
 				success: function(data) {
 					//alert(data);
+					if(data == null || data == "") return;
 					var jsonObj = JSON.parse(data);
 					var fl = jq("#friendList");
 					
