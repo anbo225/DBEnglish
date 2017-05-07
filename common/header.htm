@@ -197,8 +197,14 @@
 							ci.val("");
 							cc.scrollTop(cc[0].scrollHeight);
 						}
-						else {
-							alert("data: "+data);
+						else if(data.indexOf("exist") > -1) {
+							var plid = data.substring(6);
+							if(curTalkId == null || curTalkId == "") {
+								var tempName = jq("#chatName").text();
+								var curF = jq("#friend"+curFriendId);
+								curF.attr("onclick","getChatDetail('"+tempName+"','"+curFriendId+"','0','"+plid+"')");
+								curF.trigger("click");
+							}
 						}
 					}
 				});
@@ -390,7 +396,7 @@
 				url:'./template/EnglishDB/fetchChatFriendsList.php',     
 				type:'get',
 				error: function() {     
-					alert('error');     
+					alert('flist error');     
 				},
 				success: function(data) {
 					//alert(data);

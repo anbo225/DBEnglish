@@ -33,7 +33,7 @@ else {
 	else if($fuid > $_G['uid']) $mm = $_G['uid'].'_'.$fuid;
 	else exit("not in chat");
 	$res = DB::fetch_first("SELECT plid FROM pre_ucenter_pm_lists WHERE min_max='".$mm."'");
-	if(!empty($res['plid'])) exit("already exist");
+	if(!empty($res['plid'])) exit("exist ".$res['plid']);
 	$subject = substr($mymes, 0, 50);
 	$plid = DB::query("INSERT INTO pre_ucenter_pm_lists(authorid, pmtype, subject, members, min_max, dateline, lastmessage) VALUES('".$_G['uid']."','1','".$subject."','2','".$mm."','".time()."','".$mymes."')");
 	$tableIndex = $plid % 10;
