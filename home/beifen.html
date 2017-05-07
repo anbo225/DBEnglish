@@ -1,5 +1,10 @@
+revise list:
+space_friend.php perpage
+spacecp_friend.php perpage
+spacecp_friend.php ignore closetime
+
+
 <!--{template common/header}-->
-<!--{if $_G['uid']}-->
 <link rel="stylesheet" href="./template/EnglishDB/common/css/friend.css">
 <script>
 	jq(document).ready(function() {
@@ -70,10 +75,6 @@
 		}
 
 
-		jq(".optionList").click(function(event){
-    		event.stopPropagation();
-		});
-
 		jq("#sfInput").keypress(function(e) {
 		    if(e.which == 13) {
 		        jq("#sfForm").submit();
@@ -99,13 +100,6 @@
 			alert("Invalid page");
 		}
 	}
-
-	function chatTalk(uid) {
-		var name = jq("#myFriendName"+uid).text();
-		showChatBox(1);
-		//alert(uid+" chatTalk "+name);
-		getChatDetailFromSearch(uid, name);
-	}
 </script>
 <div class="mainPage">
 	<div class="searchBar">
@@ -125,7 +119,7 @@
 			<div class="searchFriendLine">
 				<div class="buttonLine">
 					<div class="button choose">All</div>
-					<div class="button" onclick="window.location.href='home.php?mod=spacecp&ac=friend&op=request'">Request</div>
+					<div class="button">Online</div>
 				</div>
 				<div class="inlineSearch">
 					<img src="./template/EnglishDB/common/img/search.png" class="logo" />
@@ -145,22 +139,22 @@
 			<div class="friendsLine">
 				<!--{/if}-->
 				<div class="friend">
-					<div class="logo" onclick="window.location.href='home.php?mod=space&uid=$value[uid]'"><!--{avatar($value[uid],middle)}--></div>
+					<div class="logo"><a href="home.php?mod=space&uid=$value[uid]"><!--{avatar($value[uid],big)}--></a></div>
 					<div class="info">
-						<div class="name" id="myFriendName{$value[uid]}">$value[username]</div>
+						<div class="name">$value[username]</div>
 					</div>
 					<div class="option" tabindex="-1" title="option">
 						<img class="optionImg" src="./template/EnglishDB/common/img/option.png" />
 						<div class="optionList">
-							<div class="item grey" onclick="chatTalk('$value[uid]')">
-								<img src="./template/EnglishDB/common/img/talk.png" id='myFriendChat{$value[uid]}'>
+							<div class="item grey">
+								<img src="./template/EnglishDB/common/img/talk.png">
 								<div>Talk</div>
 							</div>
 							<div class="item">
 								<img src="./template/EnglishDB/common/img/mail.png">
 								<div>Mail</div>
 							</div>
-							<div class="item grey" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=ignore&uid=$value[uid]&handlekey=ignorefriendhk_{$value[uid]}', 'get', 0);" id="a_ignore_{$value[uid]}">
+							<div class="item grey" onclick="if(confirm('Are you sure you want to delete?')){alert('home.php?mod=spacecp&ac=friend&op=ignore&uid=$value[uid]&handlekey=delfriendhk_{$value[uid]}');}">
 								<img src="./template/EnglishDB/common/img/rubbish.png">
 								<div>Remove</div>
 							</div>
@@ -240,5 +234,5 @@
 		<div class="blank"></div>
 	</div>
 </div>
-<!--{/if}-->
+
 <!--{template common/footer}-->

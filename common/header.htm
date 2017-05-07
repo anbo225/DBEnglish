@@ -110,7 +110,11 @@
 					targetPml = jq("#pModule2");
 				}
 				else if(pmlmod == "spacecp") {
-					targetPml = jq("#pModule3");
+					var pmlac = GetQueryString("ac");
+					if(pmlac == "friend")
+						targetPml = jq("#pModule4");
+					else
+						targetPml = jq("#pModule3");
 				}
 				else if(pmlmod == "space" && pmldo == "friend") {
 					targetPml = jq("#pModule4");
@@ -123,7 +127,7 @@
 			if(targetPml.length > 0) {
 				targetPml.addClass("choose");
 				targetPml.find(".arrow").eq(0).addClass("arrowChoose");
-				targetPml.attr("onclick","");
+				//targetPml.attr("onclick","");
 			}
 		});
 
@@ -132,30 +136,156 @@
 	<script>
 		curTalkId = "";
 		firstFlag = 0;
+		getCurMesFlag = 0;
 		curFriendId = "";
+		curTalkLastTime = "0";
+		newCnt = 0;
+
+		function myEscape(msg) {
+			msg = msg.replace(/&/g, '**211**');
+			msg = msg.replace(/=/g, '**221**');
+			msg = msg.replace(/\?/g, '**241**');
+			msg = msg.replace(/'/g, '**251**');
+			msg = msg.replace(/"/g, '**271**');
+			return msg;
+		}
+		function myUnescape(msg) {
+			msg = msg.replace(/\*\*211\*\*/g, '&');
+			msg = msg.replace(/\*\*221\*\*/g, '=');
+			msg = msg.replace(/\*\*241\*\*/g, '?');
+			msg = msg.replace(/\*\*251\*\*/g, '\'');
+			msg = msg.replace(/\*\*271\*\*/g, '"');
+			return msg;
+		}
+		function sendChatMsg() {
+			var ci = jq("#chatInput");
+			var msg = ci.val();
+			//alert("msg: "+msg);
+			msg = myEscape(msg);
+			if(msg == null || msg.length == 0) {
+				return;
+			}
+			else if(msg.length > 450) {
+				alert("message too long");
+			}
+			else {
+				myAjax({
+					url:'./template/EnglishDB/postChatMessage.php',
+					type:'post',
+					data:{'fuid':curFriendId,'plid':curTalkId,'mymes':msg},
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					error: function () {
+						alert("error");
+					},
+					success: function (data) {
+						if(data.indexOf("success") > -1) {
+							var cc = jq("#chatContent");
+							var realData = data.substring(8).split("**");
+							var authorid = realData[0];
+							var plid = realData[1];
+							if(curTalkId == null || curTalkId == "") {
+								curTalkId = plid;
+
+							}
+							cc.append('<div class="chatMessage myMes"><div class="friendPic">'+
+							'<img src="uc_server/avatar.php?uid='+authorid+
+							'&size=small" /></div><div class="rightTri"></div><div class="'+
+							'mesContent grey">'+myUnescape(msg)+'</div></div>');
+							ci.val("");
+							cc.scrollTop(cc[0].scrollHeight);
+						}
+						else {
+							alert("data: "+data);
+						}
+					}
+				});
+			}
+		}
+
+
+		sto1 = "";
+		getCurChatMesLock = new Array();
+
+		function getCurChatMes(msg) {
+			if(curTalkId == "" || curFriendId == "") return;
+			//alert("lock "+curFriendId+" 1");
+			getCurChatMesLock[''+curFriendId] = 1;				
+			myAjax({
+				url:'./template/EnglishDB/fetchChatDetailMore.php',
+				type:'post',
+				data:'fuid='+curFriendId+'&plid='+curTalkId+'&dateline='+curTalkLastTime,
+				error: function() {
+					getCurChatMesLock[''+curFriendId] = 0;
+				},
+				success: function(data) {
+					var jsonObj = JSON.parse(data);
+					//alert("unlock "+jsonObj[0].authorid+" 0");
+					getCurChatMesLock[''+jsonObj[0].authorid] = 0;
+					if(jsonObj.length > 0 && jsonObj[0].authorid == curFriendId) {
+						var cc = jq("#chatContent");
+						for(var i = 0; i < jsonObj.length - 1; i++) {
+							cc.append('<div class="chatMessage"><div class="friendPic">'+
+							'<img src="uc_server/avatar.php?uid='+jsonObj[i].authorid+
+							'&size=small" /></div><div class="leftTri"></div><div class="'+
+							'mesContent">'+myUnescape(jsonObj[i].message)+'</div></div>');
+						}
+						if(jsonObj.length > 1) {
+							cc.scrollTop(cc[0].scrollHeight);
+							curTalkLastTime = jsonObj[jsonObj.length - 2].dateline;
+						}
+						if(getCurMesFlag == 1) {
+							//alert("clear "+sto1);
+							clearTimeout(sto1);
+							getCurChatMes("clear");
+						}
+					}
+				}
+			});
+			if(getCurMesFlag == 1) {
+				sto1 = setTimeout("getCurChatMes('time')", 30000);
+				//alert("set "+sto1);
+			}
+		}
+
+		function getNewMes() {
+
+		}
 
 		function getChatDetail(uname, fuid, isNew, plid) {
+			if(curTalkId == plid && curFriendId == fuid) return;
+
 			var obj = jq("#friend"+fuid);
 			if(!plid) {
 				plid = "";
 			}
+
+			if(curFriendId != null && curFriendId != "")
+				jq("#friend"+curFriendId).removeClass("choose");
 			curTalkId = plid;
 			curFriendId = fuid;
+			jq("#friend"+curFriendId).addClass("choose");
+			if(getCurMesFlag == 1) {
+				//alert("clear "+sto1);
+				clearTimeout(sto1);
+			}
 			//alert(fuid+" "+plid);
 			if(isNew != null && isNew == 1) {
 				obj.attr("onclick","getChatDetail('"+uname+"', '"+fuid+"', 0, '"+plid+"')");
 				obj.find(".isNew").eq(0).remove();
 				myAjax({
-					url:'./updateIsNewMes.php',
+					url:'./template/EnglishDB/updateIsNewMes.php',
 					type:'post',
-					data:'fuid='+fuid+'&plid='+plid
+					data:'fuid='+fuid+'&plid='+plid,
+					success: function(data) {
+						if(data > 0 && newCnt > 0) newCnt--;
+					}
 				});
 			}
 
 			jq("#chatName").html(uname);
 
 			myAjax({
-				url:'./fetchChatDetail.php',
+				url:'./template/EnglishDB/fetchChatDetail.php',
 				type:'post',
 				data:'fuid='+fuid+'&plid='+plid,
 				error: function () {
@@ -178,16 +308,51 @@
 						cc.append('<div class="chatMessage'+mymes+'"><div class="friendPic">'+
 							'<img src="uc_server/avatar.php?uid='+jsonObj[i].authorid+
 							'&size=small" /></div><div class="'+tri+'"></div><div class="'+
-							'mesContent'+grey+'">'+jsonObj[i].message+'</div></div>');
+							'mesContent'+grey+'">'+myUnescape(jsonObj[i].message)+'</div></div>');
 					}
 					cc.scrollTop(cc[0].scrollHeight);
+
+					curTalkLastTime = jsonObj[jsonObj.length - 1].dateline;
+					if(getCurMesFlag == 1 && getCurChatMesLock[''+curFriendId] != 1) {
+						getCurChatMes();
+					}
 				}
 			});
 		}
+		function getChatDetailFrom(fuid, uname) {
+			if(curFriendId == fuid) return;
+			jq("#chatName").html(uname);
+			curTalkId = "";
+			if(curFriendId != null && curFriendId != "")
+				jq("#friend"+curFriendId).removeClass("choose");
+			curFriendId = fuid;
+			var cc = jq("#chatContent");
+			cc.empty();
+		}
+		function getChatDetailFromSearch(fuid, uname) {
+			//alert(fuid+" "+uname);
+			var fl = jq("#friendList").find(".item");
+			for(var i = 0; i < fl.length; i++) {
+				var fri = fl.eq(i);
+				if(fri.attr("id") == "friend"+fuid) {
+					//alert(fuid+" "+fri.attr("id"));
+					fri.trigger("click");
+					return;
+				}
+			}
+			getChatDetailFrom(fuid, uname);
+			var fl = jq("#friendList");
+			fl.prepend('<div class="item choose" id="friend'+fuid+'" onclick="getChatDetailFrom(\''+
+				fuid+'\', \''+uname+'\')"><div class="friendPic"><img src="'+
+				'uc_server/avatar.php?uid='+fuid+'&size=small" /></div>'+
+				'<div class="friendName">'+uname+'</div></div>');
+		}
 
-		function showChatBox() {
-			if(firstFlag == 0) {
-				firstFlag = 1;
+		function showChatBox(disableGet) {
+			var getFlag = true;
+			if(disableGet == 1) getFlag = false;
+			getCurMesFlag = 1;
+			if(firstFlag == 0 && getFlag) {
 				var fl = jq("#friendList").find(".item");
 				if(fl.length > 0) {
 					fl.eq(0).trigger("click");
@@ -195,16 +360,31 @@
 			}
 			jq("#chatEntry").hide();
 			jq("#chatBox").show();
+			//alert(getCurChatMesLock[''+curFriendId]);
+			if(firstFlag == 1){
+				if(getFlag && getCurChatMesLock[''+curFriendId] != 1)
+					getCurChatMes();
+			}
+			else
+				firstFlag = 1;
 		}
 		function hideChatBox() {
 			jq("#chatBox").hide();
-			jq("#chatEntry").show();
+			var obj = jq("#chatEntry");
+			if(newCnt > 0)
+				obj.html('message('+newCnt+' new)');
+			obj.show();
+			getCurMesFlag = 0;
+			//alert("clear "+sto1);
+			clearTimeout(sto1);
 		}
 
+		findFriendTime = "";
+		sto2 = "";
 		jq(document).ready(function() {
 			//load chat module
 			myAjax({
-				url:'./fetchChatFriendsList.php',     
+				url:'./template/EnglishDB/fetchChatFriendsList.php',     
 				type:'get',
 				error: function() {     
 					alert('error');     
@@ -213,7 +393,7 @@
 					//alert(data);
 					var jsonObj = JSON.parse(data);
 					var fl = jq("#friendList");
-					var newCnt = 0;
+					
 					for(var i = 0; i < jsonObj.length; i++) {
 						if(jsonObj[i].name == null || jsonObj[i].name == "") continue;
 						var isNewContent = "";
@@ -240,6 +420,54 @@
 			});
 			jq("#chatEntry").click(function(event){
     			event.stopPropagation();
+			});
+			jq("#chatInput").keypress(function(e) {
+			    if(e.which == 13) {
+			        sendChatMsg();
+			    }
+			});
+			findFriendTime = (new Date()).valueOf();
+			jq('#findFriend').on('input', function() {
+				var curT = (new Date()).valueOf();
+				var word = jq(this).val();
+				if(curT - findFriendTime < 800) {
+					clearTimeout(sto2);
+				}
+				if(word.length > 1) {
+					sto2 = setTimeout(function() {
+						//alert("search "+word);
+						myAjax({
+							url:'./template/EnglishDB/fetchFriendSearch.php',
+							type:'post',
+							data:'searchkey='+word,
+							error: function() {     
+								alert('error');     
+							},
+							success: function(data) {
+								var jsonObj = JSON.parse(data);
+								var sfl = jq("#searchFriendList");
+								sfl.empty();
+								for(var i = 0; i < jsonObj.length; i++) {
+									sfl.append('<div class="item" onclick="getChatDetailFromSearch(\''+
+										jsonObj[i].fuid+'\',\''+jsonObj[i].fusername+'\')">'+
+										'<div class="friendPic"><img src="'+
+										'uc_server/avatar.php?uid='+jsonObj[i].fuid+'&size=small" /></div>'+
+										'<div class="friendName">'+jsonObj[i].fusername+'</div></div>')
+								}
+								jq('#friendList').hide();
+								sfl.show();
+							}
+						});
+					}, 800);
+				}
+				else {
+					jq('#searchFriendList').hide();
+					jq('#friendList').show();
+				}
+				findFriendTime = curT;
+			});
+			jq('#findFriend').blur(function() {
+				setTimeout("jq('#searchFriendList').hide();jq('#friendList').show();",200);
 			});
 		});
 	</script>
@@ -296,7 +524,7 @@
 		<div class="chatB" id="chatBox">
 			<div class="chatBox">
 				<div class="friend">
-					<input type="text" placeholder="search friend" class="findFriend" />
+					<input type="text" placeholder="search friend" class="findFriend" id="findFriend"/>
 					<div class="horizenHr"></div>
 					<div class="friendList" id="friendList">
 						<!--
@@ -306,6 +534,7 @@
 						</div>
 						-->
 					</div>
+					<div class="friendList" id="searchFriendList" style="display: none;"></div>
 				</div>
 				<div class="verticleHr"></div>
 				<div class="chatList">
@@ -325,7 +554,7 @@
 					</div>
 					<div class="horizenHr"></div>
 					<div class="chatInputLine">
-						<input type="text" class="chatInput" />
+						<input type="text" class="chatInput" id="chatInput"/>
 						<div class="verticleHr"></div>
 						<div class="emoji"></div>
 					</div>
