@@ -10,36 +10,27 @@
 				saveUserdata('avatar_redirect', document.referrer);
 				<!--{/if}-->
 			</script>
-			<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=avatar&ref">
-				<!--{avatar($space[uid],big)}-->
-				<table cellspacing="0" cellpadding="0" class="tfm">
-					<caption>
-						<span id="retpre" class="y xi2"></span>
-						<h2 class="xs2">{lang current_my_space}</h2>
-						<p>{lang setting_avatar_message}</p>
-					</caption>
-					<tr>
-						<td>
-							<!--{avatar($space[uid],big)}-->
-						</td>
-					</tr>
-				</table>
-
-				<table cellspacing="0" cellpadding="0" class="tfm">
-					<caption>
-						<h2 class="xs2">{lang setting_my_new_avatar}</h2>
-						<p>{lang setting_my_new_avatar_message}</p>
-					</caption>
-					<tr>
-						<td>
-							<script type="text/javascript">document.write(AC_FL_RunContent('<!--{echo implode("','", $uc_avatarflash);}-->'));</script>
-						</td>
-					</tr>
-				</table>
-				<input type="hidden" name="formhash" value="{FORMHASH}" />
-			</form>
-		
+			<div class="edit">
+				<form method="post" autocomplete="off" action="home.php?mod=spacecp&ac=avatar&ref">
+					<div class="head" id="editBlock1" style="display: block;">
+						<div class="head" id="editBlock1" style="display: block;">
+							<span class="headLine" style="width:80%; margin-left:100px">
+								<img src="http://localhost/upload/uc_server/avatar.php?uid=1&amp;size=big" class="headImg" style = "margin-right:100px;">
+								<script type="text/javascript">document.write(AC_FL_RunContent('<!--{echo implode("','", $uc_avatarflash);}-->'));</script>
+							</span>
+						</div>
+					</div>
+					<input type="hidden" name="formhash" value="{FORMHASH}" />
+				</form>
+				<div class="blankLine"></div>
+			</div>
+			<div class="bottomInfo">
+					<p>广告业务|合作交流|联系我们|技术支持</p>
+					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+					<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+			</div>
 		</div>
+
 	</div>
 	<script type="text/javascript">
 		var redirecturl = loadUserdata('avatar_redirect');

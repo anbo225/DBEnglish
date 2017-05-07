@@ -6,15 +6,7 @@
 		<div class="edit">
 									<!--{if $operation == 'password'}-->
 			<script type="text/javascript" src="{$_G[setting][jspath]}register.js?{VERHASH}"></script>
-			<p class="bbda pbm mbm">
-				<!--{if !$_G['member']['freeze']}-->
-					<!--{if !$_G['setting']['connect']['allow'] || !$conisregister}-->{lang old_password_comment}<!--{elseif $wechatuser}-->{lang wechat_config_newpassword_comment}<!--{else}-->{lang connect_config_newpassword_comment}<!--{/if}-->
-				<!--{elseif $_G['member']['freeze'] == 1}-->
-					<strong class="xi1">{lang freeze_pw_tips}</strong>
-				<!--{elseif $_G['member']['freeze'] == 2}-->
-					<strong class="xi1">{lang freeze_email_tips}</strong>
-				<!--{/if}-->
-			</p>
+			<div class = "text" style="margin-left:30px"> To modify the following information, please input your old password. </div>
 			<form action="home.php?mod=spacecp&ac=profile" method="post" autocomplete="off">
 				<input type="hidden" value="{FORMHASH}" name="formhash" />
 				<table summary="{lang memcp_profile}" cellspacing="0" cellpadding="0" class="tfm">
@@ -54,6 +46,7 @@
 				</table>
 				<input type="hidden" name="passwordsubmit" value="true" />
 			</form>
+
 			<script type="text/javascript">
 				var strongpw = new Array();
 				<!--{if $_G['setting']['strongpw']}-->
@@ -64,6 +57,13 @@
 				var pwlength = <!--{if $_G['setting']['pwlength']}-->$_G['setting']['pwlength']<!--{else}-->0<!--{/if}-->;
 				checkPwdComplexity($('newpassword'), $('newpassword2'), true);
 			</script>
+		</div>
+		<div class="blankBottom"></div>
+		<div class="bottomInfo">
+				<p>广告业务|合作交流|联系我们|技术支持</p>
+				<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+				<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+		</div>
 		<!--{else}-->
 			
 			<iframe id="frame_profile" name="frame_profile" style="display: none"></iframe>
@@ -76,7 +76,7 @@
 				<table cellspacing="0" cellpadding="0" class="tfm" id="profilelist">
 					
 					<div class="inputLine">
-						<div class="text">{lang username}</div>
+						<div class="text">User Name</div>
 						<div class="text" style="width:250px;">$_G[member][username]</div>
 					</div>
 					<div class="inputLine">
@@ -107,10 +107,16 @@
 
 					<input type="hidden" name="profilesubmit" value="true" />
 					<button type="submit" name="profilesubmitbtn" id="profilesubmitbtn" value="true" class="saveButton" style="float:right"/><strong>Save</strong></button>
-				
 				</table>
 				<!--{hook/spacecp_profile_bottom}-->
 			</form>
+		</div>
+		</div>
+		<div class="blankBottom"></div>
+		<div class="bottomInfo">
+				<p>广告业务|合作交流|联系我们|技术支持</p>
+				<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+				<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
 		</div>
 			<script type="text/javascript">
 				function show_error(fieldid, extrainfo) {
