@@ -105,8 +105,11 @@
 				if(pmlmod == "space" && pmldo == "favorite") {
 					targetPml = jq("#pModule1");
 				}
-				else if(pmlmod == "space" && pmldo == "pm") {
-					targetPml = jq("#pModule2");
+				else if(pmlmod == "space") {
+					if(pmldo == "pm")
+						targetPml = jq("#pModule2");
+					else
+						targetPml = jq("#pModule3");
 				}
 				else if(pmlmod == "spacecp") {
 					var pmlac = GetQueryString("ac");

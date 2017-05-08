@@ -1,5 +1,17 @@
 <!--{template common/header}-->
 <link rel="stylesheet" href="./template/EnglishDB/common/css/personalData.css">
+<script>
+	jq(document).ready(function() {
+		jq("#profileButtonBar").click(function(event){
+    		event.stopPropagation();
+		});
+	});
+
+	function chatTalk(uid, uname) {
+		showChatBox(1);
+		getChatDetailFromSearch(uid, name);
+	}
+</script>
 	<div class="mainPage">
 		<div class="searchBar">
 			<div class="blank"></div>
@@ -14,11 +26,11 @@
 		<div class="main" style="background-image: url(./template/EnglishDB/common/img/background3.png)">
 			<div class="blank"></div>
 			<div class="mainContent">
-				<div class="path"><a href="main.html?login=login">Homepage</a> >> <a href="">Personal Data</a></div>
+				<div class="path"><a href="forum.php">Homepage</a> >> <a href="">Personal Data</a></div>
 	<div class="personalData">
 					<div class="personalDataTop"></div>
 					<div class="websiteData">
-						<img src="http://localhost/upload/uc_server/avatar.php?uid=1&size=big" class="pPhoto" />
+						<img src="http://localhost/upload/uc_server/avatar.php?uid=$space[uid]&size=big" class="pPhoto" />
 						<div class="data">
 							<div class="nameBar">
 								<div class="name">{$space[username]}</div>
@@ -33,10 +45,21 @@
 							<div class="otherInfo">Grade: $space[credits]</div>
 							<div class="otherInfo">Post: $space[posts]</div>
 						</div>
-						<div class="buttonBar">
+						
+						<div class="buttonBar" id="profileButtonBar">
+						<!--{if $_G['uid'] == $space[uid]}-->
 							<div class="button" onclick="window.location.href='./home.php?mod=spacecp'">Edit</div>
-							<div class="button logout" onclick="window.location.href='main.html?login=notLogin'">Log out</div>
+							<div class="button logout" onclick="window.location.href='member.php?mod=logging&action=logout&formhash={FORMHASH}'">Log out</div>
+						<!--{else}-->
+							<!--{if !$isfriend}-->
+							<div class="button follow" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}', 'get', 0);" id="a_friend_li_{$space[uid]}">follow</div>
+							<!--{else}-->
+							<div class="button" onclick="chatTalk('$space[uid]','$space[username]')">Talk</div>
+							<div class="button logout" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}', 'get', 0);" id="a_ignore_{$space[uid]}">Delete</div>
+							<!--{/if}-->
+						<!--{/if}-->
 						</div>
+						
 					</div>
 					<hr />
 					<div class="information">
