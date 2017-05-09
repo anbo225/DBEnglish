@@ -29,7 +29,10 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="./template/EnglishDB/common/css/global.css" ／>
 	<link rel="stylesheet" href="./template/EnglishDB/common/css/main.css" ／>
+
 	<link rel="stylesheet" href="./template/EnglishDB/common/css/personalEdit.css" ／>
+	<link rel="stylesheet" href="./template/EnglishDB/common/css/postItem.css" ／>
+
 
 	<script type="text/javascript" src="./template/EnglishDB/common/js/jquery.min.js"></script>
 	<script>
@@ -106,8 +109,11 @@
 				if(pmlmod == "space" && pmldo == "favorite") {
 					targetPml = jq("#pModule1");
 				}
-				else if(pmlmod == "space" && pmldo == "pm") {
-					targetPml = jq("#pModule2");
+				else if(pmlmod == "space") {
+					if(pmldo == "pm")
+						targetPml = jq("#pModule2");
+					else
+						targetPml = jq("#pModule3");
 				}
 				else if(pmlmod == "spacecp") {
 					var pmlac = GetQueryString("ac");
