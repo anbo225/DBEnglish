@@ -15,7 +15,7 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 <!--{/if}-->
 
 <!--{if empty($post['deleted'])}-->
-    
+        <div class="floor">
 				<div class="personalBar">
 					<div class="pPhoto"> <a href="home.php?mod=space&uid=$post[authorid]"  target="_blank">$post[avatar]</a>
 					</div>
@@ -111,7 +111,7 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 					</div>
 				</div>
 		
-
+  </div>
 <!--{else}-->
 	<table id="pid$post[pid]" summary="pid$post[pid]" cellspacing="0" cellpadding="0">
 	<tbody>

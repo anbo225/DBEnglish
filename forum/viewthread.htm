@@ -1,6 +1,14 @@
 <!--{template common/header}-->
 
 
+<script type="text/javascript">var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
+<!--{if $modmenu['thread'] || $modmenu['post']}-->
+	<script type="text/javascript" src="{$_G['setting']['jspath']}forum_moderate.js?{VERHASH}"></script>
+<!--{/if}-->
+
+<script type="text/javascript" src="{$_G['setting']['jspath']}forum_viewthread.js?{VERHASH}"></script>
+<script type="text/javascript">zoomstatus = parseInt($_G['setting']['zoomstatus']);var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';var aimgcount = new Array();</script>
+
 
 <div class="mainPage">
     <div class="searchBar">
@@ -35,16 +43,23 @@
 						</div>
 					</div>
 
+					
 					<!--{eval $postcount = 0;}-->
 					<!--{loop $postlist $post}-->
 						<!--{if $rushreply && $_GET['checkrush'] && $post['rewardfloor'] != 1}-->
 							<!--{eval continue;}-->
 						<!--{/if}-->
-						<div id="post_$post[pid]" class="floor" {if $_G['blockedpids'] && $post['inblacklist']}style="display:none;"{/if}>
+						<div id="post_$post[pid]"  {if $_G['blockedpids'] && $post['inblacklist']}style="display:none;"{/if}>
 							<!--{subtemplate forum/viewthread_node}-->
 						</div>
 						<!--{eval $postcount++;}-->
 					<!--{/loop}-->
+
+					<div id="postlistreply"  >
+						<div id="post_new" style="display: none"></div>
+					</div>
+					
+
 
 				</div>
 				<div class="pageModule">
@@ -77,4 +92,8 @@
 			<div class="blank"></div>
 		</div>
 </div>
+
+
+
+
 <!--{template common/footer}-->
