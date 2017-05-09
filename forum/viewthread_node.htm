@@ -33,6 +33,30 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 							<!--{/if}-->
 						<!--{/if}-->
 					</div>
+
+					<!--管理员功能代码 -->
+								<!--{if ($_G['group']['allowedituser'] || $_G['group']['allowbanuser'] || ($_G['forum']['ismoderator'] && $_G['group']['allowviewip'])) && !getstatus($post['status'], 5)}-->
+									<div class="pInfo">
+										<!--{if $_G['forum']['ismoderator'] && $_G['group']['allowviewip']}-->
+											<a href="forum.php?mod=topicadmin&action=getip&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if $_G['forum_auditstatuson']}&modthreadkey=$_GET[modthreadkey]{/if}" onclick="ajaxmenu(this, 0, 0, 2);doane(event)">IP</a>
+										<!--{/if}-->
+										<!--{if $_G['group']['allowedituser']}-->
+											<a href="{if $_G['adminid'] == 1}admin.php?frames=yes&action=members&operation=search&uid=$post[authorid]&submit=yes{else}forum.php?mod=modcp&action=member&op=edit&uid=$post[authorid]{/if}" target="_blank">{lang edit}</a>
+										<!--{/if}-->
+										<!--{if $_G['group']['allowbanuser']}-->
+											<!--{if $_G['adminid'] == 1}-->
+												<a href="admin.php?action=members&operation=ban&username=$post[usernameenc]&frames=yes" target="_blank">{lang ban_member}</a>
+											<!--{else}-->
+												<a href="forum.php?mod=modcp&action=member&op=ban&uid=$post[authorid]" target="_blank">{lang ban_member}</a>
+											<!--{/if}-->
+										<!--{/if}-->
+										<a href="forum.php?mod=modcp&action=thread&op=post&do=search&searchsubmit=1&users=$post[usernameenc]" target="_blank">{lang posts}</a>
+										<!--{if $_G['adminid'] == 1}-->
+											<a href="forum.php?mod=ajax&action=quickclear&uid=$post[authorid]" onclick="showWindow('qclear_$post[authorid]', this.href, 'get', 0)">{lang clear}</a>
+										<!--{/if}-->
+									</div>
+					<!--{/if}-->
+
 				</div>
 
 				<div class="verticleHr"></div>
@@ -43,11 +67,46 @@ $postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatu
 					<div class="content">
 						<div class="context">$post['message']</div>
 						<div class="bottomLine">
-							<div class="disagreeNum">0</div>
-							<img src="./template/EnglishDB/common/img/like&dislike.png" class="agree" />
-							<div class="agreeNum">2</div>
-							<img src="./template/EnglishDB/common/img/reply.png" class="reply" onclick="reply('1', 'Helen')" />
-							<div>Reply</div>
+
+
+						<!--帖子赞同反对-->
+						<!--{if !$_G['forum_thread']['special'] && !$rushreply && !$hiddenreplies && $_G['setting']['repliesrank'] && !$post['first'] && !($post['isWater'] && $_G['setting']['filterednovote'])}-->
+								
+								<div class="disagreeNum">$post[postreview][against]</div>
+								
+								<a  href="forum.php?mod=misc&action=postreview&do=against&tid=$_G[tid]&pid=$post[pid]&hash={FORMHASH}" {if $_G['uid']} onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;"{else} onclick="showWindow('login', this.href)"{/if} onmouseover="this.title = ($('review_against_$post[pid]').innerHTML ? $('review_against_$post[pid]').innerHTML : 0) + ' {lang activity_member_unit} {lang against_reply}'"> 
+									<img src="./template/EnglishDB/common/img/dislike.png" class="agree" />
+								</a>
+
+								<a  href="forum.php?mod=misc&action=postreview&do=support&tid=$_G[tid]&pid=$post[pid]&hash={FORMHASH}" {if $_G['uid']} onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;"{else} onclick="showWindow('login', this.href)"{/if} onmouseover="this.title = ($('review_support_$post[pid]').innerHTML ? $('review_support_$post[pid]').innerHTML : 0) + ' {lang activity_member_unit} {lang support_reply}'">
+									
+									<img src="./template/EnglishDB/common/img/like.png" class="agree" />
+								</a>
+
+
+								<div class="agreeNum">$post[postreview][support]</div>
+								
+						<!--{/if}-->
+
+						<!--编辑回复-->
+                        <!--{if (!$_G['uid'] || $allowpostreply) && !$needhiddenreply}-->
+							<!--{if $post['first']}-->
+								
+								<a href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&reppost=$post[pid]&extra=$_GET[extra]&page=$page" onclick="showWindow('reply', this.href)">
+									<img src="./template/EnglishDB/common/img/reply.png" class="reply" onclick="reply('1', 'Helen')">		
+								</a>
+								<div>Reply</div>
+							<!--{else}-->
+								
+								<a  href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&repquote=$post[pid]&extra=$_GET[extra]&page=$page" onclick="showWindow('reply', this.href)">	
+									<img src="./template/EnglishDB/common/img/reply.png" class="reply" onclick="reply('1', 'Helen')">
+									
+								</a>
+								<div>Reply</div>
+							<!--{/if}-->
+						<!--{/if}-->
+
+							
 						</div>
 					</div>
 				</div>

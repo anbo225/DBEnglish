@@ -13,6 +13,7 @@
       </div>
       <div class="blank"></div>
     </div>
+
     <div class="main" style="background-image: url(./template/EnglishDB/common/img/background.png)">
 			<div class="blank"></div>
 			<div class="mainContent">
@@ -21,6 +22,7 @@
 
 				<div class="postItem">
 					<div class="postItemTop"></div>
+
 					<div class="titleLine">
 
 						<div class="title">$_G[forum_thread][subject]
@@ -33,7 +35,6 @@
 						</div>
 					</div>
 
-
 					<!--{eval $postcount = 0;}-->
 					<!--{loop $postlist $post}-->
 						<!--{if $rushreply && $_GET['checkrush'] && $post['rewardfloor'] != 1}-->
@@ -45,36 +46,6 @@
 						<!--{eval $postcount++;}-->
 					<!--{/loop}-->
 
-					
-				
-				
-					<div class="floor">
-						<div class="personalBar">
-							<div class="pPhoto"><img src="./template/EnglishDB/common/img/profile.png" /></div>
-							<div class="name">Helen</div>
-							<div class="pInfo" id="grade">grade: 2</div>
-							<div class="pInfo" id="article">article: 8</div>
-							<div class="pButtonBar">
-								<div class="pButton">Follow</div>
-								<img src="img/mail.png" class="pMail" />
-							</div>
-						</div>
-						<div class="verticleHr"></div>
-						<div class="postInfo">
-							<div class="time">Tue Aug 23, 2016 08:05 pm</div>
-							<div class="horizenHr"></div>
-							<div class="content">
-								<div class="context">asdf</div>
-								<div class="bottomLine">
-									<div class="disagreeNum">0</div>
-									<img src="./template/EnglishDB/common/img/like&dislike.png" class="agree" />
-									<div class="agreeNum">2</div>
-									<img src="./template/EnglishDB/common/img/reply.png" class="reply" onclick="reply('4', 'Helen')" />
-									<div>Reply</div>
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 				<div class="pageModule">
 					<div class="jumpButton" onclick="pageJump()">Jump</div>
@@ -91,12 +62,11 @@
 						<div class="page" style="margin-left: 15px" onclick="pageNext()">Next</div>
 					</div>
 				</div>
+				
 				<div class="postModule">
-					<div class="titleLine">
-						<div class="titleText">Reply louzhu</div>
-					</div>
-					<textarea placeholder="Write your content here"></textarea>
-					<div class="postButton">Post</div>
+					<!--{if $fastpost}-->
+						<!--{subtemplate forum/viewthread_fastpost}-->
+					<!--{/if}-->
 				</div>
 				<div class="bottomInfo">
 					<p>广告业务|合作交流|联系我们|技术支持</p>
