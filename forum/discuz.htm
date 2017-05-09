@@ -7,7 +7,6 @@
           <img src="./template/EnglishDB/common/img/search.png" class="logo" />
           <input type="text" name="search" placeholder="search" />
         </div>
-        
       </div>
       <div class="blank"></div>
     </div>
@@ -17,6 +16,8 @@
         <div class="moduleList">
 
           <div class="moduleBlock">
+
+            <!--最火帖子 -->
             <div class="module newestModule">
               <div class="moduleTop" style="background-color: #62592d"></div>
               <div class="moduleTitle">
@@ -26,16 +27,22 @@
               <hr />
             </div>
           </div>
+
+
           <div class="moduleBlock">
+            <!-- 考试版块 -->
             <div class="module">
               <div class="moduleTop" style="background-color: #455d4d"></div>
               <div class="moduleTitle">
                 <div class="title"><img src="./template/EnglishDB/common/img/testing.png" /></div>
-                <div class="more" id="moretesting" onclick="window.open('module.html?m=testing&show=all&page=1')"><img src="./template/EnglishDB/common/img/more.png" /></div>
+                <div class="more" id="moretesting" >
+                <a href="forum.php?mod=forumdisplay&fid=2"> 
+                <img src="./template/EnglishDB/common/img/more.png" /></a></div>
               </div>
               <hr />
               <!--{block/59}-->
             </div>
+
             <div class="module">
               <div class="moduleTop" style="background-color: #c73926"></div>
               <div class="moduleTitle">

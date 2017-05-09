@@ -1,0 +1,79 @@
+<!--{eval
+$needhiddenreply = ($hiddenreplies && $_G['uid'] != $post['authorid'] && $_G['uid'] != $_G['forum_thread']['authorid'] && !$post['first'] && !$_G['forum']['ismoderator']);
+$postshowavatars = !($_G['setting']['bannedmessages'] & 2 && ($post['memberstatus'] == '-1' || ($post['authorid'] && !$post['username']) || ($post['groupid'] == 4 || $post['groupid'] == 5) || ($post['status'] & 1)));
+}-->
+<!--{block authorverifys}-->
+<!--{loop $post['verifyicon'] $vid}-->
+	<a href="home.php?mod=spacecp&ac=profile&op=verify&vid=$vid" target="_blank"><!--{if $_G['setting']['verify'][$vid]['icon']}--><img src="$_G['setting']['verify'][$vid]['icon']" class="vm" alt="$_G['setting']['verify'][$vid][title]" title="$_G['setting']['verify'][$vid][title]" /><!--{else}-->$_G['setting']['verify'][$vid]['title']<!--{/if}--></a>
+<!--{/loop}-->
+<!--{loop $post['unverifyicon'] $vid}-->
+	<a href="home.php?mod=spacecp&ac=profile&op=verify&vid=$vid" target="_blank"><img src="$_G['setting']['verify'][$vid]['unverifyicon']" class="vm" alt="$_G['setting']['verify'][$vid][title]" title="$_G['setting']['verify'][$vid][title]" /></a>
+<!--{/loop}-->
+<!--{/block}-->
+<!--{if $post['first'] &&  $_G['forum_threadstamp']}-->
+	<div id="threadstamp"><img src="{STATICURL}image/stamp/$_G[forum_threadstamp][url]" title="$_G[forum_threadstamp][text]" /></div>
+<!--{/if}-->
+
+<!--{if empty($post['deleted'])}-->
+    
+				<div class="personalBar">
+					<div class="pPhoto"> <a href="home.php?mod=space&uid=$post[authorid]"  target="_blank">$post[avatar]</a>
+					</div>
+					<div class="name"><a href="home.php?mod=space&uid=$post['authorid']" target="_blank" class="xw1">$post[author]</a>
+					</div>				
+					<div class="pInfo" id="grade">grade: $post[credits]</div>
+					<div class="pInfo" id="article">article: $post[posts]</div>
+					<div class="pButtonBar">
+						<!--{if !($_G['setting']['threadguestlite'] && !$_G['uid'])}-->
+							<!-- 发送消息-->
+							<!--{if $post[authorid] != $_G[uid]}-->
+								<a href="home.php?mod=spacecp&ac=follow&op=add&hash={FORMHASH}&fuid=$post[authorid]" id="followmod_$post[authorid]" title="{lang follow}" class="xi2" onclick="showWindow('followmod', this.href, 'get', 0);"><div class="pButton">Follow</div></a>
+
+								<a href="home.php?mod=spacecp&ac=pm&op=showmsg&handlekey=showmsg_$post[authorid]&touid=$post[authorid]&pmid=0&daterange=2&pid=$post[pid]&tid=$post[tid]" onclick="showWindow('sendpm', this.href);" title="{lang viewthread_left_sendpm}" class="xi2"><img src="./template/EnglishDB/common/img/mail.png" class="pMail" /></a>
+							<!--{/if}-->
+						<!--{/if}-->
+					</div>
+				</div>
+
+				<div class="verticleHr"></div>
+
+				<div class="postInfo">
+					<div class="time"> $post[dateline]</div>
+					<div class="horizenHr"></div>
+					<div class="content">
+						<div class="context">$post['message']</div>
+						<div class="bottomLine">
+							<div class="disagreeNum">0</div>
+							<img src="./template/EnglishDB/common/img/like&dislike.png" class="agree" />
+							<div class="agreeNum">2</div>
+							<img src="./template/EnglishDB/common/img/reply.png" class="reply" onclick="reply('1', 'Helen')" />
+							<div>Reply</div>
+						</div>
+					</div>
+				</div>
+		
+
+<!--{else}-->
+	<table id="pid$post[pid]" summary="pid$post[pid]" cellspacing="0" cellpadding="0">
+	<tbody>
+		<tr>
+			<!--{if !$close_leftinfo}-->
+			<td class="pls"></td>
+			<!--{/if}-->
+			<td class="plc"<!--{if $close_leftinfo}--> style="width:100%"<!--{/if}-->>
+				<div class="pi">
+					<strong><a><!--{if !empty($postno[$post[number]])}-->$postno[$post[number]]<!--{else}--><em>{$post[number]}</em>{$postno[0]}<!--{/if}--></a></strong>
+				</div>
+				<div class="pct">{lang post_deleted}</div>
+			</td>
+		</tr>
+		<tr class="ad">
+			<!--{if !$close_leftinfo}-->
+			<td class="pls"></td>
+			<!--{/if}-->
+			<td class="plc"></td>
+		</tr>
+	</tbody>
+</table>
+<!--{/if}-->
+<!--{hook/viewthread_endline $postcount}-->
