@@ -108,6 +108,8 @@
 				else if(pmlmod == "space") {
 					if(pmldo == "pm")
 						targetPml = jq("#pModule2");
+					else if(pmldo == "friend")
+						targetPml = jq("#pModule4");
 					else
 						targetPml = jq("#pModule3");
 				}
@@ -117,9 +119,6 @@
 						targetPml = jq("#pModule4");
 					else
 						targetPml = jq("#pModule3");
-				}
-				else if(pmlmod == "space" && pmldo == "friend") {
-					targetPml = jq("#pModule4");
 				}
 				else targetPml = jq("#pModule0");
 			}
@@ -218,7 +217,7 @@
 		getCurChatMesLock = new Array();
 
 		function getCurChatMes(msg) {
-			if(curTalkId == "" || curFriendId == "") return;
+			if(curTalkId == "" || curFriendId == "" || getCurChatMesLock[''+curFriendId] == 1) return;
 			//alert("lock "+curFriendId+" 1");
 			getCurChatMesLock[''+curFriendId] = 1;				
 			myAjax({
@@ -243,6 +242,7 @@
 						if(jsonObj.length > 1) {
 							cc.scrollTop(cc[0].scrollHeight);
 							curTalkLastTime = jsonObj[jsonObj.length - 2].dateline;
+							
 						}
 						if(getCurMesFlag == 1) {
 							//alert("clear "+sto1);
@@ -258,8 +258,56 @@
 			}
 		}
 
+		sto3 = "";
+		getNewMesLock = 0;
 		function getNewMes() {
-
+			if(getNewMesLock == 1) return;
+			myAjax({
+				url:'./template/EnglishDB/fetchChatFriendsNewMsg.php',     
+				type:'get',
+				error: function() {     
+					alert('getNewMes error');
+					getNewMesLock = 0;
+					clearTimeout(sto3);
+					sto3 = setTimeout("getNewMes()", 15000);
+				},
+				success: function(data) {
+					var jsonObj = JSON.parse(data);
+					if(jsonObj.length > 0) {
+						var fl = jq("#friendList").find(".item");
+						newCnt = 0;
+						for(var j = 0; j < fl.length; j++) {
+							var obj = fl.eq(j);
+							for(var i = 0; i < jsonObj.length; i++) {
+								if(obj.attr("id") == "friend"+jsonObj[i].uid) {
+									newCnt++;
+									var tempOc = obj.attr("onclick").split(",");
+									if(tempOc.length == 4) {
+										obj.attr("onclick",tempOc[0]+","+tempOc[1]+",'1',"+tempOc[3]);
+									}
+									else if(tempOc.length == 2) {
+										var uname = tempOc[1].split("'")[1];
+										obj.attr("onclick","getChatDetail('"+uname+"','"+jsonObj[i].uid+"','1','"+jsonObj[i].plid+"')");
+									}
+									if(jsonObj[i].uid != curFriendId && obj.find(".isNew").length == 0) {
+										obj.append('<div class="isNew"><div class="text">New</div><div class="dot"></div></div>');
+									}
+									break;
+								}
+							}
+						}
+						var cEntry = jq("#chatEntry");
+						if(newCnt > 0)
+							cEntry.html('message('+newCnt+' new)');
+						else
+							cEntry.html('message');
+					}
+					getNewMesLock = 0;
+					clearTimeout(sto3);
+					sto3 = setTimeout("getNewMes()", 15000);
+				}
+			});
+			sto3 = setTimeout("getNewMes()", 30000);
 		}
 
 		function getChatDetail(uname, fuid, isNew, plid) {
@@ -280,8 +328,8 @@
 				clearTimeout(sto1);
 			}
 			//alert(fuid+" "+plid);
-			if(isNew != null && isNew == 1) {
-				obj.attr("onclick","getChatDetail('"+uname+"', '"+fuid+"', 0, '"+plid+"')");
+			if(isNew != null && isNew == '1') {
+				obj.attr("onclick","getChatDetail('"+uname+"', '"+fuid+"', '0', '"+plid+"')");
 				obj.find(".isNew").eq(0).remove();
 				myAjax({
 					url:'./template/EnglishDB/updateIsNewMes.php',
@@ -384,6 +432,8 @@
 			var obj = jq("#chatEntry");
 			if(newCnt > 0)
 				obj.html('message('+newCnt+' new)');
+			else
+				obj.html('message');
 			obj.show();
 			getCurMesFlag = 0;
 			//alert("clear "+sto1);
@@ -424,6 +474,7 @@
 					}
 				}
 			});
+
 			jq(document).click(function(){
     			hideChatBox();
 			});
@@ -433,11 +484,13 @@
 			jq("#chatEntry").click(function(event){
     			event.stopPropagation();
 			});
+
 			jq("#chatInput").keypress(function(e) {
 			    if(e.which == 13) {
 			        sendChatMsg();
 			    }
 			});
+
 			findFriendTime = (new Date()).valueOf();
 			jq('#findFriend').on('input', function() {
 				var curT = (new Date()).valueOf();
@@ -481,6 +534,8 @@
 			jq('#findFriend').blur(function() {
 				setTimeout("jq('#searchFriendList').hide();jq('#friendList').show();",200);
 			});
+
+			getNewMes();
 		});
 	</script>
 	<!--{/if}-->
