@@ -29,8 +29,6 @@
 	<meta charset="utf-8" />
 	<link rel="stylesheet" href="./template/EnglishDB/common/css/global.css" ／>
 	<link rel="stylesheet" href="./template/EnglishDB/common/css/main.css" ／>
-
-	<link rel="stylesheet" href="./template/EnglishDB/common/css/personalEdit.css" ／>
 	<link rel="stylesheet" href="./template/EnglishDB/common/css/postItem.css" ／>
 
 
@@ -270,7 +268,7 @@
 				url:'./template/EnglishDB/fetchChatFriendsNewMsg.php',     
 				type:'get',
 				error: function() {     
-					alert('getNewMes error');
+					//alert('getNewMes error');
 					getNewMesLock = 0;
 					clearTimeout(sto3);
 					sto3 = setTimeout("getNewMes()", 15000);
