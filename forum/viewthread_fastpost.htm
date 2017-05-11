@@ -9,10 +9,7 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 	<!--{if empty($_GET[from])}-->
 	<table cellspacing="0" cellpadding="0">
 		<tr>
-			<td class="pls">
-				<!--{if $_G['uid']}--><div class="avatar avtm"><!--{echo avatar($_G['uid'])}--></div><!--{/if}-->
-				<!--{hook/viewthread_fastpost_side}-->
-			</td>
+		
 			<td class="plc">
 	<!--{/if}-->
 	<!--{hook/viewthread_fastpost_content}-->
@@ -38,10 +35,7 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 		<div{if empty($_GET[from]) && $_G[setting][fastsmilies]} class="hasfsl"{/if} id="fastposteditor">
 			<div class="tedt{if !($_G[forum_thread][special] == 5 && empty($firststand))} mtn{/if}">
 				<div class="bar">
-					<span class="y">
-						<!--{hook/viewthread_fastpost_func_extra}-->
-						<a href="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]{if $_GET[from]}&from=$_GET[from]{/if}" onclick="return switchAdvanceMode(this.href)">{lang post_advancemode}</a>
-					</span>
+					
 					<!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'img', 'link', 'quote', 'code', 'smilies'), !$allowfastpost ? 1 : 0, $allowpostattach && $_GET['from'] != 'preview' && $allowfastpost ? '<span class="pipe z">|</span><span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
 					<!--{hook/viewthread_fastpost_ctrl_extra}-->
 					<!--{subtemplate common/seditor}-->
@@ -53,7 +47,7 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 						<div class="pt hm">
 							<!--{if !$_G['uid']}-->
 								<!--{if !$_G['connectguest']}-->
-									{lang login_to_reply} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" class="xi2">{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">$_G['setting']['reglinkname']</a>
+									You need to log in to reply <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" class="xi2">Login</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">Register</a>
 								<!--{else}-->
 									{lang connect_fill_profile_to_post}
 								<!--{/if}-->
@@ -67,6 +61,9 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 			</div>
 		</div>
 	</div>
+
+
+	<!--验证码-->
 	<div id="seccheck_fastpost">
 		<!--{if $allowpostreply && ($secqaacheck || $seccodecheck)}-->
 			<!--{subtemplate forum/seccheck_post}-->
@@ -149,14 +146,14 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 	<input type="hidden" name="usesig" value="$usesigcheck" />
 	<input type="hidden" name="subject" value="  " />
 	<p class="ptm pnpost">
-		<a href="home.php?mod=spacecp&ac=credit&op=rule&fid=$_G[fid]" class="y" target="_blank">{lang post_credits_rule}</a>
-		<button {if $allowpostreply}type="submit" {elseif !$_G['uid']}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes')" {/if}{if !$seccodecheck}onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" {/if}name="replysubmit" id="fastpostsubmit" class="pn pnc vm" value="replysubmit" tabindex="5"><strong>{lang post_newreply}</strong></button>
-		<!--{hook/viewthread_fastpost_btn_extra}-->
-		<!--{if helper_access::check_module('follow')}-->
-		<label class="lb"><input type="checkbox" name="adddynamic" class="pc" value="1" />{lang post_reply_relay}</label>
-		<!--{/if}-->
+
+		
+
+		<button {if $allowpostreply}type="submit" {elseif !$_G['uid']}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes')" {/if}{if !$seccodecheck}onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" {/if}name="replysubmit" id="fastpostsubmit" class="pn pnc vm" value="replysubmit" tabindex="5"><strong>Post Reply</strong></button>
+
+		<label for="fastpostrefresh"><input id="fastpostrefresh" type="checkbox" class="pc" />Jump to the last page after reply</label>
+		
 		<!--{if $_GET['ordertype'] != 1 && empty($_GET[from])}-->
-		<label for="fastpostrefresh"><input id="fastpostrefresh" type="checkbox" class="pc" />{lang post_fastreply_gotolast}</label>
 		<script type="text/javascript">if(getcookie('fastpostrefresh') == 1) {$('fastpostrefresh').checked=true;}</script>
 		<!--{/if}-->
 	</p>
