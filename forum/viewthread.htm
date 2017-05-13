@@ -1,0 +1,188 @@
+<!--{template common/header}-->
+
+<link rel="stylesheet" href="./template/EnglishDB/common/css/postItem.css" ／>
+<script type="text/javascript">var fid = parseInt('$_G[fid]'), tid = parseInt('$_G[tid]');</script>
+<!--{if $modmenu['thread'] || $modmenu['post']}-->
+	<script type="text/javascript" src="{$_G['setting']['jspath']}forum_moderate.js?{VERHASH}"></script>
+<!--{/if}-->
+
+<script type="text/javascript" src="{$_G['setting']['jspath']}forum_viewthread.js?{VERHASH}"></script>
+<script type="text/javascript">zoomstatus = parseInt($_G['setting']['zoomstatus']);var imagemaxwidth = '{$_G['setting']['imagemaxwidth']}';var aimgcount = new Array();</script>
+
+
+<script  type="text/javascript">
+	jq(document).ready(function() {
+		page = {$page};
+		totalPage = {$totalpage};
+
+		//load page module
+		jumpHref = 'forum.php?mod=viewthread&tid={$_G['tid']}';
+	
+		jq("#totalPage").text("/ "+totalPage);
+		if(totalPage <= 6) {
+			for(var i = 1; i <= totalPage; i++) {
+				jq("#page"+i).text(i);
+				jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+i+"'");
+				if(i == page) {
+					jq("#page"+i).addClass("choose");
+				}
+			}
+			for(var i = totalPage + 1; i <= 6; i++) {
+				jq("#page"+i).hide();
+			}
+		}
+		else {
+			if(page < 4) {
+				for(var i = 1; i < 6; i++) {
+					jq("#page"+i).text(i);
+					jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+i+"'");
+					if(i == page) {
+						jq("#page"+i).addClass("choose");
+						jq("#page"+i).attr("onclick", "");
+					}
+				}
+				jq("#page6").text("..."+totalPage);
+				jq("#page6").attr("onclick", "window.location.href='"+jumpHref+"&page="+totalPage+"'");
+			}
+			else {
+				jq("#page1").text("1...");
+				jq("#page1").attr("onclick", "window.location.href='"+jumpHref+"&page=1'");
+				if(page < totalPage - 3) {
+					for(var i = 2; i < 6; i++) {
+						jq("#page"+i).text(i + page - 3);
+						jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+(i+page-3)+"'");
+						if(i == 3) {
+							jq("#page"+i).addClass("choose");
+							jq("#page"+i).attr("onclick", "");
+						}
+					}
+					jq("#page6").text("..."+totalPage);
+					jq("#page6").attr("onclick", "window.location.href='"+jumpHref+"&page="+totalPage+"'");
+				}
+				else {
+					for(var i = 2; i <= 6; i++) {
+						jq("#page"+i).text(i + totalPage - 6);
+						jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+(i+totalPage-6)+"'");
+						if(i + totalPage - 6 == page) {
+							jq("#page"+i).addClass("choose");
+							jq("#page"+i).attr("onclick", "");
+						}
+					}
+				}
+			}
+		}
+
+
+		jq("#sfInput").keypress(function(e) {
+		    if(e.which == 13) {
+		        jq("#sfForm").submit();
+		    }
+		});
+	});
+
+	function pagePrev() {
+		if(page > 1) {
+			window.location.href=jumpHref+'&page='+(page-1);
+		}
+	}
+	function pageNext() {
+		if(page < totalPage) {
+			window.location.href=jumpHref+'&page='+(page+1);
+		}
+	}
+	function pageJump() {
+		var jump = Number(jq("#searchPage").val());
+		if(jump > 0 && jump <= totalPage) {
+			window.location.href=jumpHref+'&page='+(jump);
+		}
+		else {
+			alert("Invalid page");
+		}
+	}
+</script>
+
+<div class="mainPage">
+    <div class="searchBar">
+      <div class="blank"></div>
+      <div class="context">
+        <div class="search">
+          <img src="./template/EnglishDB/common/img/search.png" class="logo" />
+          <input type="text" name="search" placeholder="search" />
+        </div>
+      </div>
+      <div class="blank"></div>
+    </div>
+
+    <div class="main" style="background-image: url(./template/EnglishDB/common/img/background.png)">
+			<div class="blank"></div>
+			<div class="mainContent">
+
+				<div class="path"><a href="./">Homepage</a>  $navigation  </div>
+
+				<div class="postItem">
+					<div class="postItemTop"></div>
+
+					<div class="titleLine">
+
+						<div class="title">$_G[forum_thread][subject]
+						</div>
+						<div class="share">
+							<img src="./template/EnglishDB/common/img/qq.png" onclick="" />
+							<img src="./template/EnglishDB/common/img/weibo.png" />
+							<img src="./template/EnglishDB/common/img/wechat.png" />
+							<img src="./template/EnglishDB/common/img/heart.png" />
+						</div>
+					</div>
+
+					
+					<!--{eval $postcount = 0;}-->
+					<!--{loop $postlist $post}-->
+						<!--{if $rushreply && $_GET['checkrush'] && $post['rewardfloor'] != 1}-->
+							<!--{eval continue;}-->
+						<!--{/if}-->
+						<div id="post_$post[pid]"  {if $_G['blockedpids'] && $post['inblacklist']}style="display:none;"{/if}>
+							<!--{subtemplate forum/viewthread_node}-->
+						</div>
+						<!--{eval $postcount++;}-->
+					<!--{/loop}-->
+
+					<div id="postlistreply"  >
+						<div id="post_new" style="display: none"></div>
+					</div>
+				</div>
+
+				<div class="pageModule">
+					<div class="jumpButton" onclick="pageJump()">Jump</div>
+					<div class="totalPage" id="totalPage"></div>
+					<input type="text" class="searchPage" id="searchPage" placeholder="page"/>
+					<div class="pageLine">
+						<div class="page" style="margin-right: 12px;" onclick="pagePrev()">Previous</div>
+						<div class="page" id="page1"></div>
+						<div class="page" id="page2"></div>
+						<div class="page" id="page3"></div>
+						<div class="page" id="page4"></div>
+						<div class="page" id="page5"></div>
+						<div class="page" id="page6"></div>
+						<div class="page" style="margin-left: 15px" onclick="pageNext()">Next</div>
+					</div>
+				</div>
+				
+				<div class="postModule">
+					<!--{if $fastpost}-->
+						<!--{subtemplate forum/viewthread_fastpost}-->
+					<!--{/if}-->
+				</div>
+				<div class="bottomInfo">
+					<p>广告业务|合作交流|联系我们|技术支持</p>
+					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+					<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+				</div>
+			</div>
+			<div class="blank"></div>
+		</div>
+</div>
+
+
+
+
+<!--{template common/footer}-->
