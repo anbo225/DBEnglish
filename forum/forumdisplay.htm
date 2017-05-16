@@ -1,190 +1,310 @@
 <!--{subtemplate common/header}-->
+<link rel="stylesheet" href="./template/EnglishDB/common/css/module.css">
+<script type="text/javascript" src="{$_G[setting][jspath]}forum_moderate.js?{VERHASH}"></script>
+<script>
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
 
-<table summary="forum_$_G[fid]" width="100%" class="mb20">
-								<!--{loop $_G['forum_threadlist'] $key $thread}-->
-										
-									<tbody id="$thread[id]" class="bus_forum_tbody {if in_array($thread['displayorder'], array(3))}zd_on{/if}">
-										<tr class="bus_forumlist {eval $i++;} {if ($i % 2 === 0)} {eval $i=0;} bus_list2 {/if}" >
-											<td class="icon">
-													<a href="home.php?mod=space&uid=$thread[authorid]" class="arvtx" c="1"><!--{avatar($thread[authorid],small)}--></a>
-											</td>
-											<td class="$thread[folder] subject">
-												<div class="posttitle">
-												<!--{if !$_GET['archiveid'] && $_G['forum']['ismoderator']}-->
-													<!--{if $thread['fid'] == $_G[fid]}-->
-														<!--{if $thread['displayorder'] <= 3 || $_G['adminid'] == 1}-->
-															<input onclick="tmodclick(this)" type="checkbox" name="moderate[]" value="$thread[tid]" />
-														<!--{else}-->
-															<input type="checkbox" disabled="disabled" />
-														<!--{/if}-->
-													<!--{else}-->
-														<input type="checkbox" disabled="disabled" />
-													<!--{/if}-->
-												<!--{/if}-->
-												$thread[typehtml] $thread[sorthtml]
-												<!--{if $thread['moved']}-->{lang thread_moved}:<!--{eval $thread[tid]=$thread[closed];}--><!--{/if}--><a href="forum.php?mod=viewthread&tid=$thread[tid]&{if $_GET['archiveid']}archiveid={$_GET['archiveid']}&{/if}extra=$extra"$thread[highlight]{if $thread['isgroup'] == 1 || $thread['forumstick']} target="_blank"{else} onclick="atarget(this)"{/if} class="st">$thread[subject]</a>
-												<!--{if $thread['replycredit'] > 0}-->
-													- <span class="xi1">[{lang replycredit} <strong> $thread['replycredit']</strong> ]</span>
-												<!--{/if}-->
-												<!--{if $thread[icon] >= 0}-->
-													<img src="{STATICURL}image/stamp/{$_G[cache][stamps][$thread[icon]][url]}" alt="{$_G[cache][stamps][$thread[icon]][text]}" align="absmiddle" />
-												<!--{/if}-->
-												<!--{if $stemplate && $sortid}-->$stemplate[$sortid][$thread[tid]]<!--{/if}-->
-												<!--{if $thread['readperm']}--> - [{lang readperm} <span class="xw1">$thread[readperm]</span>]<!--{/if}-->
-												<!--{if $thread['price'] > 0}-->
-													<!--{if $thread['special'] == '3'}-->
-													- <a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}&rewardtype=1" title="{lang show_rewarding_only}"><span class="xi1">[{lang thread_reward} <span class="xw1">$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][2]][title]}]</span></a>
-													<!--{else}-->
-													- [{lang price} <span class="xw1">$thread[price]</span> {$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][unit]}{$_G[setting][extcredits][$_G['setting']['creditstransextra'][1]][title]}]
-													<!--{/if}-->
-												<!--{elseif $thread['special'] == '3' && $thread['price'] < 0}-->
-													- <a href="forum.php?mod=forumdisplay&fid=$_G[fid]&filter=specialtype&specialtype=reward$forumdisplayadd[specialtype]{if $_GET['archiveid']}&archiveid={$_GET['archiveid']}{/if}&rewardtype=2" title="{lang show_rewarded_only}">[{lang reward_solved}]</a>
-												<!--{/if}-->
-												<!--{if $thread['attachment'] == 2}-->
-													<img src="{STATICURL}image/filetype/image_s.gif" alt="attach_img" title="{lang attach_img}" align="absmiddle" />
-												<!--{elseif $thread['attachment'] == 1}-->
-													<img src="{STATICURL}image/filetype/common.gif" alt="attachment" title="{lang attachment}" align="absmiddle" />
-												<!--{/if}-->
-												<!--{if $thread['mobile']}-->
-													<img src="{IMGDIR}/mobile-attach-$thread['mobile'].png" alt="{lang post_mobile}" align="absmiddle" />
-												<!--{/if}-->
-												<!--{if $thread['digest'] > 0 && $filter != 'digest'}-->
-													<img src="{IMGDIR}/digest_$thread[digest].gif" align="absmiddle" alt="digest" title="{lang thread_digest} $thread[digest]" />
-												<!--{/if}-->
-												<!--{if $thread['displayorder'] == 0}-->
-													<!--{if $thread[recommendicon] && $filter != 'recommend'}-->
-														<img src="{IMGDIR}/recommend_$thread[recommendicon].gif" align="absmiddle" alt="recommend" title="{lang thread_recommend} $thread[recommends]" />
-													<!--{/if}-->
-													<!--{if $thread[heatlevel]}-->
-														<img src="{IMGDIR}/hot_$thread[heatlevel].gif" align="absmiddle" alt="heatlevel" title="{lang heats}: {$thread[heats]}" />
-													<!--{/if}-->
-													<!--{if $thread['rate'] > 0}-->
-														<img src="{IMGDIR}/agree.gif" align="absmiddle" alt="agree" title="{lang rate_credit_add}" />
-													<!--{elseif $thread['rate'] < 0}-->
-														<img src="{IMGDIR}/disagree.gif" align="absmiddle" alt="disagree" title="{lang posts_deducted}" />
-													<!--{/if}-->
-												<!--{/if}-->
-												<!--{if $thread['digest'] > 0 && $filter != 'digest'}-->
-													<i class="s1">精</i>
-													<!-- <img src="{IMGDIR}/digest_$thread[digest].gif" align="absmiddle" alt="digest" title="{lang thread_digest} $thread[digest]" /> -->
-												<!--{/if}-->
-												<!--{if $thread['displayorder'] == 0}-->
-													<!--{if $thread[recommendicon] && $filter != 'recommend'}-->
-														<img src="{IMGDIR}/recommend_$thread[recommendicon].gif" align="absmiddle" alt="recommend" title="{lang thread_recommend} $thread[recommends]" />
-													<!--{/if}-->
-													<!--{if $thread[heatlevel]}-->
-														<i class="s1">火</i>
-														<!-- <img src="{IMGDIR}/hot_$thread[heatlevel].gif" align="absmiddle" alt="heatlevel" title="{lang heats}: {$thread[heats]}" /> -->
-													<!--{/if}-->
-													<!--{if $thread['rate'] > 0}-->
-														<i class="s3">赞</i>
-														<!-- <img src="{IMGDIR}/agree.gif" align="absmiddle" alt="agree" title="{lang rate_credit_add}" /> -->
-													<!--{elseif $thread['rate'] < 0}-->
-														<i class="s3">踩</i>
-														<!-- <img src="{IMGDIR}/disagree.gif" align="absmiddle" alt="disagree" title="{lang posts_deducted}" /> -->
-													<!--{/if}-->
-												<!--{/if}-->
-												
-												<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
-													<!--{eval $thread[tid]=$thread[closed];}-->
-												<!--{/if}-->
-												<!--{if $thread[folder] == 'lock'}-->
-												<i class="s3">锁</i>
-													<!-- <img src="{IMGDIR}/folder_lock.gif" /> -->
-												<!--{elseif $thread['special'] == 1}-->
-													<img src="{IMGDIR}/pollsmall.gif" alt="{lang thread_poll}" />
-												<!--{elseif $thread['special'] == 2}-->
-													<img src="{IMGDIR}/tradesmall.gif" alt="{lang thread_trade}" />
-												<!--{elseif $thread['special'] == 3}-->
-													<img src="{IMGDIR}/rewardsmall.gif" alt="{lang thread_reward}" />
-												<!--{elseif $thread['special'] == 4}-->
-													<img src="{IMGDIR}/activitysmall.gif" alt="{lang thread_activity}" />
-												<!--{elseif $thread['special'] == 5}-->
-													<img src="{IMGDIR}/debatesmall.gif" alt="{lang thread_debate}" />
-												<!--{/if}-->
-												<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
-													<i class="s2">顶</i>
-													<img src="{IMGDIR}/pin_$thread[displayorder].gif" alt="$_G[setting][threadsticky][3-$thread[displayorder]]" />
-												<!--{elseif $thread[folder] == 'new'}-->
-													<i class="s1">new</i>
-												<!--{/if}-->
-												<!--{if $thread['rushreply']}-->
-												<i class="s1">抢</i>
-													<!-- <img src="{IMGDIR}/rushreply_s.png" alt="{lang rushreply}" align="absmiddle" /> -->
-												<!--{/if}-->
-												<!--{hook/forumdisplay_thread_subject $key}-->
-												
-												<!--{if !$thread['forumstick'] && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
-													<!--{if $thread['related_group'] == 0 && $thread['closed'] > 1}-->
-														<!--{eval $thread[tid]=$thread[closed];}-->
-													<!--{/if}-->
-													<!--{if $groupnames[$thread[tid]]}-->
-														<span class="fromg xg1"> [{lang from}: <a href="forum.php?mod=forumdisplay&fid={$groupnames[$thread[tid]][fid]}" target="_blank" class="xg1">{$groupnames[$thread[tid]][name]}</a>]</span>
-													<!--{/if}-->
-												<!--{/if}-->
-										<a href="javascript:;" id="content_$thread[tid]" class="showcontent y" title="{lang content_actions}" onclick="CONTENT_TID='$thread[tid]';CONTENT_ID='$thread[id]';showMenu({'ctrlid':this.id,'menuid':'content_menu'})"></a>
-										<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
-											<a href="javascript:void(0);" onclick="hideStickThread('$thread[tid]')" class="showhide y" title="{lang hidedisplayorder}">{lang hidedisplayorder}</a></em>
-										<!--{/if}-->
-										<!--{if !$thread['forumstick'] && $thread['closed'] > 1 && ($thread['isgroup'] == 1 || $thread['fid'] != $_G['fid'])}-->
-												<!--{eval $thread[tid]=$thread[closed];}-->
-										<!--{/if}-->
-										<!--{if !$_G['setting']['forumdisplaythreadpreview'] && !($thread['readperm'] && $thread['readperm'] > $_G['group']['readaccess'] && !$_G['forum']['ismoderator'] && $thread['authorid'] != $_G['uid'])}-->
-											<!--{if !(!empty($_G['setting']['antitheft']['allow']) && empty($_G['setting']['antitheft']['disable']['thread']) && empty($_G['forum']['noantitheft']))}-->
-												<a class="tdpre y" href="javascript:void(0);" onclick="previewThread('{echo $thread['moved'] ? $thread[closed] : $thread[tid]}', '$thread[id]');">{lang preview}</a>
-											<!--{/if}-->
-										<!--{/if}-->
-										<!--{hook/forumdisplay_thread $key}-->
-										<!--{if $thread['moved']}-->
-											{lang thread_moved}:<!--{eval $thread[tid]=$thread[closed];}-->
-										<!--{/if}-->
-										<!--{if !empty($thread['images'])}-->
-										<!--{loop $thread['images'] $img}-->
-										<img src="$_G['setting']['attachurl']forum/{$img[attachment]}" height="90px;"/>
-										<!--{/loop}-->
-										<!--{/if}-->
-												</div>
-												
-												<div class="con">
-													<em class="a">
-													<!--{if $thread['authorid'] && $thread['author']}-->
-													<a href="home.php?mod=space&uid=$thread[authorid]" c="1">作者：<!--{$thread[author]}--></a>
-													<!--{else}-->
-														<a href="home.php?mod=space&uid=$thread[authorid]" c="1">$_G[setting][anonymoustext]</a>
-													<!--{/if}-->
-													<!--{if $thread['displayorder'] != 0 || 1}-->
-													<code class="creat_time {if $thread['istoday']}xi1{/if}">$thread[dateline]</code>
-													<!--{/if}-->
-													</em>
-													<!--{if $thread['displayorder'] == 0}-->
-													<!--{if $thread['lastposter']}-->
-													<em class="b">
-													<a href="{if $thread[digest] != -2}home.php?mod=space&uid=$thread[lastposter_id]{else}forum.php?mod=viewthread&tid=$thread[tid]&page={echo max(1, $thread[pages]);}{/if}">最后回复：$thread[lastposter]</a>
-													<code class="creat_time">$thread[lastpost]</code>
-													</em>
-													<!--{else}-->$_G[setting][anonymoustext]
-													<!--{/if}-->
-													<!--{/if}-->
-												</div>
-												
-											</td>
+	/*window.onload=function(){
+		var type = GetQueryString("type");
 
-											<td class="reply">
-											<!--{if in_array($thread['displayorder'], array(3))}-->
-											<p class="p2">
-											<em><!--{echo dnumber($thread[replies])}-->/$thread[views]</em></p>
-											<!--{else}-->
-											<!--{if $thread[replies] > 50}-->
-											<p class="p2">
-											<!--{else}-->
-											<p class="p2">
-											<!--{/if}-->
-											<em><!--{echo dnumber($thread[replies])}-->/$thread[views]</em></p>
-											<!--{/if}-->
-											</td>
-										</tr>
-									</tbody>
-								<!--{/loop}-->
-								</table>
+		jq("#" + type).css("background-color", "rgb(70, 93, 76)");
+		if (type != null && type != "all")
+			jq("#all").css("background-color", "rgba(85, 85, 85, 1.0)");
+		if (type != null && type != "thread")
+			jq("#thread").css("background-color", "rgba(85, 85, 85, 1.0)");
+		if (type != null && type != "forum")
+			jq("#forum").css("background-color", "rgba(85, 85, 85, 1.0)");
+	}*/
 
-<!--{template common/footer}-->
+	jq("input[type='checkbox']").click(function(e){  
+		alert("hello");
+	    e.stopPropagation();  
+	    window.event.cancelBubble = true; 
+	}); 
+
+	function getTime(timeStamp){
+		var date = new Date(timeStamp * 1000); 
+		var year = date.getFullYear();//获取完整的年份(4位,1970)
+		var month = date.getMonth() + 1;//获取月份(0-11,0代表1月,用的时候记得加上1)
+		var date = date.getDate();//获取日(1-31)
+		return year + "-" + month + "-" + date;
+	}
+
+	jq(document).ready(function() {
+			var page = Number(GetQueryString("page"));
+			var show = GetQueryString("filter");
+			var fid = GetQueryString("fid");
+
+			//module choose
+			var module="$_G['forum'][name]";
+			if(module == null || module == "") module = "newest";
+			jq("#moduleTitle").attr("src", "./template/EnglishDB/common/img/"+module+".png");
+			var moduleUpper = module;
+			jq("#pathTitle").text(module.charAt(0).toUpperCase()+module.substr(1));
+
+			//show choose
+			//show choose
+			if(show == null || show == "") show = "all";
+			jq("#"+show).css("background-color", "rgba(70, 93, 76, 1.0)");
+			jq("#all").attr("onclick", "window.location.href='http://localhost/upload/forum.php?mod=forumdisplay&fid=" + fid + "'");
+			jq("#heat").attr("onclick", "window.location.href='http://localhost/upload/forum.php?mod=forumdisplay&fid=" + fid + "&filter=heat&digest=heats'");
+			jq("#digest").attr("onclick", "window.location.href='http://localhost/upload/forum.php?mod=forumdisplay&fid=" + fid + "&filter=digest&digest=1'");
+			//jq("#"+show).attr("onclick", "");
+
+			//page choose
+			//totalPage = Math.ceil($count / 20);
+			totalPage=20;
+			//totalPage = 10;
+			jq("#totalPage").text("/ "+totalPage);
+			if(page == NaN || page > totalPage || page < 1) page = 1;
+			if(totalPage <= 6) {
+				for(var i = 1; i <= totalPage; i++) {
+					jq("#page"+i).text(i);
+					jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+					if(i == page) {
+						jq("#page"+i).addClass("choose");
+					}
+				}
+				for(var i = totalPage + 1; i <= 6; i++) {
+					jq("#page"+i).hide();
+				}
+			}
+			else {
+				if(page < 4) {
+					for(var i = 1; i < 6; i++) {
+						jq("#page"+i).text(i);
+						jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+						if(i == page) {
+							jq("#page"+i).addClass("choose");
+							jq("#page"+i).attr("onclick", "");
+						}
+					}
+					jq("#page6").text("..."+totalPage);
+					jq("#page6").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+				}
+				else {
+					jq("#page1").text("1...");
+					jq("#page1").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page=1'");
+					if(page < totalPage - 3) {
+						for(var i = 2; i < 6; i++) {
+							jq("#page"+i).text(i + page - 3);
+							jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+(i + page - 3)+"'");
+							if(i == 3) {
+								jq("#page"+i).addClass("choose");
+								jq("#page"+i).attr("onclick", "");
+							}
+						}
+						jq("#page6").text("..."+totalPage);
+						jq("#page6").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+totalPage+"'");
+					}
+					else {
+						for(var i = 2; i <= 6; i++) {
+							jq("#page"+i).text(i + totalPage - 6);
+							jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+(i + totalPage - 6) +"'");
+							if(i + totalPage - 6 == page) {
+								jq("#page"+i).addClass("choose");
+								jq("#page"+i).attr("onclick", "");
+							}
+						}
+					}
+				}
+			}
+		});
+
+		function pagePrev() {
+			if(page > 1) {
+				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(page - 1);
+			}
+		}
+		function pageNext() {
+			if(page < totalPage) {
+				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(page + 1);
+			}
+		}
+		function pageJump() {
+			var jump = Number(jq("#searchPage").val());
+			if(jump > 0 && jump <= totalPage) {
+				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(jump);
+			}
+			else {
+				alert("Invalid page");
+			}
+		}
+		function postJump() {
+			jq(".mainPage").eq(0).scrollTop(400);
+		}
+</script>
+<div class="mainPage">
+		<div class="searchBar">
+			<div class="blank"></div>
+			<div class="context">
+				<div class="search">
+					<img src="./template/EnglishDB/common/img/search.png" class="logo" />
+					<input type="text" name="search" placeholder="search" />
+				</div>
+				
+			</div>
+			<div class="blank"></div>
+		</div>
+		<div class="main" style="background-image: url(./template/EnglishDB/common/img/background.png)">
+			<div class="blank"></div>
+			<div class="mainContent">
+				<div class="path"><a href="main.html" id="homepageHref">Homepage</a> >> <a href="" id="pathTitle"></a></div>
+				<div class="module">
+					<div class="topBar">
+						<div class="moduleTop"></div>
+						<div class="moduleTitle">
+							<div class="mytitle"><img src="" id="moduleTitle" /></div>
+						</div>
+						<div class="otherInfo">
+							<div class="info">
+								<div>Rank:</div><div class="red-font">&nbsp&nbsp $_G[forum][rank] &nbsp&nbsp</div>
+								<div>Posts:</div><div class="red-font">&nbsp&nbsp $_G[forum][threads] &nbsp&nbsp</div>
+								<div>Today:</div><div class="red-font">&nbsp&nbsp $_G[forum][todayposts] &nbsp&nbsp</div>
+							</div>
+							<div class="postButton" onclick="postJump()">Post</div>
+						</div>
+						<div class="blankBottom"></div>
+					</div>
+					<div class="buttonBar">
+						<div class="button" id="all">All</div>
+						<div class="button" id="heat">Hot</div>
+						<div class="button" id="digest">Digest</div>
+					</div>
+					<div class="mainContent">
+						<div class="moduleTop"></div>
+						<div class="articleList">
+							<div class="titleLine">
+								<div class="mytitle">Title</div>
+								<div class="other">Author</div>
+								<div class="other">Reply/View</div>
+								<div class="other">Last Post</div>
+							</div>
+							<form method="post" autocomplete="off" name="moderate" id="moderate" action="forum.php?mod=topicadmin&action=moderate&fid=$_G[fid]&infloat=yes&nopost=yes">
+							<input type="hidden" name="formhash" value="{FORMHASH}" />
+							<input type="hidden" name="listextra" value="$extra" />
+							{eval $ix = 0;}
+							<!--{loop $_G['forum_threadlist'] $key $thread}-->
+								<!--{if ($ix % 2) == 0}-->
+								<div class="article grey">
+								<!--{else}-->
+								<div class="article">
+								<!--{/if}-->
+									<!--{if !$_GET['archiveid'] && $_G['forum']['ismoderator']}-->
+										<div class="o point">
+											<!--{if $thread['fid'] == $_G[fid]}-->
+												<!--{if $thread['displayorder'] <= 3 || $_G['adminid'] == 1}-->
+													<input onclick="tmodclick(this)" type="checkbox" name="moderate[]" value="$thread[tid]"  style="margin-top:20px; margin-left:20px"/>
+												<!--{else}-->
+													<input type="checkbox" disabled="disabled" />
+												<!--{/if}-->
+												<!--{else}-->
+												<input type="checkbox" disabled="disabled" />
+											<!--{/if}-->
+										</div>
+									<!--{else}-->
+										<div class="point"><div class="dot"></div></div>
+									<!--{/if}-->
+									<!--{if ($ix % 2) == 0}-->
+										<span class="article grey" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">
+									<!--{else}-->
+										<span class="article" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">
+									<!--{/if}-->
+									<div class="mytitle">
+
+										<div class="topContent">$thread[subject]</div>
+										<!--{if $thread[displayorder] != 0}-->
+											<div class="top">Top</div>
+										<!--{/if}-->
+										<!--{if $thread[attachment] != 0}-->
+											<img src="./template/EnglishDB/common/img/clip.png" class="attachment" />
+										<!--{/if}-->
+									</div>
+									<div class="other">
+										<div class="author">$thread[author]</div>
+										<div class="date" id = "post$thread[tid]" ></div>
+										<script>
+											jq("#post$thread[tid]").append(getTime($thread[dateline]));
+										</script>
+									</div>
+									<div class="other">$thread[replies]/$thread[views]</div>
+									<div class="other">
+										<div class="author">$thread[lastposter]</div>
+										<div class="date" id = "reply$thread[tid]"></div>
+										<script>
+											jq("#reply$thread[tid]").append(getTime($thread[lastpost]));
+										</script>
+									</div>
+								</span>
+								</div>
+								{eval $ix++;}
+							<!--{/loop}-->
+
+
+<div class = "showWindowModule" id="mdly" style="display: none;{if $_G['forum']['picstyle']} margin-top: 20px;{/if}" >
+	<input type="hidden" name="optgroup" />
+	<input type="hidden" name="operation" />
+	<a class="cp" href="javascript:;" title="{lang minimize}" onclick="$('mdly').className='cpd'">{lang minimize}</a>
+	<label><input type="checkbox" name="chkall" class="pc" onclick="if(!($('mdct').innerHTML = modclickcount = checkall(this.form, 'moderate'))) {$('mdly').style.display = 'none';}" />Choose All</label>
+	<h6><strong onclick="$('mdly').className='';" onmouseover="this.title='{lang maximize}'" id="mdct"></strong><span>
+		article<span id="s"></span> choosed
+		: </span></h6>
+	<p>
+		<!--{if $_G['group']['allowdelpost']}-->
+			<strong><a href="javascript:;" onclick="tmodthreads(3, 'delete');return false;">Delete</a></strong>
+			<span class="pipe">|</span>
+		<!--{/if}-->
+			<strong><a href="javascript:;" onclick="tmodthreads(1, 'stick');return false;">Stick</a></strong>
+			<span class="pipe">|</span>
+			<strong><a href="javascript:;" onclick="tmodthreads(1, 'digest');return false;">Digest</a></strong>
+	</p>
+	
+</div>
+
+
+						</form>
+
+							<div class="blankBottom"></div>
+						</div>
+					</div>
+				</div>
+				<div class="pageModule">
+					<div class="jumpButton" onclick="pageJump()">Jump</div>
+					<div class="totalPage" id="totalPage">/ 234</div>
+					<input type="text" class="searchPage" id="searchPage" placeholder="page"/>
+					<div class="pageLine">
+						<div class="page" style="margin-right: 12px;" onclick="pagePrev()">Previous</div>
+						<div class="page" id="page1"></div>
+						<div class="page" id="page2"></div>
+						<div class="page" id="page3"></div>
+						<div class="page" id="page4"></div>
+						<div class="page" id="page5"></div>
+						<div class="page" id="page6"></div>
+						<div class="page" style="margin-left: 15px" onclick="pageNext()">Next</div>
+					</div>
+				</div>
+				<div class="postModule" id="postModule">
+					<div class="titleLine">
+						<div class="titleText">Title</div>
+						<input type="text" id="subject" name="subject" class="titleInput" value="" onkeyup="strLenCalc(this, 'checklen', 80);" tabindex="11"  placeholder="title"/>
+						<span style="margin-left:20px"> <strong id="checklen"> 80</strong> characters left.</span>
+						<div class="attachmentText">Attachment</div>
+						<img src="./template/EnglishDB/common/img/clip.png" class="attachment" onclick="alert('ha')" />
+					</div>
+					<textarea placeholder="Write your content here"></textarea>
+					<div class="postButton">Post</div>
+				</div>
+				<div class="bottomInfo">
+					<p>广告业务|合作交流|联系我们|技术支持</p>
+					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
+					<p>本站信息均由网民提供，严禁在本论坛发表与中华人民共和国法律相抵触的言论</p>
+				</div>
+			</div>
+			<div class="blank"></div>
+
+		</div>
+	</div>
