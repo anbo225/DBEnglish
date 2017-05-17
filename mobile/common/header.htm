@@ -45,7 +45,7 @@ img{border: 0;}
 .txt_s { width: 30px; }
 
 
-body {background: #FFF; background-image:none; line-height: 130%; font-size: 10pt; font-style: normal; font-family: Arial,Helvetica,sans-serif; }
+body { font-size: 10pt; font-style: normal; font-family: Arial,Helvetica,sans-serif; }
 
 .hd { padding: 3px; border-bottom: 3px solid #2B7ACD; }
 	.hd a{ color: #2B7ACD; text-decoration: none; }
@@ -113,6 +113,17 @@ body {background: #FFF; background-image:none; line-height: 130%; font-size: 10p
 	.profile_table th { border-top: 2px #efefef solid;}
 .jammer { font-size: 10px; color:#FFF;}
 </style>
+
+<meta name="msapplication-tap-highlight" content="no" />
+<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+<link rel="stylesheet" href="./template/EnglishDB/mobile/common/css/mobile_global.css" ／>
+
+<script type="text/javascript" src="./template/EnglishDB/common/js/jquery.min.js"></script>
+<script>
+	jq = jQuery.noConflict();
+</script>
+
 </head>
 <body>
 <!--{if $_G['setting']['domain']['app']['mobile']}-->
@@ -120,9 +131,61 @@ body {background: #FFF; background-image:none; line-height: 130%; font-size: 10p
 <!--{else}-->
 	{eval $nav = "forum.php";}
 <!--{/if}-->
-<div class="hd"><a href="$nav" title="<!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}-->{lang waptitle}"><!--{if $_G['setting']['mobile']['mobilesimpletype'] == 1}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> {lang waptitle}<!--{else}--><img src="./static/image/mobile/logo.gif" /><!--{/if}--></a></div>
-<div class="wp">
-	<div class="pd2">
-	<!--{if $_G['uid']}--><a href="home.php?mod=space&uid={$_G['uid']}&do=profile">{$_G['member']['username']}</a><span class="pipe">|</span><a href="home.php?mod=space&do=pm" {if $_G[member][newpm]}class="xi1"{/if}>{if $_G[member][newpm]}{lang new_pm}{else}{lang pm_center}{/if}</a><span class="pipe">|</span><a href="home.php?mod=space&uid={$_G[uid]}&do=favorite&view=me&type=forum">{lang favorite}</a><span class="pipe">|</span><a href="home.php?mod=space&uid={$_G[uid]}&do=thread&view=me">{lang my_posts}</a><span class="pipe">|</span><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" title="{lang logout}">{lang logout}</a><!--{elseif $_G['connectguest']}-->{$_G['member']['username']}<span class="pipe">|</span><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" title="{lang logout}">{lang logout}</a><!--{else}--><a href="member.php?mod=logging&action=login" title="{lang login}">{lang login}</a><!--{if $_G['setting']['regstatus']}--><span class="pipe">|</span><a href="member.php?mod={$_G[setting][regname]}" title="{$_G['setting']['reglinkname']}">{$_G['setting']['reglinkname']}</a><!--{/if}--><!--{if $_G['setting']['connect']['allow'] && !$_G['setting']['bbclosed']}--><span class="pipe">|</span><a href="$_G[connect][login_url]&statfrom=login_simple">{lang qqconnect:connect_mobile_login}</a><!--{/if}--><!--{/if}-->
-</div>
+	<!--{if $_G['uid']}-->
+	<script>
+		jq(document).ready(function() {
+			jq(document).on("touchstart",function(){
+    			jq("#pInfoOptionList").css("display","none");
+			});
+			jq("#pInfo").on("touchstart",function(event){
+    			event.stopPropagation();
+
+    			var obj = jq("#pInfoOptionList");
+    			obj.css("display","block");
+    			obj.css("-webkit-animation","fadeIn 0.3s ease");
+    			obj.css("-moz-animation","fadeIn 0.3s ease");
+    			obj.css("-o-animation","fadeIn 0.3s ease");
+    			obj.css("animation","fadeIn 0.3s ease");
+			});
+		});
+	</script>
+	<!--{/if}-->
+
+	<div class="mainTopLine">
+		<img class="logo" src="img/logo.png" />
+		<div class="searchLine">
+			<input type="text" name="search" placeholder="search" />
+			<div class="inputLogo">
+				<img src="img/search.png" />
+			</div>
+		</div>
+	</div>
+	<!--{if $_G['uid']}-->
+	<div class="personalModuleLine">
+		<div class="pModule choose">
+			<img src="img/mobile_home.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/mobile_favorites.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/mobile_friends
+			.png" />
+		</div>
+		<div class="pInfo" tabindex="-1" id="pInfo">
+			<img class="pInfoLogo" src="img/person.png"/>
+			<div class="pInfoOptionList" id="pInfoOptionList">
+				<div class="item" onclick="alert('pd')">PersonalData</div>
+				<div class="horizenHr"></div>
+				<div class="item" onclick="alert('set')">Setting</div>
+				<div class="horizenHr"></div>
+				<div class="item">Logout</div>
+			</div>
+		</div>
+	</div>
+	<!--{else}-->
+	<div class="loginLine">
+		<div class="loginButton">Login</div>
+	</div>
+	<!--{/if}-->
 <!--{hook/global_header_mobile}-->

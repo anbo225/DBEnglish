@@ -1,0 +1,81 @@
+.moduleTop {
+	background-color: #ffffff;
+}
+.moduleTop .titlePic {
+	height: 25px;
+	width: auto;
+	margin: 18px 15px;
+}
+.moduleTop .moduleDetail {
+	display: flex;
+	display: -webkit-flex;
+	color: #717171;
+	font-size: 14px;
+	margin-left: 15px;
+}
+.moduleTop .moduleDetail .redText {
+	color: #c80001;
+}
+.moduleTop .showType {
+	display: flex;
+	display: -webkit-flex;
+	padding: 10px 15px;
+	color: #b0b0b0;
+	font-size: 18px;
+}
+.moduleTop .showType .showItem {
+	width: 100px;
+}
+.moduleTop .showType .choose {
+	color: #000000;
+}
+
+.moduleContent {
+	background-color: #ffffff;
+	padding: 5px 10px;
+}
+.moduleContent .grey {
+	background-color: #e9e9e9;
+}
+.moduleContent .topArticle {
+	color: #c80001;
+	padding: 8px 10px;
+}
+.moduleContent .topArticle .titleLine {
+	display: flex;
+	display: -webkit-flex;
+	min-height: 50px;
+	font-size: 16px;
+}
+.moduleContent .topArticle .titleLine .topPic {
+	margin-top: 3px;
+	height: 15px;
+	width: 30px;
+	border-radius: 3px;
+	border: 1px solid #c80001;
+	text-align: center;
+	font-size: 12px;
+	line-height: 15px;
+}
+.moduleContent .topArticle .titleLine .topTitle {
+	width: calc(100% - 30px);
+	margin-left: 5px;
+	line-height: 140%;
+}
+.moduleContent .articleInfo {
+	display: flex;
+	display: -webkit-flex;
+	color: #a4a4a4;
+	font-size: 14px;
+}
+.moduleContent .articleInfo .info {
+	margin-right: 15px;
+}
+.moduleContent .article {
+	color: #000000;
+	padding: 8px 10px;
+}
+.moduleContent .article .aTitle {
+	line-height: 140%;
+	min-height: 50px;
+}
