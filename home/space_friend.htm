@@ -69,6 +69,17 @@
 			}
 		}
 
+		myAjax({
+			url:'./template/EnglishDB/fetchFriendRequestNum.php',
+			error: function () {
+				alert("fetch reqNum error");
+			},
+			success: function (data) {
+				if(data > 0) {
+					jq("#reqButton").html("Request("+data+" new)");
+				}
+			}
+		});
 
 		jq(".optionList").click(function(event){
     		event.stopPropagation();
@@ -125,7 +136,7 @@
 			<div class="searchFriendLine">
 				<div class="buttonLine">
 					<div class="button choose">All</div>
-					<div class="button" onclick="window.location.href='home.php?mod=spacecp&ac=friend&op=request'">Request</div>
+					<div class="button" onclick="window.location.href='home.php?mod=spacecp&ac=friend&op=request'" id="reqButton">Request</div>
 				</div>
 				<div class="inlineSearch">
 					<img src="./template/EnglishDB/common/img/search.png" class="logo" />

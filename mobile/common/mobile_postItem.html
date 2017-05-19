@@ -1,0 +1,175 @@
+<html><head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<link rel="stylesheet" href="css/mobile_global.css" ／>
+	<link rel="stylesheet" href="css/mobile_postItem.css" ／>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+		jq = jQuery.noConflict();
+	</script>
+</head>
+<body>
+	<script>
+		jq(document).ready(function() {
+			jq(document).on("touchstart",function(){
+    			jq("#pInfoOptionList").css("display","none");
+			});
+			jq("#pInfo").on("touchstart",function(event){
+    			event.stopPropagation();
+
+    			var obj = jq("#pInfoOptionList");
+    			obj.css("display","block");
+    			obj.css("-webkit-animation","fadeIn 0.3s ease");
+    			obj.css("-moz-animation","fadeIn 0.3s ease");
+    			obj.css("-o-animation","fadeIn 0.3s ease");
+    			obj.css("animation","fadeIn 0.3s ease");
+			});
+		});
+	</script>
+	<div class="mainTopLine">
+		<img class="logo" src="img/logo.png" />
+		<div class="searchLine">
+			<input type="text" name="search" placeholder="search" />
+			<div class="inputLogo">
+				<img src="img/search.png" />
+			</div>
+		</div>
+	</div>
+	<!-- <div class="loginLine">
+		<div class="loginButton">Login</div>
+	</div> -->
+	
+	<div class="personalModuleLine">
+		<div class="pModule choose">
+			<img src="img/mobile_home.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/mobile_favorites.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/mobile_friends
+			.png" />
+		</div>
+		<div class="pInfo" tabindex="-1" id="pInfo">
+			<img class="pInfoLogo" src="img/person.png"/>
+			<div class="pInfoOptionList" id="pInfoOptionList">
+				<div class="item" onclick="alert('pd')">PersonalData</div>
+				<div class="horizenHr"></div>
+				<div class="item" onclick="alert('set')">Setting</div>
+				<div class="horizenHr"></div>
+				<div class="item">Logout</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="horizenHr"></div>
+	<div class="postItemTop">
+		<div class="back">
+			<img src="img/left.png" class="postItemTopImg" />
+			<div class="backText">Back</div>
+		</div>
+		<img src="img/heart.png" class="postItemTopImg" />
+	</div>
+	<div class="postItemTitle">Press is forum software, made the world hahahhah</div>
+
+	<div class="postItemFloor">
+		<div class="floorTop" style="background-color: #62592d"></div>
+		<div class="floorContent">
+			<div class="floorInfo">
+				<img src="img/profile.png" class="floorLogo" />
+				<div class="nameAndTime">
+					<div class="name">Frankylyc</div>
+					<div class="time">2017-05-12 09:34:38</div>
+				</div>
+				<div class="floorIndex">1st floor</div>
+			</div>
+			<div class="floorText">itsnwlkfanlksdnlknsfladkn<br />diskjfaojod<br />lnlnlnln. ln ln lnl nl nl nl n
+			 ln ln ln ln l nln ln l inj ij l kl nlj klh. hi jlk jlk joi jo lk lk h hkjhgjkj hkjh kh wqljk</div>
+			 <div class="optionLine">
+			 	<div class="optionItem">Reply</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Like</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Dislike</div>
+			 </div>
+		</div>
+	</div>
+	<div class="postItemFloor">
+		<div class="floorTop" style="background-color: #455d4d"></div>
+		<div class="floorContent">
+			<div class="floorInfo">
+				<img src="img/woman.png" class="floorLogo" />
+				<div class="nameAndTime">
+					<div class="name">Lily</div>
+					<div class="time">2017-05-12 09:34:38</div>
+				</div>
+				<div class="floorIndex">2nd floor</div>
+			</div>
+			<div class="floorText">itsnwlkfanlksdnlknsfladkn<br />diskjfaojod<br />lnlnlnln. ln ln lnl nl nl nl n
+			 ln ln ln ln l nln ln l inj ij l kl nlj klh. hi jlk jlk joi jo lk lk h hkjhgjkj hkjh kh wqljk</div>
+			 <div class="optionLine">
+			 	<div class="optionItem">Reply</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Like</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Dislike</div>
+			 </div>
+		</div>
+	</div>
+	<div class="postItemFloor">
+		<div class="floorTop" style="background-color: #c73926"></div>
+		<div class="floorContent">
+			<div class="floorInfo">
+				<img src="img/man.png" class="floorLogo" />
+				<div class="nameAndTime">
+					<div class="name">AsLody</div>
+					<div class="time">2017-05-12 09:34:38</div>
+				</div>
+				<div class="floorIndex">3rd floor</div>
+			</div>
+			<div class="floorText">itsnwlkfanlksdnlknsfladkn</div>
+			 <div class="optionLine">
+			 	<div class="optionItem">Reply</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Like 23</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Dislike 7</div>
+			 </div>
+		</div>
+	</div>
+	<div class="postItemFloor">
+		<div class="floorTop" style="background-color: #a4a151"></div>
+		<div class="floorContent">
+			<div class="floorInfo">
+				<img src="img/man.png" class="floorLogo" />
+				<div class="nameAndTime">
+					<div class="name">Frankylyc</div>
+					<div class="time">2017-05-12 09:34:38</div>
+				</div>
+				<div class="floorIndex">4th floor</div>
+			</div>
+			<div class="floorText">itsnwlkfanlksdnlknsfladkn not gosidjflksaj</div>
+			 <div class="optionLine">
+			 	<div class="optionItem">Reply</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Like</div>
+			 	<div class="verticleHr"></div>
+			 	<div class="optionItem">Dislike 7</div>
+			 </div>
+		</div>
+	</div>
+	<div style="padding: 0px 15px;">
+		<div class="pageModule">
+			<div class="pageButton"><< First</div>
+			<div class="pageButton" style="margin-left: 7px;"><</div>
+			<div class="pageShow">1/7</div>
+			<div class="pageButton">></div>
+			<div class="pageButton" style="margin-left: 7px;">Last >></div>
+		</div>
+	</div>
+</body>
+</html>

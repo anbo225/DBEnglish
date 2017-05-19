@@ -44,7 +44,7 @@
 .moduleContent .topArticle .titleLine {
 	display: flex;
 	display: -webkit-flex;
-	min-height: 50px;
+	min-height: 40px;
 	font-size: 16px;
 }
 .moduleContent .topArticle .titleLine .topPic {
@@ -63,6 +63,7 @@
 	line-height: 140%;
 }
 .moduleContent .articleInfo {
+	margin-top: 10px;
 	display: flex;
 	display: -webkit-flex;
 	color: #a4a4a4;
@@ -77,5 +78,5 @@
 }
 .moduleContent .article .aTitle {
 	line-height: 140%;
-	min-height: 50px;
+	min-height: 40px;
 }

@@ -1,0 +1,108 @@
+<html><head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<link rel="stylesheet" href="css/mobile_global.css" ／>
+	<link rel="stylesheet" href="css/mobile_friend.css" ／>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+		jq = jQuery.noConflict();
+	</script>
+</head>
+<body>
+	<script>
+		jq(document).ready(function() {
+			jq(document).on("touchstart",function(){
+    			jq("#pInfoOptionList").css("display","none");
+			});
+			jq("#pInfo").on("touchstart",function(event){
+    			event.stopPropagation();
+
+    			var obj = jq("#pInfoOptionList");
+    			obj.css("display","block");
+    			obj.css("-webkit-animation","fadeIn 0.3s ease");
+    			obj.css("-moz-animation","fadeIn 0.3s ease");
+    			obj.css("-o-animation","fadeIn 0.3s ease");
+    			obj.css("animation","fadeIn 0.3s ease");
+			});
+		});
+	</script>
+	<div class="mainTopLine">
+		<img class="logo" src="img/logo.png" />
+		<div class="searchLine">
+			<input type="text" name="search" placeholder="search" />
+			<div class="inputLogo">
+				<img src="img/search.png" />
+			</div>
+		</div>
+	</div>
+	<!-- <div class="loginLine">
+		<div class="loginButton">Login</div>
+	</div> -->
+	
+	<div class="personalModuleLine">
+		<div class="pModule choose">
+			<img src="img/mobile_home.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/favoritesTitle.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/mobile_friends.png" />
+		</div>
+		<div class="pInfo" tabindex="-1" id="pInfo">
+			<img class="pInfoLogo" src="img/person.png"/>
+			<div class="pInfoOptionList" id="pInfoOptionList">
+				<div class="item" onclick="alert('pd')">PersonalData</div>
+				<div class="horizenHr"></div>
+				<div class="item" onclick="alert('set')">Setting</div>
+				<div class="horizenHr"></div>
+				<div class="item">Logout</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="friendsTitle">
+		<img src="img/mobile_friends.png" class="friendsTitleImg" />
+	</div>
+	<div class="horizenHr"></div>
+	<div class="friendsList">
+		<div class="friendItem">
+			<img src="img/profile.png" class="friendLogo" />
+			<div class="friendName">Frankylyc</div>
+			<img src="img/talk.png" class="talkImg" />
+		</div>
+		<div class="horizenHr"></div>
+		<div class="friendItem">
+			<img src="img/man.png" class="friendLogo" />
+			<div class="friendName">Lily</div>
+			<img src="img/talk.png" class="talkImg" />
+		</div>
+		<div class="horizenHr"></div>
+		<div class="friendItem">
+			<img src="img/profile.png" class="friendLogo" />
+			<div class="friendName">PIggg</div>
+			<img src="img/talk.png" class="talkImg" />
+		</div>
+		<div class="horizenHr"></div>
+		<div class="friendItem">
+			<img src="img/woman.png" class="friendLogo" />
+			<div class="friendName">NOnono</div>
+			<img src="img/talk.png" class="talkImg" />
+		</div>
+		<div class="horizenHr"></div>
+	</div>
+	<div style="padding: 0px 15px;">
+		<div class="pageModule">
+			<div class="pageButton"><< First</div>
+			<div class="pageButton" style="margin-left: 7px;"><</div>
+			<div class="pageShow">1/7</div>
+			<div class="pageButton">></div>
+			<div class="pageButton" style="margin-left: 7px;">Last >></div>
+		</div>
+	</div>
+</body>
+</html>

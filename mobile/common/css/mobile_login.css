@@ -1,0 +1,113 @@
+html body {
+	height: 100%;
+}
+.main {
+	-moz-background-size: 100% 100%;
+	background-size: 100% 100%;
+	font-family: Arial;
+	min-height: 100%;
+}
+.main .dblogo {
+	width: 60%;
+	height: auto;
+	margin: 40px 20% 10px;
+}
+
+.main .loginNormal {
+	margin: 0px 40px;
+	width: calc(100% - 80px);
+	color: #ffffff;
+}
+.main .loginNormal .inputLine {
+	display: flex;
+	display: -webkit-flex;
+	height: 40px;
+	margin-top: 20px;
+	line-height: 40px;
+}
+.main .loginNormal .inputLine .inputImg {
+	margin: 5px;
+	width: 30px;
+	height: 30px;
+}
+.main .loginNormal .inputLine .inputItem {
+	height: 40px;
+	width: calc(100% - 40px);
+	padding: 0px 10px;
+	border: 0px;
+	outline: none;
+	background-color: transparent;
+	color: #ffffff;
+	font-size: 18px;
+}
+.main .loginNormal .inputLine .codeText {
+	width: 45px;
+	color: #ffffff;
+	font-size: 18px;
+	padding-left: 5px;
+}
+.main .loginNormal .inputLine .shortInputItem {
+	width: 40%;
+}
+.main .loginNormal .inputLine .codeImg {
+	width: 80px;
+	height: 36px;
+	margin: 2px 0px 2px 20px;
+}
+.main .loginNormal .inputHr {
+	width: 100%;
+	min-height: 1px;
+	background-color: #ffffff;
+}
+.main .loginNormal .shortInputHr {
+	width: calc(40% + 50px);
+}
+.main .loginNormal .loginButton {
+	margin-top: 30px;
+	width: calc(100% - 2px);
+	height: 50px;
+	line-height: 50px;
+	font-size: 22px;
+	text-align: center;
+	border: 1px solid #ffffff;
+	border-radius: 3px;
+}
+
+.main .loginWithOther {
+	margin: 60px 30px 0px;
+	width: calc(100% - 60px);
+	color: #ffffff;
+}
+.main .loginWithOther .hintLine {
+	display: flex;
+	display: -webkit-flex;
+	font-size: 16px;
+	line-height: 25px;
+	height: 25px;
+}
+.main .loginWithOther .hintLine .hintLineHr {
+	width: 30%;
+	min-height: 1px;
+	margin: 12px 0px;
+	background-color: #ffffff;
+}
+.main .loginWithOther .hintLine .hintInfo {
+	width: 40%;
+	text-align: center;
+}
+.main .loginWithOther .imgLine {
+	margin: 20px 20% 0px;
+	width: 60%;
+	height: 40px;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+}
+.main .loginWithOther .imgLine .otherImg {
+	height: 40px;
+	width: 40px;
+}
+
+
+

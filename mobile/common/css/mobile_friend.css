@@ -1,0 +1,34 @@
+.friendsTitle {
+	background-color: #ffffff;
+	padding: 25px 15px;
+}
+.friendsTitle .friendsTitleImg {
+	width: 25px;
+	width: auto;
+}
+
+.friendsList {
+	background-color: #ffffff;
+}
+.friendsList .friendItem {
+	display: flex;
+	display: -webkit-flex;
+	padding: 10px 15px;
+	height: 50px;
+}
+.friendsList .friendItem .friendLogo {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+}
+.friendsList .friendItem .friendName {
+	margin-left: 15px;
+	font-size: 18px;
+	line-height: 30px;
+	width: calc(100% - 95px);
+}
+.friendsList .friendItem .talkImg {
+	margin: 15px 10px;
+	height: 20px;
+	width: 20px;
+}
