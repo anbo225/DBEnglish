@@ -117,20 +117,25 @@
 			<div class="blank"></div>
 			<div class="mainContent">
 
-				<div class="path"><a href="./">Homepage</a>  $navigation  </div>
+				<div class="path">
+					<a href="forum.php" id="homepageHref">Homepage</a> &gt;&gt;
+					<a href="forum.php?mod=forumdisplay&amp;fid=$_G['fid']">$_G['forum']['name']</a> 
+				</div>
+				
 
 				<div class="postItem">
 					<div class="postItemTop"></div>
 
 					<div class="titleLine">
 
-						<div class="title">$_G[forum_thread][subject]
+						<div class="title" style="padding: 20px">$_G[forum_thread][subject]
 						</div>
 						<div class="share">
 							<img src="./template/EnglishDB/common/img/qq.png" onclick="" />
 							<img src="./template/EnglishDB/common/img/weibo.png" />
 							<img src="./template/EnglishDB/common/img/wechat.png" />
-							<img src="./template/EnglishDB/common/img/heart.png" />
+							
+							<a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]&formhash={FORMHASH}" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' {lang activity_member_unit}{lang thread_favorite}'" title="{lang fav_thread}"><i><img src="./template/EnglishDB/common/img/heart.png" alt="{lang thread_favorite}" /><span id="favoritenumber" style="display:none">{$_G['forum_thread']['favtimes']}</span></i></a>
 						</div>
 					</div>
 
