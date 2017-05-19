@@ -209,12 +209,8 @@
 									<!--{else}-->
 										<div class="point"><div class="dot"></div></div>
 									<!--{/if}-->
-									<!--{if ($ix % 2) == 0}-->
-										<span class="article grey" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">
-									<!--{else}-->
-										<span class="article" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">
-									<!--{/if}-->
-									<div class="mytitle">
+									
+									<div class="mytitle" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">
 
 										<div class="topContent">$thread[subject]</div>
 										<!--{if $thread[displayorder] != 0}-->
@@ -224,22 +220,22 @@
 											<img src="./template/EnglishDB/common/img/clip.png" class="attachment" />
 										<!--{/if}-->
 									</div>
-									<div class="other">
+									<div class="other" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">
 										<div class="author">$thread[author]</div>
 										<div class="date" id = "post$thread[tid]" ></div>
 										<script>
 											jq("#post$thread[tid]").append(getTime($thread[dateline]));
 										</script>
 									</div>
-									<div class="other">$thread[replies]/$thread[views]</div>
-									<div class="other">
+									<div class="other" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">$thread[replies]/$thread[views]</div>
+									<div class="other" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra')">
 										<div class="author">$thread[lastposter]</div>
 										<div class="date" id = "reply$thread[tid]"></div>
 										<script>
 											jq("#reply$thread[tid]").append(getTime($thread[lastpost]));
 										</script>
 									</div>
-								</span>
+								
 								</div>
 								{eval $ix++;}
 							<!--{/loop}-->
