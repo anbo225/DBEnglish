@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Cache-control" content="{if $_G['setting']['mobile'][mobilecachetime] > 0}{$_G['setting']['mobile'][mobilecachetime]}{else}no-cache{/if}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no" />
+<meta name="keywords" content="{if !empty($metakeywords)}{echo dhtmlspecialchars($metakeywords)}{/if}" />
+<meta name="description" content="{if !empty($metadescription)}{echo dhtmlspecialchars($metadescription)} {/if},$_G['setting']['bbname']" />
+<title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> {lang waptitle} - Powered by Discuz!</title>
+<link rel="stylesheet" href="{STATICURL}image/mobile/style.css" type="text/css" media="all">
+<script src="{STATICURL}js/mobile/jquery-1.8.3.min.js?{VERHASH}"></script>
+
+<script type="text/javascript">var STYLEID = '{STYLEID}', STATICURL = '{STATICURL}', IMGDIR = '{IMGDIR}', VERHASH = '{VERHASH}', charset = '{CHARSET}', discuz_uid = '$_G[uid]', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}', showusercard = '{$_G[setting][showusercard]}', attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting][disallowfloat]}', creditnotice = '<!--{if $_G['setting']['creditnotice']}-->$_G['setting']['creditnames']<!--{/if}-->', defaultstyle = '$_G[style][defaultextstyle]', REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]';</script>
+
+<script src="{STATICURL}js/mobile/common.js?{VERHASH}" charset="{CHARSET}"></script>
+
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_global.css" ／>
+
+</head>
+<body>
+	<!--{if $_G['uid']}-->
+	<script>
+		$(document).ready(function() {
+			$(document).on("touchstart",function(){
+    			$("#pInfoOptionList").css("display","none");
+			});
+			$("#pInfo").on("touchstart",function(event){
+    			event.stopPropagation();
+
+    			var obj = $("#pInfoOptionList");
+    			obj.css("display","block");
+    			obj.css("-webkit-animation","fadeIn 0.3s ease");
+    			obj.css("-moz-animation","fadeIn 0.3s ease");
+    			obj.css("-o-animation","fadeIn 0.3s ease");
+    			obj.css("animation","fadeIn 0.3s ease");
+			});
+		});
+	</script>
+	<!--{/if}-->
+
+	<div class="mainTopLine">
+		<img class="logo" src="./template/EnglishDB/common/img/logo.png" />
+		<div class="searchLine">
+			<input type="text" name="search" placeholder="search" />
+			<div class="inputLogo">
+				<img src="./template/EnglishDB/common/img/search.png" />
+			</div>
+		</div>
+	</div>
+	<!--{if $_G['uid']}-->
+	<div class="personalModuleLine">
+		<div class="pModule choose">
+			<img src="./template/EnglishDB/common/img/mobile_home.png" />
+		</div>
+		<div class="pModule">
+			<img src="./template/EnglishDB/common/img/mobile_favorites.png" />
+		</div>
+		<div class="pModule">
+			<img src="./template/EnglishDB/common/img/mobile_friends.png" />
+		</div>
+		<div class="pInfo" tabindex="-1" id="pInfo">
+			<img class="pInfoLogo" src="./template/EnglishDB/common/img/person.png"/>
+			<div class="pInfoOptionList" id="pInfoOptionList">
+				<div class="pInfoOptionListItem" onclick="alert('pd')">PersonalData</div>
+				<div class="horizenHr"></div>
+				<div class="pInfoOptionListItem" onclick="alert('set')">Setting</div>
+				<div class="horizenHr"></div>
+				<div class="pInfoOptionListItem" member.php?mod=logging&action=logout&formhash={FORMHASH}><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" title="{lang logout}" class="dialog">Logout</a></div>
+			</div>
+		</div>
+	</div>
+	<!--{else}-->
+	<div class="loginLine">
+		<div class="loginButton" onclick="window.location.href='member.php?mod=logging&action=login'">Login</div>
+	</div>
+	<!--{/if}-->

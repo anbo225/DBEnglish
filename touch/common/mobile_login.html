@@ -1,0 +1,51 @@
+<html><head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<link rel="stylesheet" href="css/mobile_global.css" ／>
+	<link rel="stylesheet" href="css/mobile_login.css" ／>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+		jq = jQuery.noConflict();
+	</script>
+</head>
+<body>
+	<div class="main" style="background-image: url(img/background_login.png)">
+		<img src="img/dblogo.png" class="dblogo" />
+		<div class="loginNormal">
+			<div class="inputLine">
+				<img src="img/register.png" class="inputImg" />
+				<input type="text" name="uname" class="inputItem" placeholder="Username" />
+			</div>
+			<div class="inputHr"></div>
+			<div class="inputLine">
+				<img src="img/lock.png" class="inputImg" />
+				<input type="password" name="pwd" class="inputItem" placeholder="Password" />
+			</div>
+			<div class="inputHr"></div>
+			<div class="inputLine">
+				<div class="codeText">Code</div>
+				<input type="text" name="vcode" class="inputItem shortInputItem" placeholder="Code" />
+				<img src="img/register button.png" class="codeImg" />
+			</div>
+			<div class="inputHr shortInputHr"></div>
+			<div class="loginButton">Login</div>
+		</div>
+		<div class="loginWithOther">
+			<div class="hintLine">
+				<div class="hintLineHr"></div>
+				<div class="hintInfo">Or Sign in with</div>
+				<div class="hintLineHr"></div>
+			</div>
+			<div class="imgLine">
+				<img src="img/qq2.png" class="otherImg" />
+				<img src="img/weibo2.png" class="otherImg" />
+				<img src="img/wechat2.png" class="otherImg" />
+			</div>
+		</div>
+	</div>
+</body>
+</html>
