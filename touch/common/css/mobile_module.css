@@ -80,3 +80,17 @@
 	line-height: 140%;
 	/**min-height: 40px;**/
 }
+.postButton{
+	font-size: 16px;
+	color: #ffffff;
+	line-height: 24px;
+	background-color: #465d4c;
+	height: 24px;
+	width: 75px;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+	border: 0px;
+	margin: 0px 0px 0px calc(100% - 280px);
+
+}
