@@ -50,7 +50,7 @@
 				data:'fuid='+fuid+'&plid='+plid+'&dateline='+curTalkLastTime,
 				error: function() {
 					getCurChatMesLock = 0;
-					alert("er");
+					//alert("er");
 				},
 				success: function(data) {
 					var jsonObj = JSON.parse(data);
@@ -136,7 +136,7 @@
 				alert("message too long");
 			}
 			else {
-				alert(fuid+" "+plid);
+				//alert(fuid+" "+plid);
 				$.ajax({
 					url:'../postChatMessage.php',
 					type:'post',
