@@ -373,7 +373,8 @@
 					}
 					cc.scrollTop(cc[0].scrollHeight);
 
-					curTalkLastTime = jsonObj[jsonObj.length - 1].dateline;
+					if(jsonObj.length > 0)
+						curTalkLastTime = jsonObj[jsonObj.length - 1].dateline;
 					if(getCurMesFlag == 1 && getCurChatMesLock[''+curFriendId] != 1) {
 						getCurChatMes();
 					}

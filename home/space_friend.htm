@@ -15,6 +15,7 @@
 			totalPage = Math.floor((totalPage-1) / perPage) + 1;
 		}
 		else totalPage = 1;
+		
 		jq("#totalPage").text("/ "+totalPage);
 		if(totalPage <= 6) {
 			for(var i = 1; i <= totalPage; i++) {
