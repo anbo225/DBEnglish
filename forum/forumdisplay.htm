@@ -22,7 +22,6 @@
 	}*/
 
 	jq("input[type='checkbox']").click(function(e){  
-		alert("hello");
 	    e.stopPropagation();  
 	    window.event.cancelBubble = true; 
 	}); 
@@ -36,7 +35,7 @@
 	}
 
 	jq(document).ready(function() {
-			var page = Number(GetQueryString("page"));
+			page = {$page};
 			var show = GetQueryString("filter");
 			var fid = GetQueryString("fid");
 
@@ -51,85 +50,87 @@
 			//show choose
 			if(show == null || show == "") show = "all";
 			jq("#"+show).css("background-color", "rgba(70, 93, 76, 1.0)");
-			jq("#all").attr("onclick", "window.location.href='http://localhost/upload/forum.php?mod=forumdisplay&fid=" + fid + "'");
-			jq("#heat").attr("onclick", "window.location.href='http://localhost/upload/forum.php?mod=forumdisplay&fid=" + fid + "&filter=heat&digest=heats'");
-			jq("#digest").attr("onclick", "window.location.href='http://localhost/upload/forum.php?mod=forumdisplay&fid=" + fid + "&filter=digest&digest=1'");
+			jq("#all").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "'");
+			jq("#heat").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "&filter=heat&digest=heats'");
+			jq("#digest").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "&filter=digest&digest=1'");
 			//jq("#"+show).attr("onclick", "");
 
+			jumpHref = 'forum.php?mod=forumdisplay&fid='+fid+'&filter='+show;
+			if (show=="digest")
+				jumpHref += "&digest=1";
 			//page choose
 			//totalPage = Math.ceil($count / 20);
-			totalPage=20;
+			totalPage= {$maxpage} ;
 			//totalPage = 10;
 			jq("#totalPage").text("/ "+totalPage);
-			if(page == NaN || page > totalPage || page < 1) page = 1;
-			if(totalPage <= 6) {
-				for(var i = 1; i <= totalPage; i++) {
-					jq("#page"+i).text(i);
-					jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
-					if(i == page) {
-						jq("#page"+i).addClass("choose");
-					}
-				}
-				for(var i = totalPage + 1; i <= 6; i++) {
-					jq("#page"+i).hide();
+		if(totalPage <= 6) {
+			for(var i = 1; i <= totalPage; i++) {
+				jq("#page"+i).text(i);
+				jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+i+"'");
+				if(i == page) {
+					jq("#page"+i).addClass("choose");
 				}
 			}
+			for(var i = totalPage + 1; i <= 6; i++) {
+				jq("#page"+i).hide();
+			}
+		}
+		else {
+			if(page < 4) {
+				for(var i = 1; i < 6; i++) {
+					jq("#page"+i).text(i);
+					jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+i+"'");
+					if(i == page) {
+						jq("#page"+i).addClass("choose");
+						jq("#page"+i).attr("onclick", "");
+					}
+				}
+				jq("#page6").text("..."+totalPage);
+				jq("#page6").attr("onclick", "window.location.href='"+jumpHref+"&page="+totalPage+"'");
+			}
 			else {
-				if(page < 4) {
-					for(var i = 1; i < 6; i++) {
-						jq("#page"+i).text(i);
-						jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
-						if(i == page) {
+				jq("#page1").text("1...");
+				jq("#page1").attr("onclick", "window.location.href='"+jumpHref+"&page=1'");
+				if(page < totalPage - 3) {
+					for(var i = 2; i < 6; i++) {
+						jq("#page"+i).text(i + page - 3);
+						jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+(i+page-3)+"'");
+						if(i == 3) {
 							jq("#page"+i).addClass("choose");
 							jq("#page"+i).attr("onclick", "");
 						}
 					}
 					jq("#page6").text("..."+totalPage);
-					jq("#page6").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+					jq("#page6").attr("onclick", "window.location.href='"+jumpHref+"&page="+totalPage+"'");
 				}
 				else {
-					jq("#page1").text("1...");
-					jq("#page1").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page=1'");
-					if(page < totalPage - 3) {
-						for(var i = 2; i < 6; i++) {
-							jq("#page"+i).text(i + page - 3);
-							jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+(i + page - 3)+"'");
-							if(i == 3) {
-								jq("#page"+i).addClass("choose");
-								jq("#page"+i).attr("onclick", "");
-							}
-						}
-						jq("#page6").text("..."+totalPage);
-						jq("#page6").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+totalPage+"'");
-					}
-					else {
-						for(var i = 2; i <= 6; i++) {
-							jq("#page"+i).text(i + totalPage - 6);
-							jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+(i + totalPage - 6) +"'");
-							if(i + totalPage - 6 == page) {
-								jq("#page"+i).addClass("choose");
-								jq("#page"+i).attr("onclick", "");
-							}
+					for(var i = 2; i <= 6; i++) {
+						jq("#page"+i).text(i + totalPage - 6);
+						jq("#page"+i).attr("onclick", "window.location.href='"+jumpHref+"&page="+(i+totalPage-6)+"'");
+						if(i + totalPage - 6 == page) {
+							jq("#page"+i).addClass("choose");
+							jq("#page"+i).attr("onclick", "");
 						}
 					}
 				}
 			}
+		}
 		});
 
 		function pagePrev() {
 			if(page > 1) {
-				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(page - 1);
+				window.location.href=jumpHref+'&page='+(page-1);
 			}
 		}
 		function pageNext() {
 			if(page < totalPage) {
-				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(page + 1);
+				window.location.href=jumpHref+'&page='+(page+1);
 			}
 		}
 		function pageJump() {
 			var jump = Number(jq("#searchPage").val());
 			if(jump > 0 && jump <= totalPage) {
-				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(jump);
+				window.location.href=jumpHref+'&page='+(jump);
 			}
 			else {
 				alert("Invalid page");
@@ -284,73 +285,10 @@
 						<div class="page" style="margin-left: 15px" onclick="pageNext()">Next</div>
 					</div>
 				</div>
-				<form method="post" autocomplete="off" id="fastpostform" action="forum.php?mod=post&action=newthread&fid=$_G[fid]&topicsubmit=yes&infloat=yes&handlekey=fastnewpost" onSubmit="return fastpostvalidate(this)">
-					<div id="fastpostreturn" style="margin:-5px 0 5px"></div>
-					<div class="postModule" id="postModule">
-						<div class="titleLine">
-							<div class="titleText">Title</div>
-							<input type="text" id="subject" name="subject" class="titleInput" value="" onkeyup="strLenCalc(this, 'checklen', 80);" tabindex="11"  placeholder="title"/>
-							<span style="margin-left:20px"> <strong id="checklen"> 80</strong> characters left.</span>
-							<div class="attachmentText">Attachment</div>
-							<img src="./template/EnglishDB/common/img/clip.png" class="attachment" onclick="alert('ha')" />
 
-						</div>
-						<div id="fastposteditor">
-							<div class="bar">
-								<!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'img', 'quote'), !$allowfastpost ? 1 : 0, $allowpostattach && $_GET['from'] != 'preview' && $allowfastpost ? '<span class="pipe z">|</span><span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
-								<!--{hook/viewthread_fastpost_ctrl_extra}-->
-								<!--{subtemplate common/seditor}-->
-							</div>
-							<!--{if $allowfastpost}-->
-								<textarea placeholder="Write your content here" name="message" id="fastpostmessage" onkeydown="seditor_ctlent(event, '$(\'fastpostsubmit\').click()');"></textarea>
-							<!--{else}-->
-								<div class="pt hm">
-									<!--{if !$_G['uid']}-->
-										<!--{if !$_G['connectguest']}-->
-											{lang login_to_post} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" class="xi2">{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">$_G['setting']['reglinkname']</a>
-										<!--{else}-->
-											{lang connect_fill_profile_to_post}
-										<!--{/if}-->
-									<!--{else}-->
-										{lang no_permission_to_post}<a href="javascript:;" onclick="$('newspecial').onclick()" class="xi2">{lang click_to_show_reason}</a>
-									<!--{/if}-->
-									<!--{hook/global_login_text}-->
-								</div>
-							<!--{/if}-->
-						</div>
-						<div id="seccheck_fastpost" style="margin-top:10px">
-							<!--{if $fastpost && ($secqaacheck || $seccodecheck)}-->
-							{eval
-								$sechash = !isset($sechash) ? 'S'.($_G['inajax'] ? 'A' : '').$_G['sid'] : $sechash.random(3);
-								$rand = random(5, 1);
-								$sectpl = str_replace("'", "\'", $sectpl);
-							}
-							<span id="seccode_c$sechash">
-								<input name="seccodehash" type="hidden" value="c$sechash">
-								<input name="seccodemodid" type="hidden" value="forum:forumdisplay">
-								
-									<div class="inputLine">
-										<span class="text" style="font-size: 16px;">Verify Code</span>
-										<input class="infoInput" name="seccodeverify" id="seccodeverify_c$sechash" type="text" autocomplete="off"  onblur="checksec('code', 'c$sechash', 0, null, 'forum:forumdisplay')">
-										<!--a href="javascript:;" style="margin-left:5px" onclick="updateseccode('c$sechash');doane(event);" class="xi2"> Change</a>
-										<span id="checkseccodeverify_c$sechash">
-											<img src="static/image/common/none.gif" width="16" height="16" class="vm">
-											<img onclick="updateseccode('c$sechash')" width="100" height="30" src="misc.php?mod=seccode&amp;update=".$rand."&amp;idhash=c$sechash" class="vm" alt="">
-										</span-->
-										<span class="verifyBlock"><span id="vseccode_c$sechash"></span></span>
-										<span style="color:blue; margin-left:10px; margin-right:10px;" onclick="updateseccode('c$sechash');doane(event);">Change</span>
-									</div>
-									<script type="text/javascript" reload="1">updateseccode('c$sechash', '$sectpl', '{$_G[basescript]}::{CURMODULE}');</script>
-								
-							</span>
-					
-								
-							<!--{/if}-->
-						<button type = "submit" class="postButton" name="topicsubmit" id="fastpostsubmit" value="topicsubmit" >Post</button>
-						<input type="hidden" name="formhash" value="{FORMHASH}" />
-						<input type="hidden" name="usesig" value="$usesigcheck" />
-					</div>
-				</form>
+
+			<!--{template forum/forumdisplay_fastpost}-->
+
 				<div class="bottomInfo">
 					<p>广告业务|合作交流|联系我们|技术支持</p>
 					<p>Copyright©️ 2016-2017 DBEnglish版权所有</p>
