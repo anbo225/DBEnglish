@@ -1,72 +1,137 @@
 <!--{template common/header}-->
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_module.css" ／>
+<script>
+	function GetQueryString(name) {
+		var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		var r = window.location.search.substr(1).match(reg);
+		if(r!=null)return  unescape(r[2]); return null;
+	}
+
+	function getTime(timeStamp){
+		var date = new Date(timeStamp * 1000); 
+		var year = date.getFullYear();//获取完整的年份(4位,1970)
+		var month = date.getMonth() + 1;//获取月份(0-11,0代表1月,用的时候记得加上1)
+		var date = date.getDate();//获取日(1-31)
+		return year + "-" + month + "-" + date;
+	}
+
+	$(document).ready(function(){
+		page = {$page};
+		$("#curPage").append(page);
+		var show = GetQueryString("filter");
+		var fid = GetQueryString("fid");
+
+		totalPage= {$maxpage};
+		$("#totalPage").append(totalPage);
+
+		jumpHref = 'forum.php?mod=forumdisplay&mobile=2&fid='+fid+'&filter=' + show;
+		if (show == "digest")
+			jumpHref += "&digest=1";
+		//module choose
+		var module="$_G['forum'][name]";
+		if(module == null || module == "") module = "newest";
+		$("#moduleTitle").attr("src", "./template/EnglishDB/common/img/"+module+".png");
+
+		//show choose
+		if(show == null || show == "") show = "all";
+		$("#"+show).addClass("choose");
+		$("#all").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "'");
+		$("#heat").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "&filter=heat&digest=heats'");
+		$("#digest").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "&filter=digest&digest=1'");
+		//jq("#"+show).attr("onclick", "");
+	});
+
+	function pagePrev() {
+		if(page > 1) {
+			window.location.href=jumpHref+'&page='+(page-1);
+		}
+	}
+	function pageNext() {
+		if(page < totalPage) {
+			window.location.href=jumpHref+'&page='+(page+1);
+		}
+	}
+	function pageFirst(){
+		window.location.href=jumpHref+'&page=1';
+	}
+	function pageLast(){
+		window.location.href=jumpHref+'&page='+totalPage;
+	}
+</script>
+
 <!-- header start -->
 <header class="header">
-    <div class="nav">
-		<div class="icon_edit y"><a href="forum.php?mod=post&action=newthread&fid=$_G[fid]" title="{lang send_threads}"><span class="none">{lang send_threads}</span></a></div>
-        <a href="forum.php?forumlist=1" class="z"><img src="{STATICURL}image/mobile/images/icon_back.png" /></a>
-		<span class="category">
-			<!--{if $subexists && $_G['page'] == 1}-->
-			<span class="display name vm" href="#subname_list">
-				<h2 class="tit"><!--{eval echo strip_tags($_G['forum']['name']) ? strip_tags($_G['forum']['name']) : $_G['forum']['name'];}--></h2>
-				<img src="{STATICURL}image/mobile/images/icon_arrow_down.png">
-			</span>
-			<div id="subname_list" class="subname_list" display="true" style="display:none;">
-				<ul>
-				<!--{loop $sublist $sub}-->
-				<li>
-					<a href="forum.php?mod=forumdisplay&fid={$sub[fid]}">{$sub['name']}</a>
-				</li>
-				<!--{/loop}-->
-				</ul>
-			</div>
-			<!--{else}-->
-			<span class="name">
-				<!--{eval echo strip_tags($_G['forum']['name']) ? strip_tags($_G['forum']['name']) : $_G['forum']['name'];}-->
-			</span>
-			<!--{/if}-->
-		</span>
-    </div>
 </header>
 <!-- header end -->
-
+<div class="moduleTop">
+		<img src="" class="titlePic" id="moduleTitle"/>
+		<div class="moduleDetail">
+			<div>Rank:</div><div class="redText">&nbsp&nbsp$_G[forum][rank]&nbsp&nbsp</div>
+			<div>Posts:</div><div class="redText">&nbsp&nbsp$_G[forum][threads]&nbsp&nbsp</div>
+			<div>Today:</div><div class="redText">&nbsp&nbsp$_G[forum][todayposts]&nbsp&nbsp</div>
+		</div>
+		<div class="showType">
+			<div class="showItem" id = "all">All</div>
+			<div class="showItem" id = "heat">Hot</div>
+			<div class="showItem" id = "digest">Digest</div>
+		</div>
+	</div>
+<div class="horizenHr"></div>
 <!--{hook/forumdisplay_top_mobile}-->
 <!-- main threadlist start -->
 <!--{if !$subforumonly}-->
-<div class="threadlist">
-			<ul>
+<div class="moduleContent">
 			<!--{if $_G['forum_threadcount']}-->
+			{eval $ix = 0;}
 				<!--{loop $_G['forum_threadlist'] $key $thread}-->
-					<!--{if !$_G['setting']['mobile']['mobiledisplayorder3'] && $thread['displayorder'] > 0}-->
-						{eval continue;}
-					<!--{/if}-->
-                	<!--{if $thread['displayorder'] > 0 && !$displayorder_thread}-->
-                		{eval $displayorder_thread = 1;}
-                    <!--{/if}-->
+					
 					<!--{if $thread['moved']}-->
 						<!--{eval $thread[tid]=$thread[closed];}-->
 					<!--{/if}-->
-					<li>
+							<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
+								<!--{if ($ix % 2) == 0}-->
+									<div class="topArticle" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra');">
+								<!--{else}-->
+									<div class="topArticle grey" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra');">
+								<!--{/if}-->
+								<div class="titleLine">
+									<div class="topPic">TOP</div>
+									<div class="topTitle">{$thread[subject]}</div>
+								</div>
+							<!--{else}-->
+								<!--{if ($ix % 2) == 0}-->
+									<div class="article" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra');">
+								<!--{else}-->
+									<div class="article grey" onclick="window.open('forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra');">
+								<!--{/if}-->
+								<div class="titleLine">
+									<div class="aTitle">{$thread[subject]}</div>
+								</div>
+							<!--{/if}-->
+						<div class="articleInfo">
+							<div class="info">$thread[author]</div>
+							<div class="info" id ="post$thread[tid]"></div>
+							<script>
+								$("#post$thread[tid]").append(getTime($thread[dateline]));
+							</script>
+						</div>
+					</div>
 					<!--{hook/forumdisplay_thread_mobile $key}-->
-                    <a href="forum.php?mod=viewthread&tid=$thread[tid]&extra=$extra" $thread[highlight] >
-					{$thread[subject]}
-					<span class="by">$thread[author]</span>
-					</a>
-					<span class="num">{$thread[replies]}</span>
-					<!--{if in_array($thread['displayorder'], array(1, 2, 3, 4))}-->
-						<span class="icon_top"><img src="{STATICURL}image/mobile/images/icon_top.png"></span>
-					<!--{elseif $thread['digest'] > 0}-->
-						<span class="icon_top"><img src="{STATICURL}image/mobile/images/icon_digest.png"></span>
-					<!--{elseif $thread['attachment'] == 2 && $_G['setting']['mobile']['mobilesimpletype'] == 0}-->
-						<span class="icon_tu"><img src="{STATICURL}image/mobile/images/icon_tu.png"></span>
-					<!--{/if}-->
-					</li>
+					{eval $ix++;}
                 <!--{/loop}-->
             <!--{else}-->
-			<li>{lang forum_nothreads}</li>
+            <ul>
+				<li>{lang forum_nothreads}</li>
+			</ul>
 			<!--{/if}-->
-		</ul>
+	<div class="pageModule">
+		<div class="pageButton" onclick="pageFirst();"><< First</div>
+		<div class="pageButton" style="margin-left: 7px;" onclick="pagePrev();"><</div>
+		<div class="pageShow"><span id="curPage"></span>/<span id="totalPage"></span></div>
+		<div class="pageButton" onclick="pageNext();">></div>
+		<div class="pageButton" style="margin-left: 7px;" onclick="pageLast();">Last >></div>
+	</div>
 </div>
-$multipage
 <!--{/if}-->
 <!-- main threadlist end -->
 <!--{hook/forumdisplay_bottom_mobile}-->
