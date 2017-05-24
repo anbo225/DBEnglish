@@ -1,6 +1,52 @@
 <!--{eval $threadsort = $threadsorts = null;}-->
 <!--{template common/header}-->
 <!-- header start -->
+
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_postItem.css" ／>
+
+<script  type="text/javascript">
+	function GetQueryString(name) {
+   		 var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+    	 var r = window.location.search.substr(1).match(reg);
+    	 if (r != null){
+    	 	return unescape(r[2]);
+    	 }
+    	return null;
+	}
+	$(document).ready(function() {
+		page = {$page};
+		totalPage = {$totalpage};
+		mobile = GetQueryString("mobile");
+
+		//load page module
+		jumpHref = 'forum.php?mod=viewthread&tid={$_G['tid']}';
+		if(mobile != null && mobile != "") jumpHref += "&mobile=" + mobile;
+	
+		$("#pageShow").text(page + "/ "+totalPage);
+	});
+
+	function pagePrev() {
+		if(page > 1) {
+			window.location.href=jumpHref+'&page='+(page-1);
+		}
+	}
+	function pageNext() {
+		if(page < totalPage) {
+			window.location.href=jumpHref+'&page='+(page+1);
+		}
+	}
+	function pageJump() {
+		var jump = Number($("#searchPage").val());
+		if(jump > 0 && jump <= totalPage) {
+			window.location.href=jumpHref+'&page='+(jump);
+		}
+		else {
+			alert("Invalid page");
+		}
+	}
+	
+</script>
+
 <header class="header">
 
 	<div class="nav">
@@ -199,8 +245,17 @@
 </div>
 <!-- main postlist end -->
 
-$multipage
-
+<div style="text-align: center;">
+	<div style="padding: 0px 15px; display:inline-block">
+			<div class="pageModule">
+				<div class="pageButton" onclick="pagePrev()">Previous</div>
+				<div class="pageButton" style="margin-left: 7px;"><</div>
+				<div class="pageShow" id="pageShow"></div>
+				<div class="pageButton">></div>
+				<div class="pageButton" style="margin-left: 7px;" onclick="pageNext()">Next</div>
+			</div>
+	</div>
+</div>
 <!--{hook/viewthread_bottom_mobile}-->
 
 <script type="text/javascript">
@@ -222,6 +277,11 @@ $multipage
 		});
 		return false;
 	});
+</script>
+
+
+
+	
 </script>
 
 <a href="javascript:;" title="{lang scrolltop}" class="scrolltop bottom"></a>
