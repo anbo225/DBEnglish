@@ -24,9 +24,6 @@
 		totalPage= {$maxpage};
 		$("#totalPage").append(totalPage);
 
-		jumpHref = 'forum.php?mod=forumdisplay&mobile=2&fid='+fid+'&filter=' + show;
-		if (show == "digest")
-			jumpHref += "&digest=1";
 		//module choose
 		var module="$_G['forum'][name]";
 		if(module == null || module == "") module = "newest";
@@ -38,6 +35,10 @@
 		$("#all").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "'");
 		$("#heat").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "&filter=heat&digest=heats'");
 		$("#digest").attr("onclick", "window.location.href='forum.php?mod=forumdisplay&fid=" + fid + "&filter=digest&digest=1'");
+
+		jumpHref = 'forum.php?mod=forumdisplay&mobile=2&fid='+fid+'&filter=' + show;
+		if (show == "digest")
+			jumpHref += "&digest=1";
 		//jq("#"+show).attr("onclick", "");
 	});
 

@@ -1,0 +1,79 @@
+<!--{template common/header}-->
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_module.css" ／>
+<!-- header start -->
+<header class="header">
+    
+</header>
+<script>
+	function getTime(timeStamp){
+		var date = new Date(timeStamp * 1000); 
+		var year = date.getFullYear();//获取完整的年份(4位,1970)
+		var month = date.getMonth() + 1;//获取月份(0-11,0代表1月,用的时候记得加上1)
+		var date = date.getDate();//获取日(1-31)
+		return year + "-" + month + "-" + date;
+	}
+
+	$(document).ready(function(){
+		page = {$page};
+		$("#curPage").append(page);
+
+		totalPage = Math.ceil($count / 20);
+		$("#totalPage").append(totalPage);
+		jumpHref = 'home.php?mod=space&do=favorite&view=me';
+	});
+
+	function pagePrev() {
+		if(page > 1) {
+			window.location.href=jumpHref+'&page='+(page-1);
+		}
+	}
+	function pageNext() {
+		if(page < totalPage) {
+			window.location.href=jumpHref+'&page='+(page+1);
+		}
+	}
+	function pageFirst(){
+		window.location.href=jumpHref+'&page=1';
+	}
+	function pageLast(){
+		window.location.href=jumpHref+'&page='+totalPage;
+	}
+</script>
+<!-- main collectlist start -->
+<div class="moduleContent">
+		<!--{if $list}-->
+			{eval $ix = 0;}
+			<!--{loop $list $k $value}-->
+			<!--{if ($ix % 2) == 0}-->
+			<div class="article" onclick="window.location.href='$value[url]';">
+			<!--{else}-->
+			<div class="article grey" onclick="window.location.href='$value[url]';">
+			<!--{/if}-->
+				<div class="titleLine">
+					<div class="aTitle">$value[title]</div>
+				</div>
+				<div class="articleInfo">
+					<div class="info" id ="time$ix"></div>
+					<script>
+						var timeString = getTime($value[dateline]);
+						$("#time$ix").append(timeString);
+					</script>
+				</div>
+			</div>
+			{eval $ix++;}
+			<!--{/loop}-->
+		<!--{else}-->
+		<li>{lang no_favorite_yet}</li>
+		<!--{/if}-->
+		<div class="pageModule">
+			<div class="pageButton" onclick="pageFirst();"><< First</div>
+			<div class="pageButton" style="margin-left: 7px;" onclick="pagePrev();"><</div>
+			<div class="pageShow"><span id="curPage"></span>/<span id="totalPage"></span></div>
+			<div class="pageButton" onclick="pageNext();">></div>
+			<div class="pageButton" style="margin-left: 7px;" onclick="pageLast();">Last >></div>
+		</div>
+</div>
+<!-- main collectlist end -->
+$multi
+<!--{eval $nofooter = true;}-->
+<!--{template common/footer}-->

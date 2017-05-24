@@ -34,12 +34,13 @@
 
 			//page choose
 			totalPage = Math.ceil($count / 20);
+			//totalPage = 20;
 			jq("#totalPage").text("/ "+totalPage);
 			if(page == NaN || page > totalPage || page < 1) page = 1;
 			if(totalPage <= 6) {
 				for(var i = 1; i <= totalPage; i++) {
 					jq("#page"+i).text(i);
-					jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+					jq("#page"+i).attr("onclick", "window.location.href='home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
 					if(i == page) {
 						jq("#page"+i).addClass("choose");
 					}
@@ -52,34 +53,34 @@
 				if(page < 4) {
 					for(var i = 1; i < 6; i++) {
 						jq("#page"+i).text(i);
-						jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+						jq("#page"+i).attr("onclick", "window.location.href='home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
 						if(i == page) {
 							jq("#page"+i).addClass("choose");
 							jq("#page"+i).attr("onclick", "");
 						}
 					}
 					jq("#page6").text("..."+totalPage);
-					jq("#page6").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
+					jq("#page6").attr("onclick", "window.location.href='home.php?mod=space&do=favorite&view=me"+"&page="+i+"'");
 				}
 				else {
 					jq("#page1").text("1...");
-					jq("#page1").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page=1'");
+					jq("#page1").attr("onclick", "window.location.href='home.php?mod=space&do=favorite&view=me"+"&page=1'");
 					if(page < totalPage - 3) {
 						for(var i = 2; i < 6; i++) {
 							jq("#page"+i).text(i + page - 3);
-							jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+(i + page - 3)+"'");
+							jq("#page"+i).attr("onclick", "window.location.href='home.php?mod=space&do=favorite&view=me"+"&page="+(i + page - 3)+"'");
 							if(i == 3) {
 								jq("#page"+i).addClass("choose");
 								jq("#page"+i).attr("onclick", "");
 							}
 						}
 						jq("#page6").text("..."+totalPage);
-						jq("#page6").attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+totalPage+"'");
+						jq("#page6").attr("onclick", "window.location.href='home.php?mod=space&do=favorite&view=me"+"&page="+totalPage+"'");
 					}
 					else {
 						for(var i = 2; i <= 6; i++) {
 							jq("#page"+i).text(i + totalPage - 6);
-							jq("#page"+i).attr("onclick", "window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me"+"&page="+(i + totalPage - 6) +"'");
+							jq("#page"+i).attr("onclick", "window.location.href='home.php?mod=space&do=favorite&view=me"+"&page="+(i + totalPage - 6) +"'");
 							if(i + totalPage - 6 == page) {
 								jq("#page"+i).addClass("choose");
 								jq("#page"+i).attr("onclick", "");
@@ -92,18 +93,18 @@
 
 		function pagePrev() {
 			if(page > 1) {
-				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(page - 1);
+				window.location.href='home.php?mod=space&do=favorite&view=me&page='+(page - 1);
 			}
 		}
 		function pageNext() {
 			if(page < totalPage) {
-				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(page + 1);
+				window.location.href='home.php?mod=space&do=favorite&view=me&page='+(page + 1);
 			}
 		}
 		function pageJump() {
 			var jump = Number(jq("#searchPage").val());
 			if(jump > 0 && jump <= totalPage) {
-				window.location.href='http://localhost/upload/home.php?mod=space&do=favorite&view=me&page='+(jump);
+				window.location.href='home.php?mod=space&do=favorite&view=me&page='+(jump);
 			}
 			else {
 				alert("Invalid page");

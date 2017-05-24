@@ -22,7 +22,7 @@ var fid = parseInt('$_G[fid]');
 					<div id="fastposteditor">
 						<div>
 							<div class="bar">
-								<!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'img', 'link', 'quote', 'code', 'smilies'), !$allowfastpost ? 1 : 0, $allowpostattach && $allowfastpost ? '<span class="pipe z">|</span><span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
+								<!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'img', 'link', 'quote'), !$allowfastpost ? 1 : 0, $allowpostattach && $allowfastpost ? '<span class="pipe z">|</span><span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
 								<!--{hook/forumdisplay_fastpost_ctrl_extra}-->
 								<!--{subtemplate common/seditor}-->
 							</div>
