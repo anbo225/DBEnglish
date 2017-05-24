@@ -33,8 +33,7 @@
 			page = Number(GetQueryString("page"));
 
 			//page choose
-			//totalPage = Math.ceil($count / 20);
-			totalPage = 10;
+			totalPage = Math.ceil($count / 20);
 			jq("#totalPage").text("/ "+totalPage);
 			if(page == NaN || page > totalPage || page < 1) page = 1;
 			if(totalPage <= 6) {
@@ -145,8 +144,7 @@
 						
 					<div class="articleList">
 						<div class="titleLine">
-								<div class="mytitle">Title</div>
-								<div class="other">Type</div>
+								<div class="mytitle" style="width:calc(100% - 240px); margin-left:30px"><span style="margin-left:180px">Title</span></div>
 								<div class="other">Time</div>
 								<div class="other">Operation</div>
 						</div>
@@ -162,26 +160,25 @@
 								<li id="fav_$k" class="article">
 									<div class="point"><div class="dot"></div></div>
 									
-									<div class="mytitle" onclick = "window.location.href='$value[url]'" target="_blank">$value[title] </div>
-									<div class="other" style="color:#717171"><div class='date'>type</div></div>
+									<div class="mytitle" onclick = "window.location.href='$value[url]'" target="_blank"  style="width:calc(100% - 240px)">$value[title] </div>
 									<div class="other"  style="color:#717171" id = "time$ix"></div>
 									<script>
 										var timeString = getTime($value[dateline]);
 										jq("#time$ix").append(timeString);
 									</script>
-									<div class = "other" ><a  style="color:#717171" id="a_delete_$k" href="home.php?mod=spacecp&ac=favorite&op=delete&favid=$k" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a></div>
+									<div class = "other" ><a  style="color:#717171" id="a_delete_$k" href="home.php?mod=spacecp&ac=favorite&op=delete&favid=$k" onclick="showWindow(this.id, this.href, 'get', 0);">Delete</a></div>
 								</li>
 								<!--{else}-->
 								<li id="fav_$k" class="article grey">
 									<div class="point"><div class="dot"></div></div>
 									
-									<div class="mytitle" onclick="window.location.href='$value[url]'" target="_blank">$value[title] </div>
-									<div class="other"  style="color:#717171" id = "time$ix"></div>
+									<div class="mytitle" onclick="window.location.href='$value[url]'" target="_blank" style="width:calc(100% - 240px)" >$value[title] </div>
+									<div class="other"  style="color:#717171" id = "time$ix" ></div>
 									<script>
 										var timeString = getTime($value[dateline]);
 										jq("#time$ix").append(timeString);
 									</script>
-									<div class = "other" ><a  style="color:#717171" id="a_delete_$k" href="home.php?mod=spacecp&ac=favorite&op=delete&favid=$k" onclick="showWindow(this.id, this.href, 'get', 0);">{lang delete}</a></div>
+									<div class = "other" ><a  style="color:#717171" id="a_delete_$k" href="home.php?mod=spacecp&ac=favorite&op=delete&favid=$k" onclick="showWindow(this.id, this.href, 'get', 0);">Delete</a></div>
 								</li>
 								<!--{/if}-->
 								{eval $ix++;}
