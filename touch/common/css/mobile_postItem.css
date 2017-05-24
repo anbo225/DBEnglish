@@ -1,6 +1,12 @@
 
 .btn_pn_blue { background:#465d4c url(./images/btn_s_bg.png) no-repeat 0 -31px; color:#FFF; }
 
+.button { width:67px; height:39px; color:#FFF; background:#465d4c url(./images/button_bg.png) no-repeat; margin:2px 2px 2px 2px; border:0; font-size:12px; }
+
+
+a.blue {
+	color: Red;
+}
 .postItemTop {
 	padding: 10px 15px;
 	height: 20px;

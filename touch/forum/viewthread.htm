@@ -76,9 +76,9 @@
             <!--{elseif $_G['forum_thread'][displayorder] == -4}--> <span>({lang draft})</span>
             <!--{/if}-->
 			<!--{if !IS_ROBOT && !$_GET['authorid'] && !$_G['forum_thread']['archiveid']}-->
-				<a href="forum.php?mod=viewthread&tid=$_G[tid]&page=$page&authorid=$_G[forum_thread][authorid]" rel="nofollow" class="blue" style="font-size:12px;font-weight:normal;margin-left:10px;">{lang viewonlyauthorid}</a>
+				<a href="forum.php?mod=viewthread&tid=$_G[tid]&page=$page&authorid=$_G[forum_thread][authorid]" rel="nofollow" class="orange" style="font-size:12px;font-weight:normal;margin-left:10px;">{lang viewonlyauthorid}</a>
 			<!--{elseif !$_G['forum_thread']['archiveid']}-->
-				<a href="forum.php?mod=viewthread&tid=$_G[tid]&page=$page" rel="nofollow" class="blue" style="font-size:12px;font-weight:normal;margin-left:10px;">{lang thread_show_all}</a>
+				<a href="forum.php?mod=viewthread&tid=$_G[tid]&page=$page" rel="nofollow" class="orange" style="font-size:12px;font-weight:normal;margin-left:10px;">{lang thread_show_all}</a>
 			<!--{/if}-->
 	</h2>
 
@@ -97,11 +97,11 @@
 						<!--{elseif $post[number] == -1}-->
 							{lang recommend_post}
 						<!--{else}-->
-							<!--{if !empty($postno[$post[number]])}-->$postno[$post[number]]<!--{else}-->{$post[number]}{$postno[0]}<!--{/if}-->
+						{$post[number]} floor
 						<!--{/if}-->
 					</em><b>
 					<!--{if $post['authorid'] && $post['username'] && !$post['anonymous']}-->
-						<a href="home.php?mod=space&uid=$post[authorid]" class="blue">$post[author]</a></b>
+						<a href="home.php?mod=space&uid=$post[authorid]"  style="font-size: 16px">$post[author]</a></b>
 
 					<!--{else}-->
 						<!--{if !$post['authorid']}-->
@@ -117,7 +117,7 @@
 					<!--{if $_G['forum']['ismoderator']}-->
 					<!-- manage start -->
 					<!--{if $post[first]}-->
-						<em><a href="#moption_$post[pid]" class="popup blue">{lang manage}</a></em>
+						<em><a href="#moption_$post[pid]" class="popup orange">{lang manage}</a></em>
 						<div id="moption_$post[pid]" popup="true" class="manage" style="display:none;">
 							<!--{if !$_G['forum_thread']['special']}-->
 							<input type="button" value="{lang edit}" class="redirect button" href="forum.php?mod=post&action=edit&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]<!--{if $_G[forum_thread][sortid]}--><!--{if $post[first]}-->&sortid={$_G[forum_thread][sortid]}<!--{/if}--><!--{/if}-->{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}&page=$page">
@@ -128,7 +128,7 @@
 							<input type="button" value="{lang topicadmin_warn_add}" class="dialog button" href="forum.php?mod=topicadmin&action=warn&fid={$_G[fid]}&tid={$_G[tid]}&topiclist[]={$_G[forum_firstpid]}">
 						</div>
 					<!--{else}-->
-						<em><a href="#moption_$post[pid]" class="popup blue">{lang manage}</a></em>
+						<em><a href="#moption_$post[pid]" class="popup orange">{lang manage}</a></em>
 						<div id="moption_$post[pid]" popup="true" class="manage" style="display:none;">
 							<input type="button" value="{lang edit}" class="redirect button" href="forum.php?mod=post&action=edit&fid=$_G[fid]&tid=$_G[tid]&pid=$post[pid]{if !empty($_GET[modthreadkey])}&modthreadkey=$_GET[modthreadkey]{/if}&page=$page">
 							<!--{if $_G['group']['allowdelpost']}--><input type="button" value="{lang modmenu_deletepost}" class="dialog button" href="forum.php?mod=topicadmin&action=delpost&fid={$_G[fid]}&tid={$_G[tid]}&operation=&optgroup=&page=&topiclist[]={$post[pid]}"><!--{/if}-->
@@ -139,7 +139,7 @@
 					<!-- manage end -->
 					<!--{/if}-->
 					<!--{if $post[first]}-->
-					<em><a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]" class="favbtn blue" <!--{if $_G[forum][ismoderator]}-->style="margin-right:10px;"<!--{/if}-->>{lang favorite}</a></em>
+					<em><a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]" class="favbtn orange" <!--{if $_G[forum][ismoderator]}-->style="margin-right:10px;"<!--{/if}-->>{lang favorite}</a></em>
 					<!--{/if}-->
 					$post[dateline]
 				</li>
