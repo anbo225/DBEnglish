@@ -50,13 +50,13 @@
 	</div>
 	<!--{if $_G['uid']}-->
 	<div class="personalModuleLine">
-		<div class="pModule choose">
+		<div class="pModule choose" onclick="window.location.href='forum.php'">
 			<img src="./template/EnglishDB/common/img/mobile_home.png" />
 		</div>
 		<div class="pModule">
 			<img src="./template/EnglishDB/common/img/mobile_favorites.png" />
 		</div>
-		<div class="pModule">
+		<div class="pModule" onclick="window.location.href='./template/EnglishDB/touch/friend.php'">
 			<img src="./template/EnglishDB/common/img/mobile_friends.png" />
 		</div>
 		<div class="pInfo" tabindex="-1" id="pInfo">
@@ -66,7 +66,7 @@
 				<div class="horizenHr"></div>
 				<div class="pInfoOptionListItem" onclick="alert('set')">Setting</div>
 				<div class="horizenHr"></div>
-				<div class="pInfoOptionListItem" member.php?mod=logging&action=logout&formhash={FORMHASH}><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" title="{lang logout}" class="dialog">Logout</a></div>
+				<div class="pInfoOptionListItem"><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" title="{lang logout}" class="dialog">Logout</a></div>
 			</div>
 		</div>
 	</div>

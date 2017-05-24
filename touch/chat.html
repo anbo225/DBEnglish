@@ -1,0 +1,206 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<link rel="stylesheet" href="common/css/mobile_chat.css" ／>
+
+	<script src="../../../static/js/mobile/jquery-1.8.3.min.js?{VERHASH}"></script>
+</head>
+<body>
+	<script>
+		fuid = "";
+		plid = "";
+		curTalkLastTime = "0";
+
+		function GetQueryString(name) {
+		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		    var r = window.location.search.substr(1).match(reg);
+		    if(r!=null)return  unescape(r[2]); return null;
+		}
+
+		function myEscape(msg) {
+			msg = msg.replace(/&/g, '**211**');
+			msg = msg.replace(/=/g, '**221**');
+			msg = msg.replace(/\?/g, '**241**');
+			msg = msg.replace(/'/g, '**251**');
+			msg = msg.replace(/"/g, '**271**');
+			return msg;
+		}
+		function myUnescape(msg) {
+			msg = msg.replace(/\*\*211\*\*/g, '&');
+			msg = msg.replace(/\*\*221\*\*/g, '=');
+			msg = msg.replace(/\*\*241\*\*/g, '?');
+			msg = msg.replace(/\*\*251\*\*/g, '\'');
+			msg = msg.replace(/\*\*271\*\*/g, '"');
+			return msg;
+		}
+
+		sto1 = "";
+		getCurChatMesLock = 0;
+		function getCurChatMes() {
+			if(getCurChatMesLock == 1 || fuid == "" || plid == "") return;
+			alert("fuid "+fuid+" plid "+plid);
+			getCurChatMesLock = 1;
+			$.ajax({
+				url:'../fetchChatDetailMore.php',
+				type:'post',
+				data:'fuid='+fuid+'&plid='+plid+'&dateline='+curTalkLastTime,
+				error: function() {
+					getCurChatMesLock = 0;
+					alert("er");
+				},
+				success: function(data) {
+					var jsonObj = JSON.parse(data);
+					//alert("unlock "+jsonObj[0].authorid+" 0");
+					getCurChatMesLock = 0;
+					if(jsonObj.length > 0) {
+						var cc = $("#chatContent");
+						for(var i = 0; i < jsonObj.length - 1; i++) {
+							cc.append('<div class="chatMessage"><div class="friendPic">'+
+							'<img src="../../../uc_server/avatar.php?uid='+jsonObj[i].authorid+
+							'&size=middle" /></div><div class="leftTri"></div><div class="'+
+							'mesContent">'+myUnescape(jsonObj[i].message)+'</div></div>');
+						}
+						if(jsonObj.length > 1) {
+							cc.scrollTop(cc[0].scrollHeight);
+							curTalkLastTime = jsonObj[jsonObj.length - 2].dateline;
+						}
+						clearTimeout(sto1);
+						getCurChatMes();
+					}
+				}
+			});
+			sto1 = setTimeout("getCurChatMes()", 30000);
+		}
+
+		function getChatDetail(isNew) {
+			if(fuid == "" || plid == "") return;
+			if(isNew != null && isNew == '1') {
+				$.ajax({
+					url:'../updateIsNewMes.php',
+					type:'post',
+					data:'fuid='+fuid+'&plid='+plid,
+					success: function(data) {
+					}
+				});
+			}
+
+			$.ajax({
+				url:'../fetchChatDetail.php',
+				type:'post',
+				data:'fuid='+fuid+'&plid='+plid,
+				error: function () {
+					alert("error");
+				},
+				success: function (data) {
+					//alert(data);
+					var jsonObj = JSON.parse(data);
+					var cc = $("#chatContent");
+					cc.empty();
+					for(var i = 0; i < jsonObj.length; i++) {
+						var tri = "rightTri";
+						var mymes = " myMes";
+						var grey = " grey";
+						if(jsonObj[i].authorid == fuid) {
+							tri = "leftTri";
+							mymes = "";
+							grey = "";
+						}
+						cc.append('<div class="chatMessage'+mymes+'"><div class="friendPic">'+
+							'<img src="../../../uc_server/avatar.php?uid='+jsonObj[i].authorid+
+							'&size=middle" /></div><div class="'+tri+'"></div><div class="'+
+							'mesContent'+grey+'">'+myUnescape(jsonObj[i].message)+'</div></div>');
+					}
+					cc.scrollTop(cc[0].scrollHeight);
+					if(jsonObj.length > 0)
+						curTalkLastTime = jsonObj[jsonObj.length - 1].dateline;
+					if(isNew != null && isNew == 'shouldGet') {
+						getCurChatMes();
+					}
+				}
+			});
+		}
+
+		function sendChatMsg() {
+			var ci = $("#chatInput");
+			var msg = ci.val();
+			//alert("msg: "+msg);
+			msg = myEscape(msg);
+			if(msg == null || msg.length == 0 || fuid == null || fuid == "") {
+				return;
+			}
+			else if(msg.length > 450) {
+				alert("message too long");
+			}
+			else {
+				alert(fuid+" "+plid);
+				$.ajax({
+					url:'../postChatMessage.php',
+					type:'post',
+					data:{'fuid':fuid,'plid':plid,'mymes':msg},
+					async:false,
+					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+					error: function () {
+						alert("message send error");
+					},
+					success: function (data) {
+						if(data.indexOf("success") > -1) {
+							var cc = $("#chatContent");
+							var realData = data.substring(8).split("**");
+							var authorid = realData[0];
+							var getplid = realData[1];
+							if(plid == null || plid == "") {
+								plid = getplid;
+								alert(plid);
+								getCurChatMes();
+							}
+							cc.append('<div class="chatMessage myMes"><div class="friendPic">'+
+							'<img src="../../../uc_server/avatar.php?uid='+authorid+
+							'&size=middle" /></div><div class="rightTri"></div><div class="'+
+							'mesContent grey">'+myUnescape(msg)+'</div></div>');
+							ci.val("");
+							cc.scrollTop(cc[0].scrollHeight);
+						}
+						else if(data.indexOf("exist") > -1) {
+							var getplid = data.substring(6);
+							if(plid == null || plid == "") {
+								plid = getplid;
+								getChatDetail("shouldGet");
+							}
+						}
+					}
+				});
+			}
+		}
+
+		$(document).ready(function() {
+			var chatName = GetQueryString("chatName");
+			fuid = GetQueryString("fuid");
+			plid = GetQueryString("plid");
+			if(fuid == null) fuid = "";
+			if(plid == null) plid = "";
+			var isNew = GetQueryString("isNew");
+			
+			$("#chatName").html(chatName);
+			getChatDetail(isNew);
+			getCurChatMes();
+		});
+	</script>
+	<div class="chatTitle">
+		<img class="back" src="../common/img/left.png" onclick="window.location.href='friend.php'" />
+		<div class="chatName" id="chatName"></div>
+	</div>
+	<div class="horizenHr"></div>
+	<div class="chatContent" id="chatContent">
+		
+	</div>
+	<div class="horizenHr"></div>
+	<div class="postLine">
+		<input type="text" placeholder="Write message" id="chatInput" />
+		<div class="postButton" onclick="sendChatMsg()">Send</div>
+	</div>
+</body>
+</html>
