@@ -1,0 +1,138 @@
+
+<html><head>
+	<meta charset="utf-8" />
+	<meta name="format-detection" content="telephone=no" />
+	<meta name="msapplication-tap-highlight" content="no" />
+	<!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+	<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+	<link rel="stylesheet" href="css/mobile_global.css" ／>
+	<link rel="stylesheet" href="css/mobile_main.css" ／>
+
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+		jq = jQuery.noConflict();
+	</script>
+</head>
+<body>
+	<script>
+		jq(document).ready(function() {
+			jq(document).on("touchstart",function(){
+    			jq("#pInfoOptionList").css("display","none");
+			});
+			jq("#pInfo").on("touchstart",function(event){
+    			event.stopPropagation();
+
+    			var obj = jq("#pInfoOptionList");
+    			obj.css("display","block");
+    			obj.css("-webkit-animation","fadeIn 0.3s ease");
+    			obj.css("-moz-animation","fadeIn 0.3s ease");
+    			obj.css("-o-animation","fadeIn 0.3s ease");
+    			obj.css("animation","fadeIn 0.3s ease");
+			});
+		});
+	</script>
+	<div class="mainTopLine">
+		<img class="logo" src="img/logo.png" />
+		<div class="searchLine">
+			<input type="text" name="search" placeholder="search" />
+			<div class="inputLogo">
+				<img src="img/search.png" />
+			</div>
+		</div>
+	</div>
+	<div class="loginLine">
+		<div class="loginButton">Login</div>
+	</div>
+	<!--
+	<div class="personalModuleLine">
+		<div class="pModule choose">
+			<img src="img/mobile_home.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/mobile_favorites.png" />
+		</div>
+		<div class="pModule">
+			<img src="img/mobile_friends
+			.png" />
+		</div>
+		<div class="pInfo" tabindex="-1" id="pInfo">
+			<img class="pInfoLogo" src="img/person.png"/>
+			<div class="pInfoOptionList" id="pInfoOptionList">
+				<div class="item" onclick="alert('pd')">PersonalData</div>
+				<div class="horizenHr"></div>
+				<div class="item" onclick="alert('set')">Setting</div>
+				<div class="horizenHr"></div>
+				<div class="item">Logout</div>
+			</div>
+		</div>
+	</div>
+	-->
+	<div class="module">
+		<div class="moduleTop"></div>
+		<div class="moduleTitle">
+			<img src="img/hot.png" class="title" />
+			<img src="img/more.png" class="more" />
+		</div>
+		
+		<div class="itemList">
+			<div class="horizenHr"></div>
+			<div class="item">
+				<div class="hotIndex" style="background-color: #863037">1</div>
+				<div class="hotContent">
+					<div class="itemTitle hotTitle">Press is forum software, made the world</div>
+					<div class="infoLine">
+						<div>[Reading]</div>
+						<img src="img/talk.png" class="icon" />
+						<div>77</div>
+					</div>
+				</div>
+			</div>
+			<div class="horizenHr"></div>
+			<div class="item">
+				<div class="hotIndex" style="background-color: #c80001">2</div>
+				<div class="hotContent">
+					<div class="itemTitle hotTitle">Press is forum software, made the world</div>
+					<div class="infoLine">
+						<div>[Reading]</div>
+						<img src="img/talk.png" class="icon" />
+						<div>77</div>
+					</div>
+				</div>
+			</div>
+			<div class="horizenHr"></div>
+			<div class="item">
+				<div class="hotIndex" style="background-color: #db4929">3</div>
+				<div class="hotContent">
+					<div class="itemTitle hotTitle">Press is forum software, made the world</div>
+					<div class="infoLine">
+						<div>[Reading]</div>
+						<img src="img/talk.png" class="icon" />
+						<div>77</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="module">
+		<div class="moduleTop"></div>
+		<div class="moduleTitle">
+			<img src="img/reading.png" class="title" />
+			<img src="img/more.png" class="more" />
+		</div>
+
+		<div class="itemList">
+			<div class="horizenHr"></div>
+			<div class="item">
+				<div class="itemDate">03-10</div>
+				<div class="itemTitle">Press is forum software, made the world</div>
+			</div>
+			<div class="horizenHr"></div>
+			<div class="item">
+				<div class="itemDate">03-10</div>
+				<div class="itemTitle">Press is forum software, made the world</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

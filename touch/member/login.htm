@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Cache-control" content="{if $_G['setting']['mobile'][mobilecachetime] > 0}{$_G['setting']['mobile'][mobilecachetime]}{else}no-cache{/if}" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="format-detection" content="telephone=no" />
+<meta name="keywords" content="{if !empty($metakeywords)}{echo dhtmlspecialchars($metakeywords)}{/if}" />
+<meta name="description" content="{if !empty($metadescription)}{echo dhtmlspecialchars($metadescription)} {/if},$_G['setting']['bbname']" />
+<title><!--{if !empty($navtitle)}-->$navtitle - <!--{/if}--><!--{if empty($nobbname)}--> $_G['setting']['bbname'] - <!--{/if}--> {lang waptitle} - Powered by Discuz!</title>
+<link rel="stylesheet" href="{STATICURL}image/mobile/style.css" type="text/css" media="all">
+<script src="{STATICURL}js/mobile/jquery-1.8.3.min.js?{VERHASH}"></script>
+
+<script type="text/javascript">var STYLEID = '{STYLEID}', STATICURL = '{STATICURL}', IMGDIR = '{IMGDIR}', VERHASH = '{VERHASH}', charset = '{CHARSET}', discuz_uid = '$_G[uid]', cookiepre = '{$_G[config][cookie][cookiepre]}', cookiedomain = '{$_G[config][cookie][cookiedomain]}', cookiepath = '{$_G[config][cookie][cookiepath]}', showusercard = '{$_G[setting][showusercard]}', attackevasive = '{$_G[config][security][attackevasive]}', disallowfloat = '{$_G[setting][disallowfloat]}', creditnotice = '<!--{if $_G['setting']['creditnotice']}-->$_G['setting']['creditnames']<!--{/if}-->', defaultstyle = '$_G[style][defaultextstyle]', REPORTURL = '$_G[currenturl_encode]', SITEURL = '$_G[siteurl]', JSPATH = '$_G[setting][jspath]';</script>
+
+<script src="{STATICURL}js/mobile/common.js?{VERHASH}" charset="{CHARSET}"></script>
+
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_global.css" ／>
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_login.css" ／>
+</head>
+<body>
+	<div class="main" style="background-image: url(./template/EnglishDB/common/img/background_login.png)">
+		<!--{if $_GET[infloat]}-->
+		<h2 class="log_tit"><a href="javascript:;" onclick="popup.close();"><span class="icon_close y">&nbsp;</span></a>{lang login}</h2>
+		<!--{/if}-->
+		<img src="./template/EnglishDB/common/img/dblogo.png" class="dblogo" />
+		<div class="loginNormal">
+		{eval $loginhash = 'L'.random(4);}
+			<form id="loginform" method="post" action="member.php?mod=logging&action=login&loginsubmit=yes&loginhash=$loginhash&mobile=2" onsubmit="{if $_G['setting']['pwdsafety']}pwmd5('password3_$loginhash');{/if}" >
+				<input type="hidden" name="formhash" id="formhash" value='{FORMHASH}' />
+				<input type="hidden" name="referer" id="referer" value="<!--{if dreferer()}-->{echo dreferer()}<!--{else}-->forum.php?mobile=2<!--{/if}-->" />
+				<input type="hidden" name="fastloginfield" value="username">
+				<input type="hidden" name="cookietime" value="2592000">
+				<!--{if $auth}-->
+					<input type="hidden" name="auth" value="$auth" />
+				<!--{/if}-->
+
+			<div class="inputLine">
+				<img src="./template/EnglishDB/common/img/register.png" class="inputImg" />
+				<input type="text" name="username" class="inputItem" placeholder="Username" />
+			</div>
+			<div class="inputHr"></div>
+			<div class="inputLine">
+				<img src="./template/EnglishDB/common/img/lock.png" class="inputImg" />
+				<input type="password" name="password" class="inputItem" placeholder="Password" />
+			</div>
+			<div class="inputHr"></div>
+			<!--{if $seccodecheck}-->
+			<div class="inputLine">
+				{eval
+					$sechash = 'S'.random(4);	
+					$ran = random(5, 1);
+				}
+				<input name="seccodehash" type="hidden" value="$sechash" />
+				<div class="codeText">Code</div>
+				<input type="text" class="inputItem shortInputItem" autocomplete="off" value="" id="seccodeverify_$sechash" name="seccodeverify" placeholder="Code" fwin="seccode">
+	        	<img src="misc.php?mod=seccode&update={$ran}&idhash={$sechash}&mobile=2" class="codeImg"/>
+	        	<script type="text/javascript">
+					(function() {
+					$('.codeImg').on('click', function() {
+						$('#seccodeverify_$sechash').attr('value', '');
+						var tmprandom = 'S' + Math.floor(Math.random() * 1000);
+						$('.sechash').attr('value', tmprandom);
+						$(this).attr('src', 'misc.php?mod=seccode&update={$ran}&idhash='+ tmprandom +'&mobile=2');
+					});
+					})();
+				</script>
+			</div>
+			<div class="inputHr shortInputHr"></div>
+			<!--{/if}-->
+			<button class="loginButton formdialog" value="true" name="submit" type="submit">Login</button>
+			</form>
+		</div>
+		<div class="loginWithOther">
+			<div class="hintLine">
+				<div class="hintLineHr"></div>
+				<div class="hintInfo">Or Sign in with</div>
+				<div class="hintLineHr"></div>
+			</div>
+			<div class="imgLine">
+				<img src="./template/EnglishDB/common/img/qq2.png" class="otherImg" />
+				<img src="./template/EnglishDB/common/img/weibo2.png" class="otherImg" />
+				<img src="./template/EnglishDB/common/img/wechat2.png" class="otherImg" />
+			</div>
+		</div>
+	</div>
+	<div id="mask" style="display:none;"></div>
+</body>
+</html>

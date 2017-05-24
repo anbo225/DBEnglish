@@ -1,0 +1,173 @@
+<!--{if $_G['setting']['mobile']['mobilehotthread'] && $_GET['forumlist'] != 1}-->
+	<!--{eval dheader('Location:forum.php?mod=guide&view=hot');exit;}-->
+<!--{/if}-->
+<!--{template common/header}-->
+
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_main.css" ／>
+
+<script type="text/javascript">
+	function getvisitclienthref() {
+		var visitclienthref = '';
+		if(ios) {
+			visitclienthref = 'https://itunes.apple.com/cn/app/zhang-shang-lun-tan/id489399408?mt=8';
+		} else if(andriod) {
+			visitclienthref = 'http://www.discuz.net/mobile.php?platform=android';
+		}
+		return visitclienthref;
+	}
+</script>
+
+<!--{if $_GET['visitclient']}-->
+
+<header class="header">
+    <div class="nav">
+		<span>{lang warmtip}</span>
+    </div>
+</header>
+<div class="cl">
+	<div class="clew_con">
+		<h2 class="tit">{lang zsltmobileclient}</h2>
+		<p>{lang visitbbsanytime}<input class="redirect button" id="visitclientid" type="button" value="{lang clicktodownload}" href="" /></p>
+		<h2 class="tit">{lang iphoneandriodmobile}</h2>
+		<p>{lang visitwapmobile}<input class="redirect button" type="button" value="{lang clicktovisitwapmobile}" href="$_GET[visitclient]" /></p>
+	</div>
+</div>
+<script type="text/javascript">
+	var visitclienthref = getvisitclienthref();
+	if(visitclienthref) {
+		$('#visitclientid').attr('href', visitclienthref);
+	} else {
+		window.location.href = '$_GET[visitclient]';
+	}
+</script>
+
+<!--{else}-->
+
+<!-- header start -->
+<!--{if $showvisitclient}-->
+
+<div class="visitclienttip vm" style="display:block;">
+	<a href="javascript:;" id="visitclientid" class="btn_download">{lang downloadnow}</a>	
+	<p>
+		{lang downloadzslttoshareview}
+	</p>
+</div>
+<script type="text/javascript">
+	var visitclienthref = getvisitclienthref();
+	if(visitclienthref) {
+		$('#visitclientid').attr('href', visitclienthref);
+		$('.visitclienttip').css('display', 'block');
+	}
+</script>
+
+<!--{/if}-->
+
+
+<!-- header end -->
+<!--{hook/index_top_mobile}-->
+<!-- main forumlist start -->
+<!-- 十大帖子 -->
+<div class="module">
+		<div class="moduleTop"  style="background-color: #62592d"></div>
+		<div class="moduleTitle">
+			<img src="./template/EnglishDB/common/img/hot.png" class="title" />
+		</div>
+		<!--{block/66}-->
+</div>
+
+<!-- 考试版块 -->
+<div class="module">
+		<div class="moduleTop" style="background-color: #455d4d"></div>
+		<a href="forum.php?mod=forumdisplay&fid=36"> 
+			<div class="moduleTitle">
+				<img src="./template/EnglishDB/common/img/testing.png" class="title" />
+				<img src="./template/EnglishDB/common/img/more.png" class="more" />
+			</div>
+		</a>
+		<!--{block/67}-->
+</div>
+
+<!-- 经验版块 -->
+<div class="module">
+		<div class="moduleTop" style="background-color: #c73926"></div>
+        <a href="forum.php?mod=forumdisplay&fid=37"> 
+			<div class="moduleTitle">
+				<img src="./template/EnglishDB/common/img/experience.png" class="title" />
+				<img src="./template/EnglishDB/common/img/more.png" class="more" />
+			</div>
+		</a>
+		<!--{block/68}-->
+</div>
+<!-- 阅读版块 -->
+<div class="module">
+		<div class="moduleTop" style="background-color: #455d4d"></div>
+		<a href="forum.php?mod=forumdisplay&fid=2"> 
+			<div class="moduleTitle">
+				<img src="./template/EnglishDB/common/img/reading.png" class="title" />
+				<img src="./template/EnglishDB/common/img/more.png" class="more" />
+			</div>
+		</a>
+		<!--{block/69}-->
+</div>
+
+<!-- 写作版块 -->
+<div class="module">
+		<div class="moduleTop" style="background-color: #c73926"></div>
+		<a href="forum.php?mod=forumdisplay&fid=41"> 
+			<div class="moduleTitle">
+				<img src="./template/EnglishDB/common/img/writing.png" class="title" />
+				<img src="./template/EnglishDB/common/img/more.png" class="more" />
+			</div>
+		</a>
+		<!--{block/70}-->
+</div>
+
+<!-- 听力版块 -->
+<div class="module">
+		<div class="moduleTop" style="background-color: #a4a151"></div>
+		<a href="forum.php?mod=forumdisplay&fid=40"> 
+			<div class="moduleTitle">
+				<img src="./template/EnglishDB/common/img/listening.png" class="title" />
+				<img src="./template/EnglishDB/common/img/more.png" class="more" />
+			</div>
+		</a>
+		<!--{block/71}-->
+</div>
+
+<!-- 翻译版块 -->
+<div class="module">
+		<div class="moduleTop" style="background-color: #62592d"></div>
+		<a href="forum.php?mod=forumdisplay&fid=42"> 
+			<div class="moduleTitle">
+				<img src="./template/EnglishDB/common/img/translation.png" class="title" />
+				<img src="./template/EnglishDB/common/img/more.png" class="more" />
+			</div>
+		</a>
+		<!--{block/72}-->
+</div>
+
+<!-- main forumlist end -->
+<!--{hook/index_middle_mobile}-->
+<script type="text/javascript">
+	(function() {
+		<!--{if !$_G[setting][mobile][mobileforumview]}-->
+			$('.sub_forum').css('display', 'block');
+		<!--{else}-->
+			$('.sub_forum').css('display', 'none');
+		<!--{/if}-->
+		$('.subforumshow').on('click', function() {
+			var obj = $(this);
+			var subobj = $(obj.attr('href'));
+			if(subobj.css('display') == 'none') {
+				subobj.css('display', 'block');
+				obj.find('img').attr('src', '{STATICURL}image/mobile/images/collapsed_yes.png');
+			} else {
+				subobj.css('display', 'none');
+				obj.find('img').attr('src', '{STATICURL}image/mobile/images/collapsed_no.png');
+			}
+		});
+	 })();
+</script>
+
+<!--{/if}-->
+<!--{template common/footer}-->
