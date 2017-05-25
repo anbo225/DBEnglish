@@ -1,0 +1,77 @@
+.personalData {
+	width: calc(100% - 40px);
+	padding: 20px;
+	background-color: #ffffff;
+	color: #000000;
+}
+.personalData .headLine {
+	display: flex;
+	display: -webkit-flex;
+}
+.personalData .headLine .headImg {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+.personalData .headLine .name {
+	font-size: 20px;
+	line-height: 40px;
+	margin-left: 15px;
+	width: calc(100% - 140px);
+}
+.personalData .headLine .buttonLine {
+	width: 65px;
+}
+.personalData .headLine .buttonLine .headLineButton {
+	margin-top: 10px;
+	width: 60px;
+	height: 25px;
+	background-color: #c80001;
+	color: #ffffff;
+	line-height: 25px;
+	font-size: 16px;
+	text-align: center;
+	border-radius: 3px;
+	border: 0px;
+	outline: none;
+}
+.personalData .headLine .buttonLine .talk {
+	background-color: #465d4c; 
+}
+.personalData .headLine .buttonLine .delete {
+	background-color: #62592d;
+}
+
+.personalData .basicInfo {
+	padding: 20px 0px;
+}
+.personalData .basicInfo .infoTitle {
+	font-size: 22px;
+}
+.personalData .basicInfo .infoLine {
+	margin-top: 15px;
+	display: flex;
+	display: -webkit-flex;
+	font-size: 18px;
+}
+.personalData .basicInfo .infoLine .infoLineType {
+	color: #a4a4a4;
+}
+.personalData .basicInfo .infoLine .infoLineValue {
+	margin-left: 10px;
+}
+
+.personalData .aboutMe {
+	padding: 20px 0px;
+	min-height: 100px;
+}
+.personalData .aboutMe .meTitle {
+	font-size: 22px;
+}
+
+.personalData .aboutMe .meDetail {
+	width: 100%;
+	margin-top: 15px;
+	font-size: 16px;
+	word-break: break-all;
+}
