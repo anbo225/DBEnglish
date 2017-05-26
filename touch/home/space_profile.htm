@@ -1,0 +1,124 @@
+<!--{if $_GET['mycenter'] && !$_G['uid']}-->
+	<!--{eval dheader('Location:member.php?mod=logging&action=login');exit;}-->
+<!--{/if}-->
+<!--{template common/header}-->
+<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_personalData.css" ／>
+<!--{if !$_GET['mycenter']}-->
+
+<!-- header start -->
+<header class="header">
+</header>
+<!-- header end -->
+<!-- userinfo start -->
+</div>
+	<div class="horizenHr"></div>
+	<div class="personalData">
+		<div class="headLine">
+			<img src="<!--{avatar($space[uid], small, true)}-->" class="headImg" />
+			<div class="name">$space[username]</div>
+			<!--{if $space['uid'] == $_G['uid']}-->
+				<div class="buttonLine">
+					<div class="headLineButton" onclick="window.location.href='member.php?mod=logging&action=logout&formhash={FORMHASH}'" style="background-color:#62592d">Log Out</div>
+				</div>
+			<!--{else}-->
+				<!--{if !$isfriend}-->
+					<div class="buttonLine">
+						<div class="headLineButton" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}', 'get', 0);" id="a_friend_li_{$space[uid]}">Follow</div>
+					</div>
+				<!--{else}-->
+					<div class="buttonLine">
+						<div class="headLineButton" style="background-color:#62592d" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}', 'get', 0);" id="a_ignore_{$space[uid]}">Delete</div>
+					</div>
+				<!--{/if}-->
+			<!--{/if}-->
+		</div>
+		<div class="basicInfo">
+			<div class="infoTitle">Basic Information</div>
+			<div class="infoLine">
+				<div class="infoLineType">Name:</div>
+				<div class="infoLineValue">$space[username]</div>
+			</div>
+			<div class="infoLine">
+				<div class="infoLineType">Gender:</div>
+				<div class="infoLineValue" id ="gender"></div>
+				<script>
+					if ("$profiles[gender][value]" == '男')
+						$("#gender").append("Male");
+					else if ("$profiles[gender][value]" == '女')
+						$("#gender").append("Femail");
+					else
+						$("#gender").append("Secret");
+				</script>
+			</div>
+			<div class="infoLine">
+				<div class="infoLineType">Birthday:</div>
+				<div class="infoLineValue" id ="birthday"></div>
+				<script>
+					var temp = "$profiles[birthday][value]".split("年");
+					var year = temp[0];
+					temp = temp[1].split("月");
+					var month = temp[0];
+					temp = temp[1].split("日");
+					var date = temp[0];
+					$("#birthday").append(year+"-"+month+"-"+date);
+				</script>
+			</div>
+			<div class="infoLine">
+				<div class="infoLineType">Mail:</div>
+				<div class="infoLineValue">$space[email]</div>
+			</div>
+			<div class="infoLine">
+				<div class="infoLineType">City:</div>
+				<div class="infoLineValue">$space[affectivestatus]</div>
+			</div>
+		</div>
+		<div class="horizenHr"></div>
+		<div class="aboutMe">
+			<div class="meTitle">About Me</div>
+			<div class="meDetail">$space[lookingfor]</div>
+		</div>
+	</div>
+<!-- userinfo end -->
+
+<!--{else}-->
+
+<!-- header start -->
+<header class="header">
+	<div class="hdc cl">
+		<!--{if $_G['setting']['domain']['app']['mobile']}-->
+			{eval $nav = 'http://'.$_G['setting']['domain']['app']['mobile'];}
+		<!--{else}-->
+			{eval $nav = "forum.php";}
+		<!--{/if}-->
+		<h2><a title="$_G[setting][bbname]" href="$nav"><img src="{STATICURL}image/mobile/images/logo.png" /></a></h2>
+		<ul class="user_fun">
+			<li><a href="search.php?mod=forum" class="icon_search">{lang search}</a></li>
+			<li><a href="forum.php?forumlist=1" class="icon_threadlist">{lang forum_list}</a></li>
+			<li class="on" id="usermsg"><a href="<!--{if $_G[uid]}-->home.php?mod=space&uid=$_G[uid]&do=profile&mycenter=1<!--{else}-->member.php?mod=logging&action=login<!--{/if}-->" class="icon_userinfo">{lang user_info}</a><!--{if $_G[member][newpm]}--><span class="icon_msg"></span><!--{/if}--></li>
+			<!--{if $_G['setting']['mobile']['mobilehotthread']}-->
+			<li><a href="forum.php?mod=guide&view=hot" class="icon_hotthread">{lang hot_thread}</a></li>
+			<!--{/if}-->
+		</ul>
+	</div>
+</header>
+<!-- header end -->
+<!-- userinfo start -->
+<div class="userinfo">
+	<div class="user_avatar">
+		<div class="avatar_m"><span><img src="<!--{avatar($_G[uid], small, true)}-->" /></span></div>
+		<h2 class="name">$_G[username]</h2>
+	</div>
+	<div class="myinfo_list cl">
+		<ul>
+			<li><a href="home.php?mod=space&uid={$_G[uid]}&do=favorite&view=me&type=thread">{lang myfavorite}</a></li>
+			<li><a href="home.php?mod=space&uid={$_G[uid]}&do=thread&view=me">{lang mythread}</a></li>
+			<li class="tit_msg"><a href="home.php?mod=space&do=pm">{lang mypm}<!--{if $_G[member][newpm]}--><img src="{STATICURL}image/mobile/images/icon_msg.png" /><!--{/if}--></a></li>
+			<li><a href="home.php?mod=space&uid={$_G[uid]}">{lang myprofile}</a></li>
+		</ul>
+	</div>
+</div>
+<!-- userinfo end -->
+
+<!--{/if}-->
+<!--{eval $nofooter = true;}-->
+<!--{template common/footer}-->
