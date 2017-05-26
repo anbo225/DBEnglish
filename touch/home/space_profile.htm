@@ -3,6 +3,28 @@
 <!--{/if}-->
 <!--{template common/header}-->
 <link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_personalData.css" ／>
+<script>
+	function operation(op, uid){
+		 $.ajax({
+            type:"POST",
+            //提交的网址
+            url:"./template/EnglishDB/addOrDeleteFriend.php",
+            //提交的数据
+            data:{op:op,uid:uid},         
+            success:function(data){
+           		if (data == "deleteSuccess")
+           			alert("Successfully deleted!");
+           		else if (data == "alreadyExist")
+           			alert("Request sended! Please wait for acception.");  
+           		else if (data == "addReqSuccess") 
+           			alert("Joined to request list!");
+           		else
+           			alert("Something goes wrong!")       
+            }       
+         });
+         location.reload(); 
+	}
+</script>
 <!--{if !$_GET['mycenter']}-->
 
 <!-- header start -->
@@ -23,11 +45,11 @@
 			<!--{else}-->
 				<!--{if !$isfriend}-->
 					<div class="buttonLine">
-						<div class="headLineButton" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}', 'get', 0);" id="a_friend_li_{$space[uid]}">Follow</div>
+						<div class="headLineButton" onclick="operation(1, $space[uid]);" id="a_friend_li_{$space[uid]}">Follow</div>
 					</div>
 				<!--{else}-->
 					<div class="buttonLine">
-						<div class="headLineButton" style="background-color:#62592d" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}', 'get', 0);" id="a_ignore_{$space[uid]}">Delete</div>
+						<div class="headLineButton" style="background-color:#62592d" onclick="operation(0, $space[uid]);" id="a_friend_li_{$space[uid]}" id="a_ignore_{$space[uid]}">Delete</div>
 					</div>
 				<!--{/if}-->
 			<!--{/if}-->

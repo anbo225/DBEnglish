@@ -20,31 +20,31 @@ var fid = parseInt('$_G[fid]');
 
 				<div>
 					<div id="fastposteditor">
-						<div>
-							<div class="bar">
-								<!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'img', 'link', 'quote'), !$allowfastpost ? 1 : 0, $allowpostattach && $allowfastpost ? '<span class="pipe z">|</span><span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
-								<!--{hook/forumdisplay_fastpost_ctrl_extra}-->
-								<!--{subtemplate common/seditor}-->
-							</div>
+						<!--{if $allowfastpost}-->
 							<div>
-								<!--{if $allowfastpost}-->
+								<div class="bar">
+									<!--{eval $seditor = array('fastpost', array('at', 'bold', 'color', 'img', 'link', 'quote'), !$allowfastpost ? 1 : 0, $allowpostattach && $allowfastpost ? '<span class="pipe z">|</span><span id="spanButtonPlaceholder">'.lang('template', 'upload').'</span>' : '');}-->
+									<!--{hook/forumdisplay_fastpost_ctrl_extra}-->
+									<!--{subtemplate common/seditor}-->
+								</div>
+								<div>
 									<textarea rows="6" cols="80" name="message" id="fastpostmessage" onKeyDown="seditor_ctlent(event, '$(\'fastpostsubmit\').click()');" tabindex="12" {eval echo getreplybg($_G['forum']['replybg']);}></textarea>
-								<!--{else}-->
-									<div class="pt hm">
-										<!--{if !$_G['uid']}-->
-											<!--{if !$_G['connectguest']}-->
-												{lang login_to_post} <a href="member.php?mod=logging&action=login" onclick="showWindow('login', this.href)" class="xi2">{lang login}</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">$_G['setting']['reglinkname']</a>
-											<!--{else}-->
-												{lang connect_fill_profile_to_post}
-											<!--{/if}-->
-										<!--{else}-->
-											{lang no_permission_to_post}<a href="javascript:;" onclick="$('newspecial').onclick()" class="xi2">{lang click_to_show_reason}</a>
-										<!--{/if}-->
-										<!--{hook/global_login_text}-->
-									</div>
-								<!--{/if}-->
+								</div>
 							</div>
-						</div>
+						<!--{else}-->
+							<div class="pt hm" style="border:0px; border-radius: 3px;">
+								<!--{if !$_G['uid']}-->
+									<!--{if !$_G['connectguest']}-->
+										{lang login_to_post} <a href="member.php?mod=logging&action=login"onclick="showWindow('login', this.href)" class="xi2">Login</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">Register</a>
+									<!--{else}-->
+										{lang connect_fill_profile_to_post}
+									<!--{/if}-->
+									<!--{else}-->
+										{lang no_permission_to_post}<a href="javascript:;" onclick="$('newspecial').onclick()" class="xi2">{lang click_to_show_reason}</a>
+									<!--{/if}-->
+									<!--{hook/global_login_text}-->
+							</div>
+						<!--{/if}-->
 					</div>
 
 					<div id="seccheck_fastpost" style="margin-top:10px">
