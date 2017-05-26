@@ -62,6 +62,7 @@ if(!empty($_G['uid'])) {
 			$friendList[$fIndex]['isTalk'] = 1;
 		}
 	}
+	$op = "friend";
 }
 
 include template('touch/home/space_friend');
