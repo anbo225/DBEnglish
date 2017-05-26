@@ -1,10 +1,27 @@
 .friendsTitle {
 	background-color: #ffffff;
-	padding: 25px 15px;
+	padding: 25px 15px 10px;
 }
 .friendsTitle .friendsTitleImg {
 	width: 25px;
 	width: auto;
+}
+
+.friendsButtonLine {
+	display: flex;
+	display: -webkit-flex;
+	padding: 10px 25px;
+	height: 18px;
+	line-height: 18px;
+	font-size: 18px;
+	color: #a4a4a4;
+	background-color: #ffffff;
+}
+.friendsButtonLine .choose {
+	color: #000000;
+}
+.friendsButtonLine .reqButton {
+	margin-left: 30px;
 }
 
 .friendsList {
@@ -62,6 +79,41 @@
 	height: 6px;
 	margin: 12px 5px;
 	border-radius: 50%;
+}
+.friendsList .friendItem .talkPart .reqFriendLine {
+	display: flex;
+	display: -webkit-flex;
+	justify-content: space-between;
+	-webkit-justify-content: space-between;
+	height: 30px;
+	line-height: 30px;
+}
+.friendsList .friendItem .talkPart .reqFriendLine .reqFriendName {
+	width: calc(100% - 150px);
+	font-size: 18px;
+	color: #000000;
+}
+.friendsList .friendItem .talkPart .reqFriendLine .reqButtonLine {
+	display: flex;
+	display: -webkit-flex;
+	height: 30px;
+	line-height: 24px;
+}
+.friendsList .friendItem .talkPart .reqFriendLine .reqButtonLine .acButton {
+	margin: 3px 0px 3px 15px;
+	color: #ffffff;
+	background-color: #465d4c;
+	width: 60px;
+	height: 24px;
+	text-align: center;
+	font-size: 14px;
+	border-radius: 3px;
+	border: 0px;
+	outline: none;
+}
+.friendsList .friendItem .talkPart .reqFriendLine .reqButtonLine .ignore {
+	background-color: #e5e5e5;
+	color: #717171;
 }
 .friendsList .friendItem .talkPart .talkDetail {
 	display: flex;

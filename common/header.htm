@@ -141,7 +141,7 @@
 		firstFlag = 0;
 		getCurMesFlag = 0;
 		curFriendId = "";
-		curTalkLastTime = "0";
+		curTalkLastTime = "10";
 		newCnt = 0;
 
 		function myEscape(msg) {
@@ -278,10 +278,13 @@
 					if(jsonObj.length > 0) {
 						var fl = jq("#friendList").find(".item");
 						newCnt = 0;
+						var usedArr = new Array(jsonObj.length);
+						for(var j = 0; j < usedArr.length; j++) usedArr[j] = 0;
 						for(var j = 0; j < fl.length; j++) {
 							var obj = fl.eq(j);
 							for(var i = 0; i < jsonObj.length; i++) {
 								if(obj.attr("id") == "friend"+jsonObj[i].uid) {
+									usedArr[i] = 1;
 									newCnt++;
 									var tempOc = obj.attr("onclick").split(",");
 									if(tempOc.length == 4) {
@@ -296,6 +299,17 @@
 									}
 									break;
 								}
+							}
+						}
+						var fll = jq("#friendList");
+						for(var j = 0; j < usedArr.length; j++) {
+							if(usedArr[j] == 0 && jsonObj[j].name != null && jsonObj[j].name != "") {
+								fll.prepend('<div class="item" id="friend'+jsonObj[j].uid+'" onclick="getChatDetail(\''+jsonObj[j].name+'\',\''+jsonObj[j].uid+'\',1,\''+jsonObj[j].plid+'\')">'+
+							'<div class="friendPic"><img src="'+
+							'uc_server/avatar.php?uid='+jsonObj[j].uid+'&size=small" /></div>'+
+							'<div class="friendName">'+jsonObj[j].name+'</div><div class="isNew"><div class="text">New</div><div class="dot"></div></div></div>');
+
+								newCnt++;
 							}
 						}
 						var cEntry = jq("#chatEntry");
@@ -388,6 +402,7 @@
 			if(curFriendId != null && curFriendId != "")
 				jq("#friend"+curFriendId).removeClass("choose");
 			curFriendId = fuid;
+			jq("#friend"+curFriendId).addClass("choose");
 			var cc = jq("#chatContent");
 			cc.empty();
 		}

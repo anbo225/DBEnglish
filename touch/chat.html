@@ -13,7 +13,7 @@
 	<script>
 		fuid = "";
 		plid = "";
-		curTalkLastTime = "0";
+		curTalkLastTime = "10";
 
 		function GetQueryString(name) {
 		    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -42,7 +42,7 @@
 		getCurChatMesLock = 0;
 		function getCurChatMes() {
 			if(getCurChatMesLock == 1 || fuid == "" || plid == "") return;
-			alert("fuid "+fuid+" plid "+plid);
+			//alert("fuid "+fuid+" plid "+plid+" time "+curTalkLastTime);
 			getCurChatMesLock = 1;
 			$.ajax({
 				url:'../fetchChatDetailMore.php',
@@ -50,11 +50,11 @@
 				data:'fuid='+fuid+'&plid='+plid+'&dateline='+curTalkLastTime,
 				error: function() {
 					getCurChatMesLock = 0;
-					//alert("er");
+					clearTimeout(sto1);
+					getCurChatMes();
 				},
 				success: function(data) {
 					var jsonObj = JSON.parse(data);
-					//alert("unlock "+jsonObj[0].authorid+" 0");
 					getCurChatMesLock = 0;
 					if(jsonObj.length > 0) {
 						var cc = $("#chatContent");
@@ -84,6 +84,7 @@
 					type:'post',
 					data:'fuid='+fuid+'&plid='+plid,
 					success: function(data) {
+						isNew = "0";
 					}
 				});
 			}
@@ -93,7 +94,7 @@
 				type:'post',
 				data:'fuid='+fuid+'&plid='+plid,
 				error: function () {
-					alert("error");
+					//alert("error");
 				},
 				success: function (data) {
 					//alert(data);
@@ -117,9 +118,8 @@
 					cc.scrollTop(cc[0].scrollHeight);
 					if(jsonObj.length > 0)
 						curTalkLastTime = jsonObj[jsonObj.length - 1].dateline;
-					if(isNew != null && isNew == 'shouldGet') {
-						getCurChatMes();
-					}
+					getCurChatMes();
+
 				}
 			});
 		}
@@ -154,7 +154,7 @@
 							var getplid = realData[1];
 							if(plid == null || plid == "") {
 								plid = getplid;
-								alert(plid);
+								//alert(plid);
 								getCurChatMes();
 							}
 							cc.append('<div class="chatMessage myMes"><div class="friendPic">'+
@@ -168,7 +168,7 @@
 							var getplid = data.substring(6);
 							if(plid == null || plid == "") {
 								plid = getplid;
-								getChatDetail("shouldGet");
+								getChatDetail();
 							}
 						}
 					}
@@ -186,7 +186,6 @@
 			
 			$("#chatName").html(chatName);
 			getChatDetail(isNew);
-			getCurChatMes();
 		});
 	</script>
 	<div class="chatTitle">

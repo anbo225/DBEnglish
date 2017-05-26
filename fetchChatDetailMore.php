@@ -10,7 +10,7 @@ $fuid = $_POST['fuid'];
 $dateline = $_POST['dateline'];
 if(empty($fuid) || empty($plid) || empty($dateline)) {
 	sleep(10);
-	exit(json_encode($mesList));
+	exit(json_encode("empty"));
 }
 $res = DB::fetch_all('SELECT plid FROM pre_ucenter_pm_members WHERE plid='.$plid.' AND uid='.$_G['uid']);
 if(count($res) > 0) {

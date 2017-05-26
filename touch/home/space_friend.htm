@@ -76,6 +76,7 @@
 
 	<link rel="stylesheet" href="../../../template/EnglishDB/touch/common/css/mobile_friend.css" ／>
 
+	<!--{if $op == "friend"}-->
 	<script>
 		function myEscape(msg) {
 			msg = msg.replace(/&/g, '**211**');
@@ -93,51 +94,172 @@
 			msg = msg.replace(/\*\*271\*\*/g, '"');
 			return msg;
 		}
+
+		$(document).ready(function() {
+			$.ajax({
+				url:'../fetchFriendRequestNum.php',
+				error: function () {
+					//alert("fetch reqNum error");
+				},
+				success: function (data) {
+					if(data > 0) {
+						$("#reqButton").html("Request("+data+" new)");
+					}
+				}
+			});
+		});
 	</script>
+	<!--{/if}-->
+	<!--{if $op == "request"}-->
+	<script>
+		<!--{if $reqList}-->
+			reqNum = $reqList.length;
+		<!--{else}-->
+			reqNum = 0;
+		<!--{/if}-->
+
+		function fAccept(uid) {
+			$.ajax({
+				url:'../updateFriendRequest.php',
+				type: 'post',
+				data:'uid='+uid+'&op=1',
+				error: function () {
+					//alert("fetch reqNum error");
+				},
+				success: function (data) {
+					$("#friend"+uid).hide();
+					$("#hr"+uid).hide();
+					if(reqNum > 0)
+						reqNum--;
+					if(reqNum == 0) {
+						$("#friendsList").empty();
+						$("#friendsList").append('<div class="nothing">No friend\'s request yet</div>');
+					}
+					if(data == "acceptSuccess") {
+						$("#mytip").html("accept success");
+						$("#mytip").show();
+						setTimeout('$("#mytip").hide()', 2000);
+					}
+				}
+			});
+		}
+		function fIgnore(uid) {
+			$.ajax({
+				url:'../updateFriendRequest.php',
+				type: 'post',
+				data:'uid='+uid+'&op=0',
+				error: function () {
+					//alert("fetch reqNum error");
+				},
+				success: function (data) {
+					$("#friend"+uid).hide();
+					$("#hr"+uid).hide();
+					if(reqNum > 0)
+						reqNum--;
+					if(reqNum == 0) {
+						$("#friendsList").empty();
+						$("#friendsList").append('<div class="nothing">No friend\'s request yet</div>');
+					}
+
+					if(data == "ignoreSuccess") {
+						$("#mytip").html("ignore success");
+						$("#mytip").show();
+						setTimeout('$("#mytip").hide()', 2000);
+					}
+				}
+			});
+			
+		}
+		$(document).ready(function() {
+			var left = (document.body.scrollWidth/2 - $("#mytip").width()/2) + 'px';
+			var top = (document.body.scrollHeight/2 - 100) + 'px';
+			$("#mytip").css("left", left);
+			$("#mytip").css("top", top);
+		});
+	</script>
+	<!--{/if}-->
+	<div class="tip" style="display: none; height: auto; padding: 20px 10px; font-size: 16px; position: fixed;" id="mytip"></div>
 	<div class="friendsTitle">
 		<img src="../../../template/EnglishDB/common/img/mobile_friends.png" class="friendsTitleImg" />
 	</div>
+	<div class="friendsButtonLine">
+		<!--{if $op == "friend"}-->
+		<div class="choose" onclick="window.location.href='friend.php'">All</div>
+		<div class="reqButton" id="reqButton" onclick="window.location.href='friend_request.php'">Request</div>
+		<!--{else}-->
+		<div onclick="window.location.href='friend.php'">All</div>
+		<div class="reqButton choose" id="reqButton" onclick="window.location.href='friend_request.php'">Request</div>
+		<!--{/if}-->
+	</div>
 	<div class="horizenHr"></div>
-	<div class="friendsList">
+	<div class="friendsList" id="friendsList">
 		<!--{if $_G['uid']}-->
-			<!--{if $talkArr}-->
-				<!--{loop $talkArr $key $value}-->
-				<!--{if $value[name]}-->
-				<div class="friendItem" id="friend$value[fuid]">
-					<img src="../../../uc_server/avatar.php?uid={$value[fuid]}&size=middle" class="friendLogo" />
-					<div class="talkPart" onclick="window.location.href='chat.html?chatName={$value[name]}&fuid={$value[fuid]}&plid={$value[plid]}&isNew={$value[isnew]}'">
-						<div class="talkFriendLine">
-							<div class="talkFriendName">$value[name]</div>
-							<!--{if $value[isnew]}-->
-							<div class="isNew">
-								<div>New</div>
-								<div class="dot"></div>
+			<!--{if $op == "friend"}-->
+				<!--{if $talkArr}-->
+					<!--{loop $talkArr $key $value}-->
+					<!--{if $value[name]}-->
+					<div class="friendItem" id="friend$value[fuid]">
+						<img src="../../../uc_server/avatar.php?uid={$value[fuid]}&size=middle" class="friendLogo" />
+						<div class="talkPart" onclick="window.location.href='chat.html?chatName={$value[name]}&fuid={$value[fuid]}&plid={$value[plid]}&isNew={$value[isnew]}'">
+							<div class="talkFriendLine">
+								<div class="talkFriendName">$value[name]</div>
+								<!--{if $value[isnew]}-->
+								<div class="isNew">
+									<div>New</div>
+									<div class="dot"></div>
+								</div>
+								<!--{/if}-->
 							</div>
-							<!--{/if}-->
-						</div>
-						<div class="talkDetail">
-							<div class="talkDate"><!--{date($value[lastdateline], 'u')}--></div>
-							<div class="lastMes">$value[lastMes]</div>
+							<div class="talkDetail">
+								<div class="talkDate"><!--{date($value[lastdateline], 'u')}--></div>
+								<div class="lastMes">$value[lastMes]</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="horizenHr"></div>
+					<div class="horizenHr"></div>
+					<!--{/if}-->
+					<!--{/loop}-->
 				<!--{/if}-->
-				<!--{/loop}-->
+				<!--{if $friendList}-->
+					<!--{loop $friendList $key $value}-->
+					<!--{if $value[isTalk] != 1}-->
+					<div class="friendItem" id="friend$value[fuid]">
+						<img src="../../../uc_server/avatar.php?uid={$value[fuid]}&size=middle" class="friendLogo" />
+						<div class="friendName" onclick="window.location.href='chat.html?chatName={$value[fusername]}&fuid={$value[fuid]}'">$value[fusername]</div>
+						<img src="../../../template/EnglishDB/common/img/talk.png" class="talkImg" onclick="window.location.href='chat.html?chatName={$value[fusername]}&fuid={$value[fuid]}'" />
+					</div>
+					<div class="horizenHr"></div>
+					<!--{/if}-->
+					<!--{/loop}-->
+				<!--{else}-->
+					<div class="nothing">No friends yet</div>
+				<!--{/if}-->
 			<!--{/if}-->
-			<!--{if $friendList}-->
-				<!--{loop $friendList $key $value}-->
-				<!--{if $value[isTalk] != 1}-->
-				<div class="friendItem" id="friend$value[fuid]">
-					<img src="../../../uc_server/avatar.php?uid={$value[fuid]}&size=middle" class="friendLogo" />
-					<div class="friendName" onclick="window.location.href='chat.html?chatName={$value[fusername]}&fuid={$value[fuid]}'">$value[fusername]</div>
-					<img src="../../../template/EnglishDB/common/img/talk.png" class="talkImg" onclick="window.location.href='chat.html?chatName={$value[fusername]}&fuid={$value[fuid]}'" />
-				</div>
-				<div class="horizenHr"></div>
+			<!--{if $op == "request"}-->
+				<!--{if $reqList}-->
+					<!--{loop $reqList $key $value}-->
+					<div class="friendItem" id="friend$value[fuid]">
+						<img src="../../../uc_server/avatar.php?uid={$value[fuid]}&size=middle" class="friendLogo" />
+						<div class="talkPart">
+							<div class="reqFriendLine">
+								<div class="reqFriendName">$value[fusername]</div>
+								<div class="reqButtonLine">
+									<div class="acButton" onclick="fAccept($value[fuid])">Accept</div>
+									<div class="acButton ignore" onclick="fIgnore($value[fuid])">Ignore</div>
+								</div>
+							</div>
+							<div class="talkDetail">
+								<div class="talkDate"></div>
+								<div class="lastMes">$value[note]</div>
+							</div>
+						</div>
+					</div>
+					<div class="horizenHr" id="hr$value[fuid]"></div>
+					<!--{/loop}-->
+
+				<!--{else}-->
+					<div class="nothing">No friend's request yet</div>
 				<!--{/if}-->
-				<!--{/loop}-->
-			<!--{else}-->
-				<div class="nothing">No friends yet</div>
 			<!--{/if}-->
 		<!--{else}-->
 			<div class="nothing" onclick="window.location.href='../../../forum.php'">Click here to return home</div>
