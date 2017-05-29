@@ -128,10 +128,7 @@
     <div class="searchBar">
       <div class="blank"></div>
       <div class="context">
-        <div class="search">
-          <img src="./template/EnglishDB/common/img/search.png" class="logo" />
-          <input type="text" name="search" placeholder="search" />
-        </div>
+          <!--{subtemplate common/pubsearchform}-->
       </div>
       <div class="blank"></div>
     </div>
@@ -157,7 +154,7 @@
 						<div class="share">
 								<!--{hook/viewthread_postheader 0}-->
 							
-								<a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]&formhash={FORMHASH}" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' {lang activity_member_unit}{lang thread_favorite}'" title="{lang fav_thread}"><i><img src="./template/EnglishDB/common/img/heart.png" alt="{lang thread_favorite}" /><span id="favoritenumber" style="display:none">{$_G['forum_thread']['favtimes']}</span></i></a>
+								<a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]&formhash={FORMHASH}" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + '  {lang activity_member_unit} {lang thread_favorite}'" title="{lang fav_thread}"><i><img src="./template/EnglishDB/common/img/heart.png" alt="{lang thread_favorite}" /><span id="favoritenumber" style="display:none">{$_G['forum_thread']['favtimes']}</span></i></a>
 								
 
 						</div>
