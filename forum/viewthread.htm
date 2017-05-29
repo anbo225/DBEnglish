@@ -117,7 +117,7 @@
 	}
 
 	function myFavourite(id, href, type) {
-		jq("#favouriteThread").empty();
+		jq("#k_favorite").empty();
 		jq("#favouriteThread").append('<img src="./template/EnglishDB/common/img/redheart.png" />');
 		//showWindow(this.id, this.href, 'get', 0);
 		showWindow(id, href, type, 0);
@@ -180,15 +180,7 @@
 								<a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]&formhash={FORMHASH}" id="k_favorite" onclick="myFavourite(this.id, this.href, 'get')" onmouseover="this.title = $('favoritenumber').innerHTML + ' {lang activity_member_unit}{lang thread_favorite}'" title="{lang fav_thread}"><i><img src="./template/EnglishDB/common/img/heart.png" alt="{lang thread_favorite}" /><span id="favoritenumber" style="display:none">{$_G['forum_thread']['favtimes']}</span></i></a>
 
 						</div>
-						<!-- <script>
-							window._bd_share_config = {
-								common : {		
-									
-									bdPic : '',		
-								
-								}
-							}
-						</script> -->
+						
 					</div>
 
 					
