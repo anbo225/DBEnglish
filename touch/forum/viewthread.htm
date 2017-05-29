@@ -23,6 +23,20 @@
         if(mobile != null && mobile != "") jumpHref += "&mobile=" + mobile;
     
         $("#pageShow").text(page + "/ "+totalPage);
+
+        $.ajax({
+            url:'./template/EnglishDB/fetchIsFavourite.php',
+            type:'post',
+            data:'tid={$_G[tid]}&idtype=tid',
+            error: function() {
+            },
+            success: function(data) {
+                if(data == "1") {
+                    $("#favouriteThread").empty();
+                    $("#favouriteThread").append('<img src="./template/EnglishDB/common/img/redheart.png" class="postItemTopImg" />');
+                }
+            }
+        });
     });
 
     function pagePrev() {
@@ -57,8 +71,9 @@
 			</div>
 		</a>
 
-		<em><a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]" class="favbtn blue" <!--{if $_G[forum][ismoderator]}-->style="margin-right:10px;"<!--{/if}-->><img src="./template/EnglishDB/common/img/heart.png" class="postItemTopImg" /></a></em>
-	
+        <div id="favouriteThread">
+            <em><a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]" class="favbtn blue" <!--{if $_G[forum][ismoderator]}-->style="margin-right:10px;"<!--{/if}-->><img src="./template/EnglishDB/common/img/heart.png" class="postItemTopImg" /></a></em>
+        </div>
 	</div>
 	<div class="postItemTitle">$_G[forum_thread][subject]</div>
 
@@ -239,6 +254,8 @@
             dataType:'xml',
         })
         .success(function(s) {
+            $("#favouriteThread").empty();
+            $("#favouriteThread").append('<img src="./template/EnglishDB/common/img/redheart.png" class="postItemTopImg" />');
             popup.open(s.lastChild.firstChild.nodeValue);
             evalscript(s.lastChild.firstChild.nodeValue);
         })
