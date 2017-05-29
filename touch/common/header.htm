@@ -41,13 +41,19 @@
 
 	<div class="mainTopLine">
 		<img class="logo" src="./template/EnglishDB/common/img/logo.png" />
-		<div class="searchLine">
-			<input type="text" name="search" placeholder="search" />
-			<div class="inputLogo">
-				<img src="./template/EnglishDB/common/img/search.png" />
-			</div>
-		</div>
+				
+				<form id="searchform"  method="post" autocomplete="off" action="search.php?mod=forum&mobile=2" style="width: 100%">
+					<div class="searchLine">
+						<input value="$keyword"  type="text" autocomplete="off" class="input" name="srchtxt" id="scform_srchtxt" value="" placeholder="{lang searchthread}" />
+
+					    <input type="hidden" name="searchsubmit" value="yes" style="display: none">
+						<div class="inputLogo"  onclick="document.getElementById('searchform').submit()" style="float: right;">
+							<img src="./template/EnglishDB/common/img/search.png" />
+						</div>			
+					</div>
+				</form>
 	</div>
+
 	<!--{if $_G['uid']}-->
 	<div class="personalModuleLine">
 		<div class="pModule choose" onclick="window.location.href='forum.php'">
