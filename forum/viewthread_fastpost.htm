@@ -144,7 +144,7 @@ var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 
 		
 
-		<button {if $allowpostreply}type="submit" {elseif !$_G['uid']}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes')" {/if}{if !$seccodecheck}onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" {/if}name="replysubmit" id="fastpostsubmit" class="postButton" value="replysubmit" tabindex="5">Post</button>
+		<button style="border: none;" {if $allowpostreply}type="submit" {elseif !$_G['uid']}type="button" onclick="showWindow('login', 'member.php?mod=logging&action=login&guestmessage=yes')" {/if}{if !$seccodecheck}onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" {/if}name="replysubmit" id="fastpostsubmit" class="postButton" value="replysubmit" tabindex="5">Post</button>
 
 		<label for="fastpostrefresh" style="float:right "><input id="fastpostrefresh" type="checkbox" class="pc" />Jump to the last page after reply</label>
 		

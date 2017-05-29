@@ -571,9 +571,9 @@
 			<div class="pPhoto"><a href="home.php?mod=space&uid=$_G[uid]"><!--{avatar($_G[uid],big)}--></a></div>
 			<div class="name">{$_G[member][username]}</div>
 			<div class="pInfo" id="grade">
-				<a class="pInfo" href="home.php?mod=spacecp&ac=credit&showcredit=1">grade: $_G[member][credits]</a>
+				grade: {$_G[member][credits]}
 			</div>
-			<div class="pInfo" id="article">article: *</div>			
+			<!-- <div class="pInfo" id="article">article: </div>			 -->
 		</div>
 
 		<div class="personalModuleList" id="personalModuleList">
@@ -648,4 +648,5 @@
 		</div>
 	</div>
 	<!--{/if}-->
-	
+
+
