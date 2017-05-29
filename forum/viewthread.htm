@@ -107,11 +107,21 @@
 	width: 34px !important;
 	margin-top: 23px !important;
 	}*/
-	
+
 	.bds_qzone {
 	background-image:url("./template/EnglishDB/common/img/qq.png") !important;
-
-
+	background-position: 0,0px !important;
+	background-size: contain !important;
+   }
+   .bds_tsina {
+	background-image:url("./template/EnglishDB/common/img/weibo.png") !important;
+	background-position: 0,0px !important;
+	background-size: contain !important;
+   }
+    .bds_weixin {
+	background-image:url("./template/EnglishDB/common/img/wechat.png") !important;
+	background-position: 0,0px !important;
+	background-size: contain !important;
    }
 </style>
 <div class="mainPage">
@@ -146,14 +156,20 @@
 					
 						<div class="share">
 								<!--{hook/viewthread_postheader 0}-->
-								<!-- <img src="./template/EnglishDB/common/img/qq.png" onclick="" />
-								<img src="./template/EnglishDB/common/img/weibo.png" /></a>
-								<img src="./template/EnglishDB/common/img/wechat.png" /> -->
-								
+							
 								<a href="home.php?mod=spacecp&ac=favorite&type=thread&id=$_G[tid]&formhash={FORMHASH}" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' {lang activity_member_unit}{lang thread_favorite}'" title="{lang fav_thread}"><i><img src="./template/EnglishDB/common/img/heart.png" alt="{lang thread_favorite}" /><span id="favoritenumber" style="display:none">{$_G['forum_thread']['favtimes']}</span></i></a>
-						
+								
+
 						</div>
-						
+						<!-- <script>
+							window._bd_share_config = {
+								common : {		
+									
+									bdPic : '',		
+								
+								}
+							}
+						</script> -->
 					</div>
 
 					
