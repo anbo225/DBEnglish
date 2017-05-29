@@ -89,7 +89,7 @@
 			success: function(data) {
 				//alert(data);
 				if(data == "1") {
-					jq("#favouriteThread").empty();
+					jq("#k_favorite").empty();
 					jq("#favouriteThread").append('<img src="./template/EnglishDB/common/img/redheart.png" />');
 				}
 			}
@@ -117,7 +117,7 @@
 	}
 
 	function myFavourite(id, href, type) {
-		jq("#k_favorite").empty();
+		jq("#k_favorite").remove();
 		jq("#favouriteThread").append('<img src="./template/EnglishDB/common/img/redheart.png" />');
 		//showWindow(this.id, this.href, 'get', 0);
 		showWindow(id, href, type, 0);
