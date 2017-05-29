@@ -21,7 +21,7 @@ body {
 	display: -webkit-flex;
 	margin: 7px 10px 7px 0px;
 	background-color: #ffffff;
-	width: calc(100% - 148px);
+	
 	height: 36px;
 	border-radius: 3px;
 }
