@@ -4,6 +4,12 @@ var postminchars = parseInt('$_G['setting']['minpostsize']');
 var postmaxchars = parseInt('$_G['setting']['maxpostsize']');
 var disablepostctrl = parseInt('{$_G['group']['disablepostctrl']}');
 var fid = parseInt('$_G[fid]');
+
+function highlight(){
+	jq("#ls_username").css("-webkit-transition", "border linear .2s,-webkit-box-shadow linear .5s"); 
+	jq("#ls_username").css("border-color", "rgba(141,39,142,.75)"); 
+	jq("#ls_username").css("-webkit-box-shadow", "0 0 18px rgba(111,1,32,3)"); 
+}
 </script>
 
 	<div id="f_pst">
@@ -35,7 +41,7 @@ var fid = parseInt('$_G[fid]');
 							<div class="pt hm" style="border:0px; border-radius: 3px;">
 								<!--{if !$_G['uid']}-->
 									<!--{if !$_G['connectguest']}-->
-										{lang login_to_post} <a href="member.php?mod=logging&action=login"onclick="showWindow('login', this.href)" class="xi2">Login</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">Register</a>
+										{lang login_to_post} <a onclick="highlight()" class="xi2">Login</a> | <a href="member.php?mod={$_G[setting][regname]}" class="xi2">Register</a>
 									<!--{else}-->
 										{lang connect_fill_profile_to_post}
 									<!--{/if}-->
