@@ -56,21 +56,19 @@
 
 	<!--{if $_G['uid']}-->
 	<div class="personalModuleLine">
-		<div class="pModule choose" onclick="window.location.href='forum.php'">
+		<div class="pModule choose" onclick="window.location.href='forum.php'" id="home">
 			<img src="./template/EnglishDB/common/img/mobile_home.png" />
 		</div>
-		<div class="pModule">
+		<div class="pModule" onclick="window.location.href='home.php?mod=space&do=favorite&view=me'" id="favorite">
 			<img src="./template/EnglishDB/common/img/mobile_favorites.png" />
 		</div>
 		<div class="pModule" onclick="window.location.href='./template/EnglishDB/touch/friend.php'">
-			<img src="./template/EnglishDB/common/img/mobile_friends.png" />
+			<img src="./template/EnglishDB/common/img/mobile_friends.png" id="friend"/>
 		</div>
 		<div class="pInfo" tabindex="-1" id="pInfo">
 			<img class="pInfoLogo" src="./template/EnglishDB/common/img/person.png"/>
 			<div class="pInfoOptionList" id="pInfoOptionList">
-				<div class="pInfoOptionListItem" onclick="alert('pd')">PersonalData</div>
-				<div class="horizenHr"></div>
-				<div class="pInfoOptionListItem" onclick="alert('set')">Setting</div>
+				<div class="pInfoOptionListItem" onclick="window.location.href='home.php?mod=space&uid=$_G[uid]'">PersonalData</div>
 				<div class="horizenHr"></div>
 				<div class="pInfoOptionListItem"><a href="member.php?mod=logging&action=logout&formhash={FORMHASH}" title="{lang logout}" class="dialog">Logout</a></div>
 			</div>

@@ -11,6 +11,12 @@
 		showChatBox(1);
 		getChatDetailFromSearch(uid, uname);
 	}
+
+	function highlight(){
+		jq("#ls_username").css("-webkit-transition", "border linear .2s,-webkit-box-shadow linear .5s"); 
+		jq("#ls_username").css("border-color", "rgba(141,39,142,.75)"); 
+		jq("#ls_username").css("-webkit-box-shadow", "0 0 18px rgba(111,1,32,3)"); 
+	}
 </script>
 	<div class="mainPage">
 		<div class="searchBar">
@@ -49,7 +55,11 @@
 							<div class="button logout" onclick="window.location.href='member.php?mod=logging&action=logout&formhash={FORMHASH}'">Log out</div>
 						<!--{else}-->
 							<!--{if !$isfriend}-->
-							<div class="button follow" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}', 'get', 0);" id="a_friend_li_{$space[uid]}">follow</div>
+								<!--{if $_G['uid']}-->
+									<div class="button follow" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=add&uid=$space[uid]&handlekey=addfriendhk_{$space[uid]}', 'get', 0);" id="a_friend_li_{$space[uid]}">follow</div>
+								<!--{else}-->
+									<div class="button follow" onclick="highlight()" id="a_friend_li_{$space[uid]}">follow</div>
+								<!--{/if}-->
 							<!--{else}-->
 							<div class="button" onclick="chatTalk('$space[uid]','$space[username]')">Talk</div>
 							<div class="button logout" onclick="showWindow(this.id, 'home.php?mod=spacecp&ac=friend&op=ignore&uid=$space[uid]&handlekey=ignorefriendhk_{$space[uid]}', 'get', 0);" id="a_ignore_{$space[uid]}">Delete</div>
