@@ -34,6 +34,10 @@
 
 			//page choose
 			totalPage = Math.ceil($count / 20);
+			if (totalPage == 0){
+				totalPage = 1;
+				page = 1;
+			}
 			//totalPage = 20;
 			jq("#totalPage").text("/ "+totalPage);
 			if(page == NaN || page > totalPage || page < 1) page = 1;
@@ -192,7 +196,8 @@
 						<!--{/if}-->
 
 					</div>
-					<div class="pageModule">
+				</div>
+				<div class="pageModule">
 					<div class="jumpButton" onclick="pageJump()">Jump</div>
 					<div class="totalPage" id="totalPage">/ 1</div>
 					<input type="text" class="searchPage" id="searchPage" placeholder="page">
@@ -207,7 +212,7 @@
 						<div class="page" style="margin-left: 15px" onclick="pageNext()">Next</div>
 					</div>
 				</div>
-				</div>
+				
 				<div class="blankLine"></div>
 				<div class="bottomInfo">
 					<p>广告业务|合作交流|联系我们|技术支持</p>
