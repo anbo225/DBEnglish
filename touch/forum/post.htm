@@ -1,8 +1,7 @@
 <!--{template common/header}-->
 <!--{if $special != 2 && $special != 4 && !($isfirstpost && $sortid)}-->
 <!--{eval $adveditor = $isfirstpost && $special && ($_GET['action'] == 'newthread' || $_GET['action'] == 'reply' && !empty($_GET['addtrade']) || $_GET['action'] == 'edit' );}-->
-<link rel="stylesheet" href="./template/EnglishDB/touch/common/css/mobile_module.css" ／>
-<div class="moduleContent">
+
 <form method="post" id="postform" 
 			{if $_GET[action] == 'newthread'}action="forum.php?mod=post&action={if $special != 2}newthread{else}newtrade{/if}&fid=$_G[fid]&extra=$extra&topicsubmit=yes&mobile=2"
 			{elseif $_GET[action] == 'reply'}action="forum.php?mod=post&action=reply&fid=$_G[fid]&tid=$_G[tid]&extra=$extra&replysubmit=yes&mobile=2"
@@ -40,6 +39,12 @@
 
 <!-- header start -->
 <header class="header">
+    <div class="nav">
+		<span class="y"><button id="postsubmit" class="btn_pn <!--{if $_GET[action] == 'edit'}-->btn_pn_blue" disable="false"<!--{else}-->btn_pn_grey" disable="true"<!--{/if}-->><span><!--{if $_GET[action] == 'newthread'}-->{lang send_thread}<!--{elseif $_GET[action] == 'reply'}-->{lang join_thread}<!--{elseif $_GET[action] == 'edit'}-->{lang edit_save}<!--{/if}--></span></button></span>
+		<input type="hidden" name="{if $_GET[action] == 'newthread'}topicsubmit{elseif $_GET[action] == 'reply'}replysubmit{elseif $_GET[action] == 'edit'}editsubmit{/if}" value="yes">
+		<a href="<!--{if $_GET[action] == 'newthread'}-->forum.php?mod=forumdisplay&fid=$_G[fid]&page=$_GET[page]<!--{else}-->forum.php?mod=redirect&goto=findpost&ptid=$_G[tid]&pid=$pid<!--{/if}-->" class="z"><img src="{STATICURL}image/mobile/images/icon_back.png" /></a>
+		<span><!--{if $_GET[action] == 'edit'}-->{lang edit}<!--{else}-->{lang send_threads}<!--{/if}--></span>
+    </div>
 </header>
 <!-- header end -->
 
@@ -49,7 +54,7 @@
 		<ul class="cl">
 			<li class="bl_line">
 			<!--{if $_GET['action'] != 'reply'}-->
-			<input type="text" tabindex="1" class="px" id="needsubject" size="30" autocomplete="off" value="$postinfo[subject]" name="subject" placeholder="Subject" fwin="login">
+			<input type="text" tabindex="1" class="px" id="needsubject" size="30" autocomplete="off" value="$postinfo[subject]" name="subject" placeholder="{lang thread_subject}" fwin="login">
 			<!--{else}-->
 				RE: $thread['subject']
 				<!--{if $quotemessage}-->$quotemessage<!--{/if}-->
@@ -73,7 +78,7 @@
 			</li>
 			<!--{/if}-->
 			<li class="bl_none area">
-			<textarea class="pt" id="needmessage" tabindex="3" autocomplete="off" id="{$editorid}_textarea" name="$editor[textarea]" cols="80" rows="2"  placeholder="Content" fwin="reply">$postinfo[message]</textarea>
+			<textarea class="pt" id="needmessage" tabindex="3" autocomplete="off" id="{$editorid}_textarea" name="$editor[textarea]" cols="80" rows="2"  placeholder="{lang thread_content}" fwin="reply">$postinfo[message]</textarea>
 			</li>
 			<li style="padding:0px;">
 				<a href="javascript:;" class="y" style="background:url({STATICURL}image/mobile/images/icon_photo.png) no-repeat;overflow:hidden;">
@@ -89,12 +94,8 @@
 		<!--{hook/post_bottom_mobile}-->
 	</div>
 </div>
-<div style="padding-left:10px;">
-<button id="postsubmit" class="btn_pn <!--{if $_GET[action] == 'edit'}-->btn_pn_blue" disable="false"<!--{else}-->btn_pn_grey" disable="true"<!--{/if}-->><span><!--{if $_GET[action] == 'newthread'}-->POST<!--{elseif $_GET[action] == 'reply'}-->{lang join_thread}<!--{elseif $_GET[action] == 'edit'}-->{lang edit_save}<!--{/if}--></span></button></div>
-		<input type="hidden" name="{if $_GET[action] == 'newthread'}topicsubmit{elseif $_GET[action] == 'reply'}replysubmit{elseif $_GET[action] == 'edit'}editsubmit{/if}" value="yes">
 <!-- main postbox start -->
 </form>
-</div>
 <!--{else}-->
 	<div class="box xg1">
 	<!--{if $special == '2'}-->
