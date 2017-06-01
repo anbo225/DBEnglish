@@ -152,10 +152,11 @@
 					}
 				}
 				function show_success(message) {
-					message = message == '' ? '{lang update_date_success}' : message;
-					showDialog(message, 'right', '{lang reminder}', function(){
-						top.window.location.href = top.window.location.href;
-					}, 0, null, '', '', '', '', 3);
+					message = message == '' ? 'update successfully' : message;
+					// showDialog(message, 'right', '{lang reminder}', function(){
+					// 	top.window.location.href = top.window.location.href;
+					// }, 0, null, '', '', '', '', 3);
+					alert("update successfully");
 				}
 				function clearErrorInfo() {
 					var spanObj = $('profilelist').getElementsByTagName("div");
