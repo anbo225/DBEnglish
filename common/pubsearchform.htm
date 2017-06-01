@@ -9,7 +9,16 @@
 	<!--{block slist[user]}--><li><a href="javascript:;" rel="user">{lang users}</a></li><!--{/block}-->
 <!--{/if}-->
 <!--{if $_G['setting']['search'] && $slist}-->
-<div id="scbar" style="background-color:#dbdbdb; border: none">
+<style>
+	#scbar { background-color: transparent !important; border: 0px !important; line-height: 100% !important; height: 50px !important}
+	#sg{ background: #FFF; width:456px; border: 1px solid #B2C7DA; }
+	.scbar_narrow #sg { width: 316px; }
+	#sg li { padding:0 8px; line-height:30px; font-size:14px; }
+	#sg li span { color:#999; }
+	.sml { background:#FFF; cursor:default; }
+	.smo { background:#E5EDF2; cursor:default; }
+</style>
+<div id="scbar">
 	<form id="scbar_form" method="{if $_G[fid] && !empty($searchparams[url])}get{else}post{/if}" autocomplete="off" onsubmit="searchFocus($('scbar_txt'))" action="{if $_G[fid] && !empty($searchparams[url])}$searchparams[url]{else}search.php?searchsubmit=yes{/if}" target="_blank">
 		<input type="hidden" name="mod" id="scbar_mod" value="search" />
 		<input type="hidden" name="formhash" value="{FORMHASH}" />
@@ -25,15 +34,7 @@
 			<input type="hidden" name="fId" id="srchFId" value="$_G[fid]" />
 			<input type="hidden" name="q" id="cloudsearchquery" value="" />
 
-			<style>
-			#scbar { overflow: visible; position: relative; }
-			#sg{ background: #FFF; width:456px; border: 1px solid #B2C7DA; }
-			.scbar_narrow #sg { width: 316px; }
-			#sg li { padding:0 8px; line-height:30px; font-size:14px; }
-			#sg li span { color:#999; }
-			.sml { background:#FFF; cursor:default; }
-			.smo { background:#E5EDF2; cursor:default; }
-            </style>
+			
             <div style="display: none; position: absolute; top:37px; left:44px;" id="sg">
                 <div id="st_box" cellpadding="2" cellspacing="0"></div>
             </div>
@@ -41,12 +42,12 @@
 	
 
 				<div class="search">
-		          <img src="./template/EnglishDB/common/img/search.png" class="logo" style="height: 22px"/>
-		          <input type="text" name="srchtxt" id="scbar_txt" autocomplete="off" placeholder="search" style="width:350px" />
+		          <img src="./template/EnglishDB/common/img/search.png" class="logo" />
+		          <input type="text" name="srchtxt" id="scbar_txt" autocomplete="off" placeholder="search here" />
         		</div>
 		
-				<td class="scbar_type_td" style="display: none;"><a href="javascript:;" id="scbar_type" class="xg1" onclick="showMenu(this.id)" hidefocus="true">{lang search}</a></td>
-				<td class="scbar_btn_td"><button type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="pn pnc" value="true"><strong class="xi2">{lang search}</strong></button></td>
+				<!--<td class="scbar_type_td" style="display: none;"><a href="javascript:;" id="scbar_type" class="xg1" onclick="showMenu(this.id)" hidefocus="true">{lang search}</a></td>
+				<td class="scbar_btn_td"><button type="submit" name="searchsubmit" id="scbar_btn" sc="1" class="pn pnc" value="true"><strong class="xi2">{lang search}</strong></button></td>-->
 				
 		
 	</form>

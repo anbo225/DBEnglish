@@ -375,9 +375,9 @@ body {
 .searchBar .context .search input {
 	font-size: 20px;
 	line-height: 34px;	
-	border: 0;
-	width: 330px;
-	outline: none;
+	border: 0 !important;
+	width: 330px !important;
+	outline: none !important;
 }
 
 .main {
@@ -655,9 +655,9 @@ body {
 .searchBar .context .search input {
 	font-size: 20px;
 	line-height: 34px;	
-	border: 0;
-	width: 260px;
-	outline: none;
+	border: 0 !important;
+	width: 260px !important;
+	outline: none !important;
 }
 
 .main {
