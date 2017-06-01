@@ -366,6 +366,7 @@ body {
 	display: -webkit-flex;
 	width: 450px;
 	background-color: #ffffff;
+	height: 34px;
 }
 .searchBar .context .search .logo {
 	margin: 6px 15px;
@@ -646,6 +647,7 @@ body {
 	display: -webkit-flex;
 	width: 330px;
 	background-color: #ffffff;
+	height: 34px;
 }
 .searchBar .context .search .logo {
 	margin: 6px 15px;
