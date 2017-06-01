@@ -366,6 +366,7 @@ body {
 	display: -webkit-flex;
 	width: 450px;
 	background-color: #ffffff;
+	height: 34px;
 }
 .searchBar .context .search .logo {
 	margin: 6px 15px;
@@ -375,9 +376,9 @@ body {
 .searchBar .context .search input {
 	font-size: 20px;
 	line-height: 34px;	
-	border: 0;
-	width: 330px;
-	outline: none;
+	border: 0 !important;
+	width: 330px !important;
+	outline: none !important;
 }
 
 .main {
@@ -646,6 +647,7 @@ body {
 	display: -webkit-flex;
 	width: 330px;
 	background-color: #ffffff;
+	height: 34px;
 }
 .searchBar .context .search .logo {
 	margin: 6px 15px;
@@ -655,9 +657,9 @@ body {
 .searchBar .context .search input {
 	font-size: 20px;
 	line-height: 34px;	
-	border: 0;
-	width: 260px;
-	outline: none;
+	border: 0 !important;
+	width: 260px !important;
+	outline: none !important;
 }
 
 .main {
